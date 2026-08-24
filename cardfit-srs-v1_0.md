@@ -41,7 +41,11 @@
 | :---: | --- | --- |
 | **3장** | 컴포넌트 | 시스템이 어떤 코드 덩어리로 나뉘고, AI가 못 들어가는 영역이 어디인가 |
 | **4장 도입** | 순서도 2개 | 계산이 도는 순서 · 게이팅이 판단하는 방식 |
+| **4.1.1** | 시퀀스 2개 | 정상 계산 · 게이팅 판정의 호출 순서 |
+| **4.2.1** | 시퀀스 | 오조회 차단과 단독 중단 경로 |
 | **4.3** | 순서도 | 어떤 상황에서 결과를 주지 않는가 (예외 6건) |
+| **4.3.1** | 시퀀스 2개 | 마이데이터 장애 · 부분 계산 처리 |
+| **5장** | 클래스 | 코드 뼈대와 `구현 클래스` 열의 출처 |
 | **6.4.1** | ERD | 데이터 표 15개가 어떻게 이어지나 |
 | **6.5** | 상태 기계 4개 | 동의·계산·조합안·완주 계측이 거치는 상태 |
 | **8.2** | 유스케이스 | 누가 이 서비스로 무엇을 하나 |
@@ -297,6 +301,94 @@ flowchart TD
 
 **게이팅을 마지막에 배치한 이유** — Net Benefit 임계값(의존성 D2)이 가장 늦게 확정될 항목이다. 임계값을 기다리는 동안 계산 엔진과 후보 생성은 진행할 수 있다.
 
+#### 4.1.1 처리 흐름 — 시퀀스
+
+> 근거: ISO/IEC/IEEE 29148:2018 **9.6.12 b)** *Functions — exact sequence of operations*
+>
+> **그림 읽는 법** — 맨 위 상자가 참여자, 아래로 내려가는 선이 시간이다. 위에서 아래로 읽으면 일이 벌어지는 순서다. `alt`로 갈라진 칸은 "이런 경우 / 저런 경우"를 뜻한다.
+
+**① 정상 계산** — REQ-FUNC-003 · REQ-NF-005 · AC-01 · AC-06
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as 사용자
+    participant GW as API Gateway
+    participant OWN as AccessOwnershipVerifier
+    participant ORCH as CalculationOrchestrator
+    participant CG as ConsentGuard
+    participant MD as MyDataConnector
+    participant SB as ScenarioBuilder
+    participant RE as RuleEngine
+    participant CO as CombinationOptimizer
+    participant AR as AuditRecorder
+
+    U->>GW: POST /api/v1/calculate
+    GW->>OWN: assertOwner(응답주체, 로그인사용자)
+    OWN-->>GW: 일치 확인
+    GW->>ORCH: execute(userId, planIds)
+    ORCH->>CG: assertActive(userId)
+    CG-->>ORCH: 동의 유효
+
+    Note over ORCH,MD: 마이데이터 호출은 여기 1회뿐이다
+    ORCH->>MD: collectOnce(userId)
+    MD-->>ORCH: 보유카드 · 과거소비 스냅샷
+
+    ORCH->>SB: buildThree(planSnapshot)
+    SB-->>ORCH: 적게 · 예상대로 · 많이
+
+    loop 시나리오 3건 — 같은 수집분을 재사용
+        ORCH->>RE: calculate(scenarioInput, cards)
+        RE-->>ORCH: ScenarioResult
+        ORCH->>CO: generate(scenarioResult)
+        CO-->>ORCH: 조합안 + 게이팅 결과
+    end
+
+    ORCH->>ORCH: resolveStatus(3건) → SUCCESS
+    ORCH->>AR: record(요청, 응답, rule_versions, 응답코드)
+    ORCH-->>GW: 3개 시나리오 + "예상대로" 결론
+    GW-->>U: 결론 노출 (p95 ≤ 5s)
+```
+
+`collectOnce`가 반복문 **밖**에 있다. 시나리오가 3개라도 마이데이터 호출은 1회이며, 이것이 REQ-NF-005를 만족시키는 방식이다. 호출을 반복문 안으로 옮기면 요구사항이 즉시 깨진다.
+
+**② 게이팅 — "현재 조합 유지" 반환** — REQ-FUNC-004 · AC-05 · GR2
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant ORCH as CalculationOrchestrator
+    participant CO as CombinationOptimizer
+    participant NBE as NetBenefitEvaluator
+    participant GP as GatingPolicy
+    participant GM as GuardrailMonitor
+
+    ORCH->>CO: generate(scenarioResult)
+    CO->>NBE: grossBenefit(candidate)
+    NBE-->>CO: 총 예상 혜택
+    CO->>NBE: transitionCost(candidate)
+    Note over NBE: 연회비 변동 + 실적 재달성 + 전환 실행
+    NBE-->>CO: 전환비용 3항목
+    CO->>NBE: netBenefit(candidate)
+    NBE-->>CO: Net Benefit
+    CO->>GP: evaluate(netBenefit, currentBenefit)
+
+    alt Net Benefit ≥ 임계값
+        GP-->>CO: RECOMMEND_CHANGE
+        CO-->>ORCH: 조합안 + 차액(원 단위)
+    else Net Benefit < 임계값
+        GP-->>CO: KEEP_CURRENT
+        CO-->>ORCH: "현재 조합 유지" — 정상 결과
+    end
+
+    CO->>GM: checkGatingViolation()
+    alt 임계 미달인데 변경을 제안했다
+        GM->>GM: haltService(GR2 위반)
+    end
+```
+
+`alt`의 두 갈래가 **모두 정상 응답**이다. 오히려 임계 미달인데 변경을 제안하는 것이 위반(GR2)이며, 마지막 블록이 그 감시다.
+
 ### 4.2 비기능 요구사항
 
 | ID | 제목 | 출처 | 우선순위 | 유형 | 검증 방식 | 인수 기준 (임계치 · 모니터링 항목) | 상태 | 담당자 |
@@ -310,7 +402,40 @@ flowchart TD
 | **REQ-NF-007** | 데이터 최신성 — Rule 버전 관리 | PRD 4절 NFR-07 | Must Have | Maintainability | 최신성 점검 배치 · 제외 처리 검증 (AC-F6) | **임계치**: 갱신 지연 **≤ 30일** · 초과 시 해당 카드 **계산 대상 제외**(무단 사용 0건) · `rule_version` 적용 시작·종료일 필수<br>**모니터링**: 카드별 약관 최종 확인일 경과일수, 30일 초과 카드 수·제외 처리 건수, 최신성 경고 노출률 (일간) | Proposed | 데이터 운영 |
 | **REQ-NF-008** | 사용성 — 입력 부담 및 결론 도달 | PRD 4절 · 7-2 | Should Have | Usability | A/B 테스트 (E3) · 여정 계측 | **임계치**: 온보딩 완료율 **≥ 60%** · 결론 도달 **p95 ≤ 5분**(기준선 수기 240분) · 직접 입력 강제 항목 **0개**<br>**모니터링**: 온보딩 완료율, 결론 도달 소요시간 p95, 초기값 수정률 (일간) | Proposed | 제품 책임자 (PM) |
 
-**대시보드 요구** — 북극성 · 보조 지표 · Guardrail 5개 · REQ-NF-001~008의 모니터링 항목을 한 화면에 두고 **페르소나 층별로 분해**한다. 임계치를 넘긴 항목은 2장의 담당 역할에게 자동 알림한다.
+| **REQ-NF-009** | 계측 가능성 — 지표 관측용 이벤트 | PRD 7-2 측정 창구 | Must Have | Observability | 이벤트 적재율 검증 · 대시보드 산식 검증 | **임계치**: 11.2가 정의한 측정 창구 이벤트를 **누락 없이 적재**해야 한다 — `result_viewed` · `evidence_expanded` · `scenario_tab_opened` · `onboarding_done`(`tag_selected` 포함) · `plan_selected` · `outcome_response` · `input_done`. 이벤트 적재 누락 **0건** · 사람 단위 7일 코호트 집계 가능<br>**모니터링**: 이벤트별 적재율, 근거 열람률(≥ 50%), 보조 탭 열람률(관찰), 이벤트 비종속 진입률(≥ 20%) (일간 · 주간) | Proposed | 제품 책임자 (PM) |
+
+**대시보드 요구** — 북극성 · 보조 지표 · Guardrail 5개 · REQ-NF-001~009의 모니터링 항목을 한 화면에 두고 **페르소나 층별로 분해**한다. 임계치를 넘긴 항목은 2장의 담당 역할에게 자동 알림한다.
+
+#### 4.2.1 오조회 차단 흐름 — 시퀀스
+
+**③ 오조회 — 제품 책임자를 우회하는 유일한 중단** — REQ-NF-004 · GR5
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant GW as API Gateway
+    participant OWN as AccessOwnershipVerifier
+    participant GM as GuardrailMonitor
+    actor CO as 컴플라이언스·보안
+    actor PM as 제품 책임자
+
+    GW->>OWN: assertOwner(응답주체, 로그인사용자)
+
+    alt 일치
+        OWN-->>GW: 통과
+    else 불일치 — 타인 데이터다
+        OWN--xGW: 즉시 차단
+        OWN->>GM: checkOwnershipMismatch() → 위반
+        GM->>CO: 실시간 통보
+        CO->>GM: haltService() — 단독 결정
+        Note over CO,PM: 제품 책임자 승인을 기다리지 않는다
+        CO->>CO: 규제기관 신고
+    end
+```
+
+이 서비스에서 제품 책임자를 우회하는 중단 경로는 이것 하나다. 타인 데이터 노출은 사업 판단 대상이 아니라 즉시 신고 의무 사항이기 때문이다.
+
+REQ-NF-009는 11.2가 지정한 측정 창구를 구현 책임으로 옮긴 것이다. 근거 열람률·보조 탭 열람률처럼 화면 행동으로만 관측되는 지표는 이벤트가 적재되지 않으면 측정할 수 없으므로, 계측을 비기능 요구사항으로 명시한다.
 
 ### 4.3 예외·실패 처리 요구사항
 
@@ -347,6 +472,60 @@ flowchart TD
     style OK fill:#C8E6C9,stroke:#2E7D32
 ```
 
+#### 4.3.1 예외 처리 흐름 — 시퀀스
+
+**④ 마이데이터 장애 — 계산을 멈추지 않는다** — REQ-EXC-003 · REQ-NF-003 · AC-F3
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant ORCH as CalculationOrchestrator
+    participant MD as MyDataConnector
+    participant DM as DegradedModeHandler
+    participant EXT as 마이데이터 API
+    actor U as 사용자
+
+    ORCH->>MD: collectOnce(userId)
+    MD->>EXT: 수집 요청
+    EXT--xMD: 장애 · 타임아웃
+    MD->>DM: fallbackToLastKnown(userId)
+    DM-->>MD: 최근 확인 스냅샷 + collected_at
+    MD-->>ORCH: DegradedSnapshot (기준일 포함)
+
+    Note over ORCH: 중단하지 않는다 — 계산을 계속한다
+    ORCH->>ORCH: 계산 수행
+    ORCH-->>U: 결론 + "최근 확인된 데이터 기준" 경고 + 기준일
+    Note over U: 경고·기준일 미표기 0건 · 무단 중단 0건 · p95 ≤ 5s 유지
+```
+
+대체 공급자가 없는 단일 채널이라 장애 시 우회 경로가 없다. 그래서 "멈추기"가 아니라 "오래된 데이터임을 밝히고 계속하기"를 택했으며, **기준일을 반드시 노출**해 사용자가 스스로 판단할 수 있게 한다.
+
+**⑤ 부분 계산 — 하나라도 실패하면 전체 중단** — REQ-EXC-005 · AC-F5
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant ORCH as CalculationOrchestrator
+    participant RE as RuleEngine
+    actor U as 사용자
+
+    loop 시나리오 3건
+        ORCH->>RE: calculate(scenarioInput)
+    end
+
+    RE-->>ORCH: 적게 → SUCCESS
+    RE-->>ORCH: 예상대로 → SUCCESS
+    RE--xORCH: 많이 → FAILED
+
+    ORCH->>ORCH: resolveStatus([S, S, F])
+    Note over ORCH: 2건이 성공했지만 부분으로 처리한다
+    ORCH->>ORCH: status = PARTIAL
+    ORCH-->>U: 추천 중단 — 결과를 반환하지 않는다
+    Note over ORCH,U: 성공한 시나리오만 내놓지 않는다 (부분 결과 노출 0건)
+```
+
+성공한 2건을 보여주고 싶은 유혹이 이 요구사항의 시험대다. 세 탭 중 하나가 비면 사용자는 남은 두 탭을 완전한 결과로 오인하므로, 전부 아니면 전무로 처리한다.
+
 **노란 상자가 하나뿐인 것에 주의한다.** 마이데이터 장애만 "계속"이고 나머지 다섯은 모두 "중단"이다. 장애를 예외 처리한 이유는 **대체 공급자가 없어 멈추면 서비스가 성립하지 않기** 때문이며, 대신 기준일을 반드시 노출해 사용자가 스스로 판단하게 한다.
 
 | ID | 제목 | 출처 | 우선순위 | 유형 | 검증 방식 | 인수 기준 | 상태 | 담당자 |
@@ -361,6 +540,83 @@ flowchart TD
 ---
 
 ## 5. 추적성 매트릭스
+
+> **그림 읽는 법** — 상자 하나가 **클래스**(코드에서 만들 부품 하나)다. 상자 안 윗칸은 그 부품이 가진 데이터, 아랫칸은 그 부품이 하는 일이다. 화살표는 "이 부품이 저 부품을 쓴다"는 뜻이다. **아래 표의 `구현 클래스` 열이 이 그림에서 나왔다.** 전체 클래스 설계는 `cardfit-design-v1_0.md` 3장에 있다.
+
+```mermaid
+classDiagram
+    direction TB
+    class CalculationOrchestrator {
+        +Calculation execute(userId, planIds)
+        +CalculationStatus resolveStatus(scenarioResults)
+    }
+    class ConsentGuard {
+        +void assertActive(userId)
+    }
+    class MyDataConnector {
+        +MyDataSnapshot collectOnce(userId)
+        +DegradedSnapshot fallbackToLastKnown(userId)
+    }
+    class ScenarioBuilder {
+        -BigDecimal deltaRatio
+        +List~ScenarioInput~ buildThree(planSnapshot)
+    }
+    class RuleEngine {
+        +ScenarioResult calculate(scenarioInput, cards)
+    }
+    class CombinationOptimizer {
+        +List~PlanCandidate~ generate(scenarioResult)
+    }
+    class NetBenefitEvaluator {
+        +long netBenefit(candidate)
+    }
+    class GatingPolicy {
+        -long absoluteThresholdWon
+        -BigDecimal relativeThreshold
+        +GatingResult evaluate(netBenefit, currentBenefit)
+    }
+    class AllocationService {
+        +boolean verifySumWithin1Won(allocations, total)
+    }
+    class PlanExpiryPolicy {
+        +boolean isExpired(candidate)
+    }
+    class EvidenceAssembler {
+        +int countDisclosedItems(items)
+        +void rejectIfBelowSix(items)
+    }
+    class ExplanationModule {
+        +String describe(evidenceItems)
+    }
+    class OutcomeTracker {
+        +void recordResponse(id, completed, reason)
+    }
+    class AccessOwnershipVerifier {
+        +void assertOwner(responseOwnerId, loginUserId)
+    }
+    class AuditRecorder {
+        +void record(request, response, ruleVersions, code)
+    }
+
+    AccessOwnershipVerifier --> CalculationOrchestrator
+    CalculationOrchestrator --> ConsentGuard
+    CalculationOrchestrator --> MyDataConnector
+    CalculationOrchestrator --> ScenarioBuilder
+    CalculationOrchestrator --> RuleEngine
+    CalculationOrchestrator --> CombinationOptimizer
+    CalculationOrchestrator --> AuditRecorder
+    CombinationOptimizer --> NetBenefitEvaluator
+    CombinationOptimizer --> GatingPolicy
+    CombinationOptimizer --> PlanExpiryPolicy
+    CombinationOptimizer --> AllocationService
+    CalculationOrchestrator --> EvidenceAssembler
+    EvidenceAssembler --> ExplanationModule
+    CombinationOptimizer --> OutcomeTracker
+```
+
+**`ExplanationModule`(AI)에서 계산 클래스로 향하는 화살표가 하나도 없다.** 이것이 9장 ADR-02를 클래스 수준에서 강제하는 방식이다. AI는 확정된 근거 항목을 인자로 받아 문장만 만든다.
+
+**클래스명에 정책이 드러난 3건** — `GatingPolicy`는 임계값(D2)이 미정이라 정책만 교체할 수 있게 분리했고, `ScenarioBuilder.deltaRatio`도 증감 폭(D5)을 상수로 박지 않았다. `MyDataConnector.collectOnce`는 이름에 `Once`를 넣어 REQ-NF-005(결론 1건당 호출 ≤ 1회)를 못 박았다.
 
 | 요구사항 ID | 모듈 | 구현 클래스 | 테스트 케이스 ID |
 | --- | --- | --- | --- |
@@ -384,6 +640,7 @@ flowchart TD
 | REQ-NF-006 | Audit Log Store | `AuditRecorder` | TC-NF-006 |
 | REQ-NF-007 | Rule Data Pipeline | `RuleDataPipeline` · `RuleFreshnessChecker` | TC-NF-007 |
 | REQ-NF-008 | Future Spend Input · Evidence Service | `InitialValueSuggester` · `JourneyTimer` | TC-NF-008 |
+| REQ-NF-009 | 전 모듈 (이벤트 계측) | `MetricEventEmitter` · `NorthStarCalculator` | TC-NF-009 |
 | REQ-EXC-001 | Future Spend Input · Rule Engine | `CalculationOrchestrator` | TC-EXC-001 |
 | REQ-EXC-002 | Evidence Service | `EvidenceAssembler` | TC-EXC-002 |
 | REQ-EXC-003 | MyData Connector | `DegradedModeHandler` | TC-EXC-003 |
@@ -408,6 +665,7 @@ flowchart TD
 | **Evidence** | GET | `/api/v1/calculations/{calculationId}/evidence` | 계산 근거 조회. **공개 항목 6개 미달 시 응답 거부** · p95 ≤ 1s |
 | **Outcome** | POST | `/api/v1/outcomes/{outcomeId}/completion` | 30일 후 완주 응답 수집. **측정 전용 — 실행 개입 엔드포인트는 존재하지 않는다** |
 | **외부 연동** | — | 마이데이터 카드 업권 API | 과거 소비·보유카드 수집. **단일 채널·호출당 과금** · 결론 1건당 호출 ≤ 1회 |
+| **외부 연동** | — | 카드사 약관·혜택 Rule 출처 | 혜택 규칙 수집. **공식 통합 API 없음** — 8개 카드사·겸영은행으로 파편화되어 수집·`rule_version` 관리를 자체 수행한다 |
 | **외부 연동** | — | 카드사 공식 신청 페이지 | **이동 링크 제공만.** 신청서 작성·제출 대행 없음 |
 
 **PRD에 정의된 인터페이스는 위가 전부다.** 동의 발급·갱신 등 마이데이터 표준 규격에 속하는 엔드포인트는 PRD에 기술되지 않아 **추가하지 않았다**.

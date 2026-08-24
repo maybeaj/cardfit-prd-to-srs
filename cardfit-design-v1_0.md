@@ -18,7 +18,7 @@
 
 **SRS는 "무엇을 만들 것인가", 이 문서는 "어떻게 만들 것인가"를 다룬다.**
 
-SRS의 요구사항 26건(REQ-FUNC 12 · REQ-NF 8 · REQ-EXC 6)을 설계 산출물로 옮긴 것이며, **새로운 요구사항을 만들지 않았다.** 이 문서에 있고 SRS에 없는 내용은 전부 "요구사항을 만족시키는 방법"에 해당한다.
+SRS의 요구사항 27건(REQ-FUNC 12 · REQ-NF 9 · REQ-EXC 6)을 설계 산출물로 옮긴 것이며, **새로운 요구사항을 만들지 않았다.** 이 문서에 있고 SRS에 없는 내용은 전부 "요구사항을 만족시키는 방법"에 해당한다.
 
 ```mermaid
 flowchart LR
@@ -1177,7 +1177,7 @@ stateDiagram-v2
 
 ## 8. SRS ↔ 설계 추적 매트릭스
 
-**요구사항 26건이 설계 산출물로 전부 옮겨졌는지 확인하는 표다.** 빈칸이 있으면 설계 누락이다.
+**요구사항 27건이 설계 산출물로 전부 옮겨졌는지 확인하는 표다.** 빈칸이 있으면 설계 누락이다.
 
 | 요구사항 | 유스케이스 | 컴포넌트 | 클래스 | 시퀀스 | 순서도 | 상태 |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -1201,6 +1201,7 @@ stateDiagram-v2
 | REQ-NF-006 | — | AuditLogStore | `AuditRecorder` | SD-01·05 | FC-02 | — |
 | REQ-NF-007 | UC-11 | RuleDataPipeline | `RuleFreshnessChecker` | SD-07·09 | — | 7.3 |
 | REQ-NF-008 | UC-02 | FutureSpendInput | `InitialValueSuggester`·`JourneyTimer` | — | FC-01 | — |
+| REQ-NF-009 | UC-15 | 전 모듈 (이벤트 계측) | `MetricEventEmitter`·`NorthStarCalculator` | SD-08 | — | 7.4 |
 | REQ-EXC-001 | UC-04 | CalculationOrchestrator | `CalculationOrchestrator` | — | FC-01·02 | — |
 | REQ-EXC-002 | UC-07 | EvidenceService | `EvidenceAssembler` | SD-03 | FC-04 | — |
 | REQ-EXC-003 | — | MyDataConnector | `DegradedModeHandler` | SD-04 | FC-02 | — |
