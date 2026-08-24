@@ -133,5 +133,25 @@
   "text": "전문가가 카드 조합을 추천해 드립니다",
   "expect": "block",
   "note": "PT-D 목적어 삽입형"
+ },
+ {
+  "text": "AI가 약관을 쉬운 말로 요약했습니다",
+  "expect": "pass",
+  "note": "ADR-02 허용 기능 ⓐ 약관 요약"
+ },
+ {
+  "text": "AI가 추천 근거를 설명해 드립니다",
+  "expect": "pass",
+  "note": "ADR-02 허용 기능 ⓑ 근거 설명"
+ },
+ {
+  "text": "AI가 카드 조합을 추천합니다",
+  "expect": "block",
+  "note": "PT-C — 조합 추천은 규칙 엔진의 일"
+ },
+ {
+  "text": "AI가 혜택금액을 산출합니다",
+  "expect": "block",
+  "note": "PT-C — 명시적 원칙 위반"
  }
 ]

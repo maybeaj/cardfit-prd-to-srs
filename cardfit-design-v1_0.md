@@ -181,7 +181,7 @@ flowchart TB
         end
 
         EVID["EvidenceService<br/>근거 6항목 검증·조립"]
-        EXPL["ExplanationModule (AI)<br/>근거를 쉬운 말로 설명 — 금액 계산 금지"]
+        EXPL["ExplanationModule (AI)<br/>약관 요약 · 근거 자연어 설명<br/>혜택금액 임의 계산 금지"]
         TRACK["OutcomeTracker<br/>완주 계측 (측정 전용)"]
         SCAN["ProhibitedTermScanner<br/>금지어 검수"]
     end
@@ -236,7 +236,7 @@ flowchart TB
 | | 결정론 영역 (노란색) | 설명 영역 (보라색) |
 | --- | --- | --- |
 | **담당** | RuleEngine · CombinationOptimizer · AllocationService | ExplanationModule (AI) |
-| **하는 일** | 금액을 계산한다 | 계산 결과를 쉬운 말로 풀어쓴다 |
+| **하는 일** | **혜택을 계산하고 최종 조합을 추천한다** | ⓐ 약관을 요약한다 ⓑ 추천 근거를 쉬운 말로 풀어쓴다 |
 | **입력이 같으면** | **답이 반드시 같다** | 표현이 달라도 된다 |
 | **깨지면** | REQ-NF-002(재계산 불일치 0건) 위반 | 사용성 저하 |
 
@@ -255,7 +255,7 @@ flowchart TB
 | **CombinationOptimizer** | 조합 후보 생성, 전환비용 3항목 차감, **게이팅 판정**, 만료 설정 | 배분 | REQ-FUNC-004 · REQ-EXC-006 |
 | **AllocationService** | 카드별 역할·금액 배분, 합계 오차 ≤ 1원 보증 | 조합 결정 | REQ-FUNC-005 |
 | **EvidenceService** | 근거 6항목 조립·검증, **미달 시 응답 거부** | 금액 재계산 | REQ-FUNC-006 · REQ-EXC-002 |
-| **ExplanationModule (AI)** | 근거를 사용자 언어로 설명 | **금액 계산 일체** | REQ-FUNC-006 (보조) |
+| **ExplanationModule (AI)** | ⓐ **약관 요약**(`rule_version`당 1회 캐시) ⓑ **추천 근거의 자연어 설명** | **혜택금액 임의 계산** · 조합 추천 | REQ-FUNC-006 (보조) |
 | **OutcomeTracker** | 선택 +30일 1회 발송, 완주 집계, 무응답 = 미완주 | **개입·재발송·독려** | REQ-FUNC-010 |
 | **ProhibitedTermScanner** | 배포 전 정적 스캔 + 런타임 문구 스캔 | 문구 작성 | REQ-FUNC-009 · GR4 |
 | **RuleDataPipeline** | 약관 수집, `rule_version` 발행, **30일 초과 카드 계산 제외** | 계산 | REQ-NF-007 |
@@ -400,8 +400,10 @@ classDiagram
     }
 
     class ExplanationModule {
-        +String describe(evidenceItems)
-        %% 금액 계산 금지 — 입력으로 받은 값만 문장으로 바꾼다
+        +String summarizeTerms(benefitRule)
+        +String describeRationale(evidenceItems)
+        %% 혜택금액을 임의 계산하지 않는다 — 받은 값만 문장으로 바꾼다
+        %% summarizeTerms는 rule_version당 1회만 호출하고 캐시한다
     }
 
     class ProhibitedTermScanner {
@@ -422,7 +424,9 @@ classDiagram
     ScopeBoundaryNotice --> ProhibitedTermScanner
 ```
 
-**`ExplanationModule`에 계산 클래스로 향하는 화살표가 하나도 없다.** 이것이 ADR-02를 클래스 수준에서 강제하는 방식이다. AI는 `EvidenceItem` 목록을 인자로 받아 문장만 만든다.
+**`ExplanationModule`에 계산 클래스로 향하는 화살표가 하나도 없다.** 이것이 ADR-02를 클래스 수준에서 강제하는 방식이다. AI는 두 가지만 한다 — `BenefitRule`을 받아 **약관을 요약**하고, `EvidenceItem` 목록을 받아 **추천 근거를 설명**한다. 혜택금액을 임의로 계산하지 않는다.
+
+**`summarizeTerms`는 `rule_version`당 1회만 호출한다.** 약관은 사용자별로 다르지 않으므로 요약을 캐시하면 AI 호출이 사용자 수와 무관하게 고정된다(REQ-NF-005). 두 메서드를 분리한 이유가 이것이고, **다루는 데이터가 달라 규제 부담도 다르다** — 약관은 공개 문서이고 근거는 사용자 금융정보를 포함한다(SRS DEC-3a·3b).
 
 **AI 출력은 반드시 `ProhibitedTermScanner`를 지난다.** AI가 *"해지해 드립니다"* 같은 문구를 생성하면 GR4(실행 지원 오인 문구 0건) 위반이 되므로, 런타임 스캔을 통과하지 않은 문장은 노출하지 않는다.
 
@@ -1224,7 +1228,8 @@ stateDiagram-v2
 
 | 항목 | 막고 있는 것 | 해소 조건 |
 | --- | --- | --- |
-| `GatingPolicy`의 임계값 2개 | `RECOMMEND_CHANGE` 판정선 | **의존성 D2** 확정 |
+| **`RuleEngine`의 계산 로직 전체** | 적용 순서 · 제외 대상 · 산정 기간 · 전월 정의 · **전환비용 산정** · 조합 생성 규칙 · 중복 혜택 | **의존성 D16 — 기획 결정** (SRS 4.1.0 RE-1~RE-8) |
+| `GatingPolicy`의 임계값 2개 | `RECOMMEND_CHANGE` 판정선 | **의존성 D2** 확정 (**D16 선행**) |
 | `ScenarioBuilder.deltaRatio` | 적게·많이 시나리오 계산 기준 | **의존성 D5** 확정 |
 | 클라이언트 플랫폼 | 화면 설계 · 응답 형식 | SRS 3장 TBD |
 | `certainty` 값 도메인 | `FutureSpendPlan` 검증 규칙 | SRS 6.4.3 TBD |
