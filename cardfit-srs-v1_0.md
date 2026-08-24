@@ -33,7 +33,7 @@
 
 **TBD로 남긴 항목** — 실측·정책 결정 없이는 정할 수 없어 채우지 않았다. 구현 클래스(5장) · 클라이언트 플랫폼(3장) · 요구사항 단위 개인 담당자(2장) · 감사 보존기간(REQ-NF-006) · 단위원가 상한(REQ-NF-005) · `certainty` 값 도메인 · 파티셔닝·인덱스 튜닝(6.4.3) · Net Benefit 임계값과 시나리오 증감 폭(의존성 D2·D5). **추정값을 만들어 넣지 않았다.**
 
-**데이터 모델은 6.2(논리)와 6.4(물리)로 나뉜다** — 6.2는 enum·엔터티 정의, 6.4는 ERD와 테이블 DDL이다. 6.4의 14개 테이블 중 4개는 정규화 과정에서 파생했고, 각 테이블이 어느 요구사항 때문에 필요한지를 **6.4.3**에 적었다.
+**데이터 모델은 6.2(논리)와 6.4(물리)로 나뉜다** — 6.2는 enum·엔터티 정의, 6.4는 ERD와 테이블 DDL이다. 6.4의 15개 테이블 중 5개는 정규화 과정에서 파생했고, 각 테이블이 어느 요구사항 때문에 필요한지를 **6.4.3**에 적었다.
 
 ---
 
@@ -336,7 +336,7 @@ public enum TransitionCostItem {
 
 ### 6.4 데이터베이스 스키마
 
-**출처 구분** — 아래 14개 테이블 중 **10개는 PRD 6-1이 엔터티로 정의**한 것이고, **4개는 정규화 과정에서 파생**했다. 파생 테이블은 각각 왜 필요한지를 6.4.3에 적었다. 임의로 늘린 것이 아니라 이미 명세된 요구사항을 만족시키려면 없을 수 없는 테이블이다.
+**출처 구분** — 아래 15개 테이블 중 **10개는 PRD 6-1이 엔터티로 정의**한 것이고, **5개는 정규화 과정에서 파생**했다. 파생 테이블은 각각 왜 필요한지를 6.4.3에 적었다. 임의로 늘린 것이 아니라 이미 명세된 요구사항을 만족시키려면 없을 수 없는 테이블이다.
 
 #### 6.4.1 ERD
 
@@ -353,9 +353,13 @@ erDiagram
     CARD_PRODUCTS ||--o{ HELD_CARDS : "상품 식별"
     CARD_PRODUCTS ||--o{ BENEFIT_RULES : "혜택 규칙 버전"
 
+    CALCULATIONS ||--|{ CALCULATION_INPUT_PLANS : "입력① 미래계획 고정"
+    FUTURE_SPEND_PLANS ||--o{ CALCULATION_INPUT_PLANS : "참조됨"
+    PAST_SPENDS }o--o{ CALCULATIONS : "입력② 과거소비 (기간 참조)"
+    CALCULATIONS ||--|{ CALCULATION_APPLIED_RULES : "입력③ 적용 rule_version 전건"
+    BENEFIT_RULES ||--o{ CALCULATION_APPLIED_RULES : "참조됨"
+
     CALCULATIONS ||--|{ CALCULATION_SCENARIOS : "시나리오 3건"
-    CALCULATIONS ||--|{ CALCULATION_APPLIED_RULES : "적용 rule_version 전건"
-    BENEFIT_RULES ||--o{ CALCULATION_APPLIED_RULES : "참조된 버전"
 
     CALCULATION_SCENARIOS ||--o{ PLAN_CANDIDATES : "조합안 후보"
     PLAN_CANDIDATES ||--o{ ALLOCATIONS : "카드별 배분"
@@ -423,8 +427,14 @@ erDiagram
         bigint calculation_id PK
         bigint user_id FK
         varchar status "요청·성공·실패·부분"
-        jsonb input_snapshot
+        jsonb input_snapshot "재현용 스냅샷"
+        date spend_window_from "과거소비 참조 기간 시작"
+        date spend_window_to "과거소비 참조 기간 종료"
         date base_date "기준일"
+    }
+    CALCULATION_INPUT_PLANS {
+        bigint calculation_id PK
+        bigint future_spend_plan_id PK
     }
     CALCULATION_SCENARIOS {
         bigint calculation_scenario_id PK
@@ -577,6 +587,8 @@ CREATE TABLE calculations (
     status              VARCHAR(16) NOT NULL
         CHECK (status IN ('REQUESTED','SUCCESS','FAILED','PARTIAL')),
     input_snapshot      JSONB NOT NULL,         -- 재현성 (REQ-NF-006)
+    spend_window_from   DATE NOT NULL,          -- 과거소비 참조 기간. 이 기간이 곧
+    spend_window_to     DATE NOT NULL,          -- 어느 past_spends 행이 입력이었는지를 확정한다
     base_date           DATE NOT NULL,          -- 근거 화면의 기준일
     requested_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
     completed_at        TIMESTAMPTZ
@@ -592,7 +604,14 @@ CREATE TABLE calculation_scenarios (        -- 파생: 시나리오 3건 사전 
     UNIQUE (calculation_id, scenario_type)      -- 시나리오당 정확히 1건
 );
 
-CREATE TABLE calculation_applied_rules (    -- 파생: 적용 rule_version 전건 보존
+CREATE TABLE calculation_input_plans (      -- 파생: 입력① 어느 미래계획이 들어갔는지
+    calculation_id      BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
+    future_spend_plan_id BIGINT NOT NULL REFERENCES future_spend_plans(future_spend_plan_id),
+    PRIMARY KEY (calculation_id, future_spend_plan_id)
+);
+-- 미래 입력 0건이면 이 테이블에 행이 없다 → REQ-EXC-001 판정의 근거
+
+CREATE TABLE calculation_applied_rules (    -- 파생: 입력③ 적용 rule_version 전건 보존
     calculation_id      BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
     benefit_rule_id     BIGINT NOT NULL REFERENCES benefit_rules(benefit_rule_id),
     PRIMARY KEY (calculation_id, benefit_rule_id)
@@ -670,11 +689,24 @@ CREATE TABLE audit_logs (
 | **`is_suggested` · `was_edited` 추가** | 초기값 수정률 감시(트레이드오프 T3). 완료율만 오르고 틀린 초기값이 통과하는 경로를 잡기 위해 필요하다 |
 | **`user_constraints`로 접두** | `constraints`는 SQL 예약어다 |
 
-**파생 테이블 4개**
+**계산의 입력 3종을 관계로 드러낸다**
+
+`Calculation`은 **미래계획 · 과거소비 · 혜택규칙** 세 가지를 입력으로 받는다. 이 흐름이 서비스의 핵심이므로 ERD에 관계선으로 표시했고, 각 입력의 카디널리티는 아래와 같다.
+
+| 입력 | 관계 | 표현 방식 |
+| :---: | --- | --- |
+| ① 미래계획 | 계산 1건이 **여러 건**을 읽고, 계획 1건이 **여러 계산**에 쓰인다 (M:N) | `calculation_input_plans` 접합 테이블. 행이 0건이면 REQ-EXC-001 판정 근거가 된다 |
+| ② 과거소비 | 계산 1건이 **수백~수천 건**을 읽는다 (M:N) | `spend_window_from`·`spend_window_to` 기간으로 확정. 행 단위 접합은 규모가 과도하다 |
+| ③ 혜택규칙 | 카드 여러 장 → 규칙 **여러 개** (M:N) | `calculation_applied_rules` 접합 테이블. REQ-NF-006 전건 보존 |
+
+**1:1 관계로 두면 안 되는 이유** — 세 입력을 각각 `1:1`로 모델링하면 계산 1건에 미래계획 1건·과거소비 1건·혜택규칙 1건만 연결된다. 카테고리가 여럿이고 카드가 여러 장인 이 서비스에서는 성립하지 않으며, 특히 ③을 1:1로 두면 **적용된 `rule_version`을 전건 보존할 수 없어 REQ-NF-006이 깨진다.**
+
+**파생 테이블 5개**
 
 | 테이블 | 왜 필요한가 |
 | --- | --- |
 | `card_products` | `held_cards`와 `benefit_rules`가 같은 카드를 문자열로 조인하면 Rule 버전 관리가 깨진다 |
+| `calculation_input_plans` | 어느 미래계획이 계산에 들어갔는지를 행 단위로 고정한다. 스냅샷만으로는 "계획 → 계산" 추적이 불가능하다 |
 | `calculation_scenarios` | PRD가 시나리오를 `Calculation`의 필드로 두었으나, **"시나리오 하나라도 실패하면 전체를 부분으로 처리"**(REQ-EXC-005)는 계산 단위 상태와 시나리오 단위 결과를 분리해야 표현된다 |
 | `calculation_applied_rules` | 계산 1건에 카드 여러 장 → `rule_version`도 복수다. PRD의 단일 필드로는 전건 보존(REQ-NF-006)이 불가능하다 |
 | `audit_logs` | PRD 4절 감사 증적 요구를 담을 테이블이 엔터티 목록에 없었다 |
