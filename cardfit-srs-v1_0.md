@@ -31,7 +31,9 @@
 
 장 안에서 확장한 절도 근거 조항을 함께 표기했다 — **4.3**(9.6.12 c 이상 상황 처리) · **4.1 요구사항 배분**(9.6.9 Apportioning) · **6.5**(9.6.12 b 상태 전이) · **6.6**(9.6.15 논리 데이터베이스 요구) · **10.4**(9.6.7 Limitations).
 
-**TBD로 남긴 항목** — 입력 PRD에 근거가 없어 채우지 않았다. 구현 클래스(5장) · 컬럼 타입·인덱스 전략(6.4) · 클라이언트 플랫폼(3장) · 요구사항 단위 개인 담당자(2장) · 감사 보존기간(REQ-NF-006) · 단위원가 상한(REQ-NF-005) · Net Benefit 임계값과 시나리오 증감 폭(의존성 D2·D5). **추정값을 만들어 넣지 않았다.**
+**TBD로 남긴 항목** — 실측·정책 결정 없이는 정할 수 없어 채우지 않았다. 구현 클래스(5장) · 클라이언트 플랫폼(3장) · 요구사항 단위 개인 담당자(2장) · 감사 보존기간(REQ-NF-006) · 단위원가 상한(REQ-NF-005) · `certainty` 값 도메인 · 파티셔닝·인덱스 튜닝(6.4.3) · Net Benefit 임계값과 시나리오 증감 폭(의존성 D2·D5). **추정값을 만들어 넣지 않았다.**
+
+**데이터 모델은 6.2(논리)와 6.4(물리)로 나뉜다** — 6.2는 enum·엔터티 정의, 6.4는 ERD와 테이블 DDL이다. 6.4의 14개 테이블 중 4개는 정규화 과정에서 파생했고, 각 테이블이 어느 요구사항 때문에 필요한지를 **6.4.3**에 적었다.
 
 ---
 
@@ -334,24 +336,358 @@ public enum TransitionCostItem {
 13. **스코프 경계 고지**: "해지" 항목이 포함된 결론에는 카드사 직접 진행 안내를 노출하고, 실행 지원으로 오인될 금지어를 자동 검수한다
 14. **동의 실효 시 차단**: 만료·철회 상태의 데이터로 계산하지 않으며, 철회 시 수집 데이터를 파기한다
 
-### 6.4 데이터베이스 스키마 개요
+### 6.4 데이터베이스 스키마
 
-```sql
--- 핵심 테이블 요약
-users                      -- 사용자 및 마이데이터 동의 상태·범위·일시
-held_cards                 -- 보유카드 (마이데이터 수집)
-past_spends                -- 과거 소비 내역 (마이데이터 수집, 대용량)
-future_spend_plans         -- 사용자 입력 미래지출 계획
-constraints                -- 사용자 제약조건 (카드 수·연회비 상한·신규 발급)
-benefit_rules              -- 카드 혜택 Rule + rule_version (적용 시작·종료일)
-calculations               -- 계산 요청·결과 (scenario별, 입력 스냅샷·기준일·미반영 항목)
-plan_candidates            -- 조합안 (Gross/Net Benefit, 게이팅 결과, 만료 시점)
-allocations                -- 카드별 역할·배분 금액
-outcome_logs               -- 조합안 선택 및 30일 후 완주 응답 (측정 전용)
-audit_logs                 -- 계산 요청·응답·rule_version·마이데이터 응답 코드 전건 보존
+**출처 구분** — 아래 14개 테이블 중 **10개는 PRD 6-1이 엔터티로 정의**한 것이고, **4개는 정규화 과정에서 파생**했다. 파생 테이블은 각각 왜 필요한지를 6.4.3에 적었다. 임의로 늘린 것이 아니라 이미 명세된 요구사항을 만족시키려면 없을 수 없는 테이블이다.
+
+#### 6.4.1 ERD
+
+> 근거: ISO/IEC/IEEE 29148:2018 **9.6.5 b)** — 관계를 보이기 위한 도해는 설계가 아니라 **논리적 관계**를 나타낸다. **9.6.15 d)** *data entities and their relationships*.
+
+```mermaid
+erDiagram
+    USERS ||--o{ HELD_CARDS : "보유"
+    USERS ||--o{ PAST_SPENDS : "소비 이력"
+    USERS ||--o{ FUTURE_SPEND_PLANS : "미래 계획 입력"
+    USERS ||--o| USER_CONSTRAINTS : "제약조건"
+    USERS ||--o{ CALCULATIONS : "계산 요청"
+
+    CARD_PRODUCTS ||--o{ HELD_CARDS : "상품 식별"
+    CARD_PRODUCTS ||--o{ BENEFIT_RULES : "혜택 규칙 버전"
+
+    CALCULATIONS ||--|{ CALCULATION_SCENARIOS : "시나리오 3건"
+    CALCULATIONS ||--|{ CALCULATION_APPLIED_RULES : "적용 rule_version 전건"
+    BENEFIT_RULES ||--o{ CALCULATION_APPLIED_RULES : "참조된 버전"
+
+    CALCULATION_SCENARIOS ||--o{ PLAN_CANDIDATES : "조합안 후보"
+    PLAN_CANDIDATES ||--o{ ALLOCATIONS : "카드별 배분"
+    PLAN_CANDIDATES ||--o| OUTCOME_LOGS : "선택 시 1건"
+
+    CALCULATIONS ||--o{ AUDIT_LOGS : "전건 증적"
+
+    USERS {
+        bigint user_id PK
+        varchar consent_status "미동의·동의·만료·철회"
+        jsonb consent_scope
+        timestamptz consented_at
+        timestamptz consent_expires_at
+        timestamptz withdrawn_at "철회 +24h 내 파기 기준점"
+    }
+    CARD_PRODUCTS {
+        bigint card_product_id PK
+        varchar issuer "카드사·겸영은행"
+        varchar product_name
+        bigint annual_fee_won
+    }
+    HELD_CARDS {
+        bigint held_card_id PK
+        bigint user_id FK
+        bigint card_product_id FK
+        date issued_on
+        varchar performance_base_month "실적 기준월"
+    }
+    PAST_SPENDS {
+        bigint past_spend_id PK
+        bigint user_id FK
+        varchar merchant_name
+        varchar industry_code "업종코드"
+        bigint amount_won
+        date paid_on
+    }
+    FUTURE_SPEND_PLANS {
+        bigint future_spend_plan_id PK
+        bigint user_id FK
+        varchar category "자유 입력 허용"
+        bigint amount_won
+        varchar target_period "시점"
+        varchar certainty "확실도"
+    }
+    USER_CONSTRAINTS {
+        bigint user_constraint_id PK
+        bigint user_id FK
+        smallint max_card_count
+        bigint annual_fee_cap_won
+        boolean allow_new_issue
+    }
+    BENEFIT_RULES {
+        bigint benefit_rule_id PK
+        bigint card_product_id FK
+        varchar rule_version "적용 버전"
+        bigint performance_tier_min_won "전월실적 구간"
+        bigint performance_tier_max_won
+        bigint combined_discount_cap_won "통합할인한도"
+        jsonb exclusions "제외 항목"
+        date effective_from
+        date effective_to
+        timestamptz verified_at "최신성 30일 판정"
+    }
+    CALCULATIONS {
+        bigint calculation_id PK
+        bigint user_id FK
+        varchar status "요청·성공·실패·부분"
+        jsonb input_snapshot
+        date base_date "기준일"
+    }
+    CALCULATION_SCENARIOS {
+        bigint calculation_scenario_id PK
+        bigint calculation_id FK
+        varchar scenario_type "적게·예상대로·많이"
+        varchar status
+        jsonb unreflected_items "미반영 항목"
+    }
+    CALCULATION_APPLIED_RULES {
+        bigint calculation_id PK
+        bigint benefit_rule_id PK
+    }
+    PLAN_CANDIDATES {
+        bigint plan_candidate_id PK
+        bigint calculation_scenario_id FK
+        jsonb composition "해지·유지·신규추가"
+        bigint gross_benefit_won
+        bigint annual_fee_delta_won "전환비용 1"
+        bigint performance_rebuild_cost_won "전환비용 2"
+        bigint execution_burden_cost_won "전환비용 3"
+        bigint net_benefit_won
+        varchar gating_result "유지·변경권고"
+        varchar status "제시·선택·미선택·만료"
+        timestamptz expires_at "rule_version 변경 또는 기준일+30일"
+    }
+    ALLOCATIONS {
+        bigint allocation_id PK
+        bigint plan_candidate_id FK
+        bigint card_product_id FK
+        varchar category
+        bigint allocated_amount_won
+    }
+    OUTCOME_LOGS {
+        bigint outcome_log_id PK
+        bigint plan_candidate_id FK
+        varchar selected_scenario_type
+        timestamptz selected_at
+        varchar status "미발송·발송·응답·무응답"
+        timestamptz sent_at "선택 +30일, 1회만"
+        boolean completed "무응답은 미완주"
+        text incomplete_reason "집계 전용"
+    }
+    AUDIT_LOGS {
+        bigint audit_log_id PK
+        bigint calculation_id FK
+        jsonb request_payload
+        jsonb response_payload
+        jsonb applied_rule_versions
+        varchar mydata_response_code
+    }
 ```
 
-**컬럼 타입·인덱스·파티셔닝 전략은 TBD**다. 입력 PRD가 엔터티와 주요 필드까지만 정의하고 있어, 물리 설계를 추정해 채우지 않았다.
+#### 6.4.2 테이블 정의
+
+```sql
+-- ═══════════════════════════════════════════════════════════
+-- 금액은 전부 BIGINT(원 단위 정수)다. 부동소수점·DECIMAL 반올림으로는
+-- "배분 합계와 입력 총액 오차 ≤ 1원"(REQ-FUNC-005)과
+-- "동일 입력 재계산 불일치 0건"(REQ-NF-002)을 보장할 수 없다.
+-- ═══════════════════════════════════════════════════════════
+
+-- ── 사용자 및 동의 ────────────────────────────────────────
+CREATE TABLE users (
+    user_id             BIGSERIAL PRIMARY KEY,
+    consent_status      VARCHAR(16) NOT NULL
+        CHECK (consent_status IN ('NOT_CONSENTED','CONSENTED','EXPIRED','WITHDRAWN')),
+    consent_scope       JSONB,              -- 동의 범위 최소화 점검 대상 (REQ-NF-004)
+    consented_at        TIMESTAMPTZ,
+    consent_expires_at  TIMESTAMPTZ,        -- 경과 시 계산 요청 400 (REQ-EXC-004)
+    withdrawn_at        TIMESTAMPTZ,        -- +24시간 내 수집 데이터 파기
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- ── 카드 상품 마스터 (파생) ────────────────────────────────
+CREATE TABLE card_products (
+    card_product_id     BIGSERIAL PRIMARY KEY,
+    issuer              VARCHAR(64) NOT NULL,   -- 8개 카드사·겸영은행
+    product_name        VARCHAR(128) NOT NULL,
+    annual_fee_won      BIGINT NOT NULL,
+    is_active           BOOLEAN NOT NULL DEFAULT TRUE,
+    UNIQUE (issuer, product_name)
+);
+
+-- ── 마이데이터 수집분 ─────────────────────────────────────
+CREATE TABLE held_cards (
+    held_card_id        BIGSERIAL PRIMARY KEY,
+    user_id             BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    card_product_id     BIGINT NOT NULL REFERENCES card_products(card_product_id),
+    issued_on           DATE,
+    performance_base_month CHAR(7),             -- 'YYYY-MM' 실적 기준월
+    collected_at        TIMESTAMPTZ NOT NULL,   -- 근거 화면의 "기준일" 산출 근거
+    UNIQUE (user_id, card_product_id)
+);
+
+CREATE TABLE past_spends (
+    past_spend_id       BIGSERIAL PRIMARY KEY,
+    user_id             BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    merchant_name       VARCHAR(256),
+    industry_code       VARCHAR(16),            -- 업종코드
+    amount_won          BIGINT NOT NULL,
+    paid_on             DATE NOT NULL,
+    collected_at        TIMESTAMPTZ NOT NULL
+);
+-- 계산마다 전량 조회되는 대용량 테이블 (6.6 사용 빈도)
+CREATE INDEX idx_past_spends_user_paid ON past_spends (user_id, paid_on DESC);
+
+-- ── 사용자 입력분 ─────────────────────────────────────────
+CREATE TABLE future_spend_plans (
+    future_spend_plan_id BIGSERIAL PRIMARY KEY,
+    user_id             BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    category            VARCHAR(64) NOT NULL,   -- 자유 입력 허용 (REQ-FUNC-008)
+    amount_won          BIGINT NOT NULL,        -- 증감 양방향: 음수 허용
+    target_period       CHAR(7) NOT NULL,       -- 'YYYY-MM'
+    certainty           VARCHAR(16),            -- 확실도 도메인 TBD
+    is_suggested        BOOLEAN NOT NULL DEFAULT FALSE, -- 초기값 자동 제안분 여부
+    was_edited          BOOLEAN NOT NULL DEFAULT FALSE, -- 초기값 수정률 측정 (T3)
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE user_constraints (             -- 'constraints'는 SQL 예약어라 접두
+    user_constraint_id  BIGSERIAL PRIMARY KEY,
+    user_id             BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    max_card_count      SMALLINT,
+    annual_fee_cap_won  BIGINT,
+    allow_new_issue     BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- ── 카드 혜택 Rule (버전 이력) ────────────────────────────
+CREATE TABLE benefit_rules (
+    benefit_rule_id     BIGSERIAL PRIMARY KEY,
+    card_product_id     BIGINT NOT NULL REFERENCES card_products(card_product_id),
+    rule_version        VARCHAR(32) NOT NULL,
+    performance_tier_min_won BIGINT NOT NULL,   -- 전월실적 구간 하한
+    performance_tier_max_won BIGINT,            -- NULL = 상한 없음
+    combined_discount_cap_won BIGINT NOT NULL,  -- 통합할인한도
+    exclusions          JSONB NOT NULL,         -- 제외 항목 (근거 6항목 중 1)
+    effective_from      DATE NOT NULL,
+    effective_to        DATE,                   -- NULL = 현행
+    verified_at         TIMESTAMPTZ NOT NULL,   -- 최신성 30일 판정 기준 (REQ-NF-007)
+    UNIQUE (card_product_id, rule_version, performance_tier_min_won)
+);
+-- 구버전을 삭제하지 않는다 — 과거 계산의 재현을 위해 (6.6 버전 관리)
+CREATE INDEX idx_benefit_rules_freshness ON benefit_rules (verified_at);
+
+-- ── 계산 ──────────────────────────────────────────────────
+CREATE TABLE calculations (
+    calculation_id      BIGSERIAL PRIMARY KEY,
+    user_id             BIGINT NOT NULL REFERENCES users(user_id),
+    status              VARCHAR(16) NOT NULL
+        CHECK (status IN ('REQUESTED','SUCCESS','FAILED','PARTIAL')),
+    input_snapshot      JSONB NOT NULL,         -- 재현성 (REQ-NF-006)
+    base_date           DATE NOT NULL,          -- 근거 화면의 기준일
+    requested_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+    completed_at        TIMESTAMPTZ
+);
+
+CREATE TABLE calculation_scenarios (        -- 파생: 시나리오 3건 사전 계산
+    calculation_scenario_id BIGSERIAL PRIMARY KEY,
+    calculation_id      BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
+    scenario_type       VARCHAR(16) NOT NULL
+        CHECK (scenario_type IN ('LESS','AS_EXPECTED','MORE')),
+    status              VARCHAR(16) NOT NULL CHECK (status IN ('SUCCESS','FAILED')),
+    unreflected_items   JSONB NOT NULL,         -- 미반영 항목, 누락률 0% 표기용
+    UNIQUE (calculation_id, scenario_type)      -- 시나리오당 정확히 1건
+);
+
+CREATE TABLE calculation_applied_rules (    -- 파생: 적용 rule_version 전건 보존
+    calculation_id      BIGINT NOT NULL REFERENCES calculations(calculation_id) ON DELETE CASCADE,
+    benefit_rule_id     BIGINT NOT NULL REFERENCES benefit_rules(benefit_rule_id),
+    PRIMARY KEY (calculation_id, benefit_rule_id)
+);
+
+-- ── 조합안 및 배분 ────────────────────────────────────────
+CREATE TABLE plan_candidates (
+    plan_candidate_id   BIGSERIAL PRIMARY KEY,
+    calculation_scenario_id BIGINT NOT NULL
+        REFERENCES calculation_scenarios(calculation_scenario_id) ON DELETE CASCADE,
+    composition         JSONB NOT NULL,         -- 해지·유지·신규추가 구성
+    gross_benefit_won   BIGINT NOT NULL,
+    annual_fee_delta_won        BIGINT NOT NULL, -- 전환비용 ①
+    performance_rebuild_cost_won BIGINT NOT NULL, -- 전환비용 ②
+    execution_burden_cost_won   BIGINT NOT NULL, -- 전환비용 ③
+    net_benefit_won     BIGINT NOT NULL,        -- Gross − 전환비용 3항목
+    gating_result       VARCHAR(24) NOT NULL
+        CHECK (gating_result IN ('KEEP_CURRENT','RECOMMEND_CHANGE')),
+    status              VARCHAR(16) NOT NULL
+        CHECK (status IN ('PRESENTED','SELECTED','NOT_SELECTED','EXPIRED')),
+    expires_at          TIMESTAMPTZ NOT NULL,   -- 기준일 +30일 (ADR-06)
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+-- 게이팅 위반 전건 대조 (GR2 실시간 알림)
+CREATE INDEX idx_plan_candidates_gating ON plan_candidates (gating_result, created_at);
+
+CREATE TABLE allocations (
+    allocation_id       BIGSERIAL PRIMARY KEY,
+    plan_candidate_id   BIGINT NOT NULL
+        REFERENCES plan_candidates(plan_candidate_id) ON DELETE CASCADE,
+    card_product_id     BIGINT NOT NULL REFERENCES card_products(card_product_id),
+    category            VARCHAR(64) NOT NULL,
+    allocated_amount_won BIGINT NOT NULL
+);
+-- 무결성: SUM(allocated_amount_won) 과 입력 총액의 오차 ≤ 1원 (REQ-FUNC-005)
+-- 단일 행 제약으로 표현 불가 — 애플리케이션 검증 + 일간 배치 대조 (REQ-NF-002)
+
+-- ── 완주 계측 (측정 전용) ─────────────────────────────────
+CREATE TABLE outcome_logs (
+    outcome_log_id      BIGSERIAL PRIMARY KEY,
+    plan_candidate_id   BIGINT NOT NULL UNIQUE  -- 선택 1건당 1행
+        REFERENCES plan_candidates(plan_candidate_id),
+    selected_scenario_type VARCHAR(16) NOT NULL, -- 어느 탭에서 골랐는지
+    selected_at         TIMESTAMPTZ NOT NULL,
+    status              VARCHAR(16) NOT NULL
+        CHECK (status IN ('NOT_SENT','SENT','RESPONDED','NO_RESPONSE')),
+    sent_at             TIMESTAMPTZ,            -- 선택 +30일, 1회만. 재발송 없음
+    responded_at        TIMESTAMPTZ,
+    completed           BOOLEAN,                -- NULL·무응답 = 미완주로 집계
+    incomplete_reason   TEXT                    -- 집계 전용. 후속 액션 트리거 금지
+);
+
+-- ── 감사 증적 (append-only) ───────────────────────────────
+CREATE TABLE audit_logs (
+    audit_log_id        BIGSERIAL PRIMARY KEY,
+    calculation_id      BIGINT REFERENCES calculations(calculation_id),
+    user_id             BIGINT,                 -- 파기 후에도 증적 유지: FK 없음
+    request_payload     JSONB NOT NULL,
+    response_payload    JSONB,
+    applied_rule_versions JSONB NOT NULL,
+    mydata_response_code VARCHAR(16),
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+-- UPDATE·DELETE 금지. 적재율 100% 감시 (REQ-NF-006)
+```
+
+#### 6.4.3 설계 판단 근거
+
+| 판단 | 근거 요구사항 |
+| --- | --- |
+| **금액은 전부 `BIGINT`(원 단위 정수)** | 배분 합계 오차 ≤ 1원(REQ-FUNC-005) · 재계산 불일치 0건(REQ-NF-002). 부동소수점은 두 조건을 동시에 만족할 수 없다 |
+| **소프트 삭제를 쓰지 않는다** | 동의 철회 시 **24시간 내 파기**(REQ-NF-004). 논리 삭제는 파기 요구와 충돌한다. 대신 `audit_logs`가 `user_id`에 FK를 걸지 않아 파기 후에도 증적이 남는다 |
+| **`benefit_rules` 구버전을 삭제하지 않는다** | 과거 계산의 재현(REQ-NF-006). 버전 이력이 없으면 만료된 조합안의 근거를 되짚을 수 없다 |
+| **`verified_at` 컬럼 추가** | 갱신 지연 30일 판정(REQ-NF-007)의 기준점. PRD가 "최신성 경고"를 요구하는데 판정할 컬럼이 없었다 |
+| **`is_suggested` · `was_edited` 추가** | 초기값 수정률 감시(트레이드오프 T3). 완료율만 오르고 틀린 초기값이 통과하는 경로를 잡기 위해 필요하다 |
+| **`user_constraints`로 접두** | `constraints`는 SQL 예약어다 |
+
+**파생 테이블 4개**
+
+| 테이블 | 왜 필요한가 |
+| --- | --- |
+| `card_products` | `held_cards`와 `benefit_rules`가 같은 카드를 문자열로 조인하면 Rule 버전 관리가 깨진다 |
+| `calculation_scenarios` | PRD가 시나리오를 `Calculation`의 필드로 두었으나, **"시나리오 하나라도 실패하면 전체를 부분으로 처리"**(REQ-EXC-005)는 계산 단위 상태와 시나리오 단위 결과를 분리해야 표현된다 |
+| `calculation_applied_rules` | 계산 1건에 카드 여러 장 → `rule_version`도 복수다. PRD의 단일 필드로는 전건 보존(REQ-NF-006)이 불가능하다 |
+| `audit_logs` | PRD 4절 감사 증적 요구를 담을 테이블이 엔터티 목록에 없었다 |
+
+**남은 TBD** — 아래는 실측·정책 없이 정할 수 없어 비워 두었다.
+
+- `past_spends` **파티셔닝 전략** — 사용자 수·조회 패턴 실측 후 결정 (월 단위 range 파티션이 유력)
+- `audit_logs` **보존기간·아카이빙** — 의존성 D9(규제 분류) 확정 후
+- `certainty` **값 도메인** — PRD가 필드만 정의하고 값 체계를 정하지 않았다
+- **PK 타입** — `BIGSERIAL`로 두었다. 외부 노출 식별자가 필요하면 UUID 병행 검토
+- **인덱스 튜닝** — 위 3개는 요구사항이 직접 지목한 것만 선언했다. 나머지는 부하 테스트(REQ-NF-001) 후
 
 ### 6.5 상태 전이 규칙
 
