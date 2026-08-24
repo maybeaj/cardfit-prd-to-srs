@@ -20,7 +20,9 @@ CardFit 서비스의 **PRD 문서를 SRS 문서로 변환**하는 작업 저장�
 | SRS 5장 구현 클래스 | ✅ 완료 — TBD 27건을 클래스 다이어그램 기반으로 채움 |
 | SRS 다이어그램 배치 | ✅ 완료 — 17개 (Component·Class·ERD·Sequence 5·Flowchart 6·State 4) |
 | SRS 수용 기준 8건 | ✅ 전건 충족 (검증 근거는 커밋 이력) |
-| 테스트 케이스 명세 | ⬜ **미작성** — 추적표에 TC ID 27건만 발행됨 |
+| 테스트 케이스 명세 | ✅ 완료 — 27건 (P0 6건 · 배포 게이트 2건) |
+| 기술 스택 제약 (C-TEC) | ✅ 완료 — 1.5 반영 + 1.5.2 이탈 11건 식별 |
+| DEC-2 배포 게이트 | ✅ 확정 — 허용 (C-TEC-007a) |
 | 설계 단계 TBD 확정 | ⬜ 대기 — 구현 클래스, 물리 스키마, 의존성 D1~D5 |
 
 ---
@@ -57,6 +59,7 @@ PRD에는 예시 SRS가 담지 않는 내용이 있습니다(KPI·Guardrail, 검
 | `cardfit-prd-v1_0.md` | **입력물** — CardFit PRD 겸 요구사항 추적표 (PRD-CARDFIT-001 v1.0) |
 | `cardfit-srs-v1_0.md` | **산출물** — 변환된 SRS (SRS-CARDFIT-001 v1.0). 다이어그램 11개 배치 |
 | `cardfit-design-v1_0.md` | **산출물** — 기술 설계 명세서 (SDD-CARDFIT-001 v1.0). 다이어그램 27개 |
+| `cardfit-testcase-v1_0.md` | **산출물** — 테스트 명세서 (STD-CARDFIT-001 v1.0). 테스트 27건 |
 | `[SRS 문서] AD-Core-Platform (한글).md` | **포맷 기준** — 광고 플랫폼 SRS. 목표 문서의 형식 견본 |
 | `29148-2018-ISOIECIEEE.pdf` | **준거 표준** — 예시 SRS 범위를 벗어난 부분을 확장할 때만 참조 |
 | `README.md` | 이 문서 |
