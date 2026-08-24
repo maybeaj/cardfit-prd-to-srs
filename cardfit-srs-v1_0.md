@@ -33,6 +33,24 @@
 
 **TBD로 남긴 항목** — 실측·정책 결정 없이는 정할 수 없어 채우지 않았다. 구현 클래스(5장) · 클라이언트 플랫폼(3장) · 요구사항 단위 개인 담당자(2장) · 감사 보존기간(REQ-NF-006) · 단위원가 상한(REQ-NF-005) · `certainty` 값 도메인 · 파티셔닝·인덱스 튜닝(6.4.3) · Net Benefit 임계값과 시나리오 증감 폭(의존성 D2·D5). **추정값을 만들어 넣지 않았다.**
 
+### 다이어그램 색인
+
+배경지식이 없는 독자를 위해 본문 각 장에 다이어그램을 배치했다. **표를 읽기 전에 그림을 먼저 보면 이해가 빠르다.**
+
+| 위치 | 다이어그램 | 무엇을 보여주나 |
+| :---: | --- | --- |
+| **3장** | 컴포넌트 | 시스템이 어떤 코드 덩어리로 나뉘고, AI가 못 들어가는 영역이 어디인가 |
+| **4장 도입** | 순서도 2개 | 계산이 도는 순서 · 게이팅이 판단하는 방식 |
+| **4.3** | 순서도 | 어떤 상황에서 결과를 주지 않는가 (예외 6건) |
+| **6.4.1** | ERD | 데이터 표 15개가 어떻게 이어지나 |
+| **6.5** | 상태 기계 4개 | 동의·계산·조합안·완주 계측이 거치는 상태 |
+| **8.2** | 유스케이스 | 누가 이 서비스로 무엇을 하나 |
+| **8.3** | 순서도 | 사용자 여정 전체와 두 개의 정상 종료 경로 |
+
+**표준 양식(`[SRS 문서] AD-Core-Platform`)에는 다이어그램이 없다.** 가독성과 비전문 독자에 대한 친절성을 위해 의도적으로 추가한 것이며, 장 구조·요구사항 표 9열·ID 체계는 양식을 그대로 따른다.
+
+**전체 설계 산출물은 `cardfit-design-v1_0.md`(SDD-CARDFIT-001)에 있다** — 유스케이스 명세, 컴포넌트 책임 정의, 클래스 다이어그램 3종, 시퀀스 다이어그램 10종, 순서도 5종, 상태 기계 4종, SRS↔설계 추적 매트릭스. 본 문서의 다이어그램은 그중 요구사항 이해에 필요한 것만 발췌한 것이다.
+
 **데이터 모델은 6.2(논리)와 6.4(물리)로 나뉜다** — 6.2는 enum·엔터티 정의, 6.4는 ERD와 테이블 DDL이다. 6.4의 15개 테이블 중 5개는 정규화 과정에서 파생했고, 각 테이블이 어느 요구사항 때문에 필요한지를 **6.4.3**에 적었다.
 
 ---
@@ -112,6 +130,63 @@
 
 ## 3. 시스템 맥락 및 인터페이스
 
+> **그림 읽는 법** — 상자는 기능 단위 코드 덩어리(컴포넌트), 큰 테두리는 계층이다. 화살표는 "누가 누구를 부르나"를 뜻한다. **노란 테두리 안에는 AI가 들어갈 수 없다**(9장 ADR-02). 상세 컴포넌트 설계는 `cardfit-design-v1_0.md` 2장에 있다.
+
+```mermaid
+flowchart TB
+    subgraph CL["클라이언트 계층 — 플랫폼 TBD"]
+        UI["사용자 화면"]
+    end
+    subgraph AP["API 계층"]
+        GW["API Gateway<br/>인증·인가 · 레이턴시 계측"]
+        OWN["AccessOwnershipVerifier<br/>응답 주체 전건 대조 — 오조회 차단"]
+    end
+    subgraph APP["응용 계층"]
+        direction TB
+        CONN["MyDataConnector<br/>연동 · 동의 판정 · 호출 과금 통제"]
+        ORCH["CalculationOrchestrator<br/>계산 조정 · 부분 상태 판정"]
+        subgraph DET["결정론 영역 — AI 진입 금지"]
+            direction TB
+            RULE["RuleEngine<br/>순혜택 계산"]
+            OPT["CombinationOptimizer<br/>조합 후보 · 게이팅"]
+            ALLOC["AllocationService<br/>카드별 배분"]
+        end
+        EVID["EvidenceService<br/>근거 6항목 검증"]
+        EXPL["ExplanationModule (AI)<br/>쉬운 말 설명 — 금액 계산 금지"]
+        TRACK["OutcomeTracker<br/>완주 계측 — 측정 전용"]
+    end
+    subgraph DATA["데이터 계층"]
+        PIPE["RuleDataPipeline<br/>약관 수집 · rule_version"]
+        DB[("운영 DB — 15개 테이블")]
+        AUD[("AuditLogStore — append-only")]
+    end
+    subgraph EXT["외부 시스템"]
+        MD[/"마이데이터 카드 업권 API<br/>단일 채널 · 호출당 과금"/]
+        TM[/"카드사 약관 출처<br/>8개사 · 통합 API 없음"/]
+        IS[/"카드사 신청 페이지"/]
+    end
+
+    UI --> GW --> OWN
+    OWN --> ORCH
+    OWN --> EVID
+    OWN --> TRACK
+    ORCH --> CONN
+    ORCH --> RULE --> OPT --> ALLOC
+    ORCH --> EVID --> EXPL
+    CONN <--> MD
+    PIPE <--> TM
+    PIPE --> DB
+    RULE --> DB
+    OPT --> DB
+    TRACK --> DB
+    ORCH --> AUD
+    UI -.->|"링크 이동만"| IS
+
+    style DET fill:#FFF9C4,stroke:#F57F17,stroke-width:3px
+    style EXPL fill:#E1BEE7,stroke:#6A1B9A
+    style EXT fill:#ECEFF1,stroke:#607D8B
+```
+
 - **클라이언트 애플리케이션**
     - **TBD** — PRD에 클라이언트 플랫폼(웹/모바일 앱 구분, 진입 도메인)이 명시되지 않았다. 요구사항은 플랫폼 비종속으로 기술한다.
 - **내부 구성요소**
@@ -132,6 +207,67 @@
 ---
 
 ## 4. 구체적 요구사항
+
+> **아래 두 그림이 4.1 표 전체의 지도다.** 요구사항 12건이 각각 어디에 해당하는지 그림에서 먼저 찾으면 표가 읽힌다. 마름모는 판단(갈라지는 지점), 사각형은 처리다.
+
+**계산이 도는 순서** — REQ-FUNC-003 · REQ-NF-005
+
+```mermaid
+flowchart TD
+    S(["계산 요청"]) --> A{"동의 유효?"}
+    A -->|"아니오"| A1(["400 + 재동의<br/>REQ-EXC-004"])
+    A -->|"예"| B["마이데이터 1회 수집<br/>REQ-FUNC-002"]
+    B --> C{"수집 성공?"}
+    C -->|"실패"| C1["최근 확인 스냅샷 + 기준일<br/>REQ-EXC-003"] --> D
+    C -->|"성공"| D["증감 폭 적용해 시나리오 3개 생성"]
+    D --> E1["적게"]
+    D --> E2["예상대로"]
+    D --> E3["많이"]
+    E1 --> F1["순혜택 계산"] --> G1["조합 후보 + 게이팅"]
+    E2 --> F2["순혜택 계산"] --> G2["조합 후보 + 게이팅"]
+    E3 --> F3["순혜택 계산"] --> G3["조합 후보 + 게이팅"]
+    G1 --> H{"3건 모두 성공?"}
+    G2 --> H
+    G3 --> H
+    H -->|"아니오"| H1(["부분 처리 · 추천 중단<br/>REQ-EXC-005"])
+    H -->|"예"| I["감사 로그 전건 적재<br/>REQ-NF-006"]
+    I --> J(["3개 시나리오 저장<br/>예상대로 노출"])
+    style B fill:#FFF9C4,stroke:#F57F17
+    style H1 fill:#FFCDD2,stroke:#C62828
+```
+
+**노란 상자가 시나리오 분기 앞에 딱 하나뿐인 것이 REQ-NF-005의 설계다.** 마이데이터 수집이 세 갈래 안으로 들어가면 호출이 3배가 되어 `결론 1건당 호출 ≤ 1회`가 즉시 깨진다.
+
+**게이팅이 판단하는 방식** — REQ-FUNC-004 · ADR-01
+
+```mermaid
+flowchart TD
+    S(["조합 후보"]) --> A["Gross Benefit 산출"]
+    A --> B["전환비용 3항목 산출"]
+    B --> B1["연회비 변동"]
+    B --> B2["실적 재달성 부담"]
+    B --> B3["전환 실행 부담"]
+    B1 --> C["Net Benefit = Gross − 전환비용"]
+    B2 --> C
+    B3 --> C
+    C --> D{"절대 임계값 이상?"}
+    D -->|"아니오"| F["KEEP_CURRENT"]
+    D -->|"예"| E{"현재 조합 대비<br/>상대 임계값 이상?"}
+    E -->|"아니오"| F
+    E -->|"예"| G["RECOMMEND_CHANGE"]
+    F --> H(["현재 조합 유지<br/>정상 결과 · 반환률 100%"])
+    G --> I(["조합안 + 차액 원 단위"])
+    H --> J{"임계 미달인데<br/>변경 제안했나?"}
+    I --> J
+    J -->|"1건이라도"| K(["즉시 중단 · GR2"])
+    J -->|"없음"| L(["정상"])
+    style D fill:#FFE0B2,stroke:#E65100
+    style E fill:#FFE0B2,stroke:#E65100
+    style H fill:#C8E6C9,stroke:#2E7D32
+    style K fill:#FFCDD2,stroke:#C62828
+```
+
+**초록 상자가 빨간 상자가 아니라는 점을 놓치면 이 서비스를 잘못 만든다.** "현재 조합 유지"는 실패가 아니라 정상 결과이며, 오히려 임계 미달인데 변경을 제안하는 것이 위반(GR2)이다. **주황 마름모 두 개의 숫자는 아직 비어 있다** — 의존성 D2 미정이다.
 
 ### 4.1 기능 요구사항
 
@@ -182,6 +318,37 @@
 
 **"결과를 내지 않는 것"이 정답인 케이스가 6건이다.** 이 표가 없으면 장애·미입력 상황의 반환값이 구현자 재량이 되고, 그 재량이 미래 입력 반영률 100%와 근거 공개 6항목을 무너뜨린다.
 
+> **그림 읽는 법** — 어떤 상황에서 무엇을 반환하는지 한눈에 본다. **빨간 상자는 "결과를 안 주는 것이 정답"**, 노란 상자는 "경고를 붙여 계속하는 것이 정답"이다.
+
+```mermaid
+flowchart TD
+    S(["요청 도착"]) --> A{"동의 유효?"}
+    A -->|"만료·철회"| R4(["400 + 재동의<br/>REQ-EXC-004"])
+    A -->|"유효"| B{"미래 입력<br/>1건 이상?"}
+    B -->|"0건"| R1(["400 + 입력 요구<br/>REQ-EXC-001"])
+    B -->|"있음"| C{"마이데이터<br/>정상?"}
+    C -->|"장애"| R3["경고 + 기준일 붙여<br/>계산 계속<br/>REQ-EXC-003"]
+    C -->|"정상"| D["계산 수행"]
+    R3 --> D
+    D --> E{"시나리오 3건<br/>모두 성공?"}
+    E -->|"1건 이상 실패"| R5(["부분 처리 · 추천 중단<br/>REQ-EXC-005"])
+    E -->|"전부 성공"| F{"조합안<br/>만료?"}
+    F -->|"rule_version 변경<br/>또는 기준일+30일"| R6(["만료 표기 + 재계산 유도<br/>REQ-EXC-006"])
+    F -->|"유효"| G{"근거 항목<br/>6개 이상?"}
+    G -->|"미달"| R2(["응답 거부<br/>REQ-EXC-002"])
+    G -->|"충족"| OK(["결과 노출"])
+
+    style R1 fill:#FFCDD2,stroke:#C62828
+    style R2 fill:#FFCDD2,stroke:#C62828
+    style R4 fill:#FFCDD2,stroke:#C62828
+    style R5 fill:#FFCDD2,stroke:#C62828
+    style R6 fill:#FFCDD2,stroke:#C62828
+    style R3 fill:#FFF9C4,stroke:#F57F17
+    style OK fill:#C8E6C9,stroke:#2E7D32
+```
+
+**노란 상자가 하나뿐인 것에 주의한다.** 마이데이터 장애만 "계속"이고 나머지 다섯은 모두 "중단"이다. 장애를 예외 처리한 이유는 **대체 공급자가 없어 멈추면 서비스가 성립하지 않기** 때문이며, 대신 기준일을 반드시 노출해 사용자가 스스로 판단하게 한다.
+
 | ID | 제목 | 출처 | 우선순위 | 유형 | 검증 방식 | 인수 기준 | 상태 | 담당자 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **REQ-EXC-001** | 미래 입력 0건 시 계산 거부 | PRD 5-2 AC-F1 | Must Have | Error Handling | 경계 입력 테스트 | 미래지출 입력 0건으로 계산 요청 시 **`400`을 반환하고 입력을 요구**한다. 미래 입력 미반영 결과 노출 **0건**, 오응답 0건 | Proposed | 개발 엔지니어 |
@@ -197,34 +364,36 @@
 
 | 요구사항 ID | 모듈 | 구현 클래스 | 테스트 케이스 ID |
 | --- | --- | --- | --- |
-| REQ-FUNC-001 | Future Spend Input | TBD | TC-FUNC-001 |
-| REQ-FUNC-002 | MyData Connector | TBD | TC-FUNC-002 |
-| REQ-FUNC-003 | Rule Engine | TBD | TC-FUNC-003 |
-| REQ-FUNC-004 | Combination Optimizer | TBD | TC-FUNC-004 |
-| REQ-FUNC-005 | Allocation Service | TBD | TC-FUNC-005 |
-| REQ-FUNC-006 | Evidence Service | TBD | TC-FUNC-006 |
-| REQ-FUNC-007 | Future Spend Input · MyData Connector | TBD | TC-FUNC-007 |
-| REQ-FUNC-008 | Future Spend Input | TBD | TC-FUNC-008 |
-| REQ-FUNC-009 | Evidence Service · 문구 스캐너 | TBD | TC-FUNC-009 |
-| REQ-FUNC-010 | Outcome Tracker | TBD | TC-FUNC-010 |
-| REQ-FUNC-011 | Combination Optimizer | TBD | TC-FUNC-011 |
-| REQ-FUNC-012 | Future Spend Input | TBD | TC-FUNC-012 |
-| REQ-NF-001 | 전 모듈 (API Gateway 계측) | TBD | TC-NF-001 |
-| REQ-NF-002 | Rule Engine | TBD | TC-NF-002 |
-| REQ-NF-003 | MyData Connector · Rule Engine | TBD | TC-NF-003 |
-| REQ-NF-004 | 전 모듈 (인가·동의 관리) | TBD | TC-NF-004 |
-| REQ-NF-005 | MyData Connector | TBD | TC-NF-005 |
-| REQ-NF-006 | Audit Log Store | TBD | TC-NF-006 |
-| REQ-NF-007 | Rule Data Pipeline | TBD | TC-NF-007 |
-| REQ-NF-008 | Future Spend Input · Evidence Service | TBD | TC-NF-008 |
-| REQ-EXC-001 | Future Spend Input · Rule Engine | TBD | TC-EXC-001 |
-| REQ-EXC-002 | Evidence Service | TBD | TC-EXC-002 |
-| REQ-EXC-003 | MyData Connector | TBD | TC-EXC-003 |
-| REQ-EXC-004 | MyData Connector | TBD | TC-EXC-004 |
-| REQ-EXC-005 | Rule Engine · Combination Optimizer | TBD | TC-EXC-005 |
-| REQ-EXC-006 | Rule Data Pipeline · Combination Optimizer | TBD | TC-EXC-006 |
+| REQ-FUNC-001 | Future Spend Input | `FutureSpendPlanService` | TC-FUNC-001 |
+| REQ-FUNC-002 | MyData Connector | `MyDataConnector` · `ConsentGuard` | TC-FUNC-002 |
+| REQ-FUNC-003 | Rule Engine | `RuleEngine` · `ScenarioBuilder` | TC-FUNC-003 |
+| REQ-FUNC-004 | Combination Optimizer | `CombinationOptimizer` · **`GatingPolicy`** | TC-FUNC-004 |
+| REQ-FUNC-005 | Allocation Service | `AllocationService` | TC-FUNC-005 |
+| REQ-FUNC-006 | Evidence Service | `EvidenceAssembler` · `ExplanationModule` | TC-FUNC-006 |
+| REQ-FUNC-007 | Future Spend Input · MyData Connector | `InitialValueSuggester` | TC-FUNC-007 |
+| REQ-FUNC-008 | Future Spend Input | `FutureSpendPlanService` | TC-FUNC-008 |
+| REQ-FUNC-009 | Evidence Service · 문구 스캐너 | `ScopeBoundaryNotice` · `ProhibitedTermScanner` | TC-FUNC-009 |
+| REQ-FUNC-010 | Outcome Tracker | `OutcomeTracker` | TC-FUNC-010 |
+| REQ-FUNC-011 | Combination Optimizer | `StagedTransitionPresenter` | TC-FUNC-011 |
+| REQ-FUNC-012 | Future Spend Input | `FutureSpendPlanService` | TC-FUNC-012 |
+| REQ-NF-001 | 전 모듈 (API Gateway 계측) | `LatencyInterceptor` | TC-NF-001 |
+| REQ-NF-002 | Rule Engine | `DeterminismVerifier` · `BoundaryRegressionSuite` | TC-NF-002 |
+| REQ-NF-003 | MyData Connector · Rule Engine | `DegradedModeHandler` | TC-NF-003 |
+| REQ-NF-004 | 전 모듈 (인가·동의 관리) | **`AccessOwnershipVerifier`** · `ConsentGuard` | TC-NF-004 |
+| REQ-NF-005 | MyData Connector | `CallBudgetCounter` | TC-NF-005 |
+| REQ-NF-006 | Audit Log Store | `AuditRecorder` | TC-NF-006 |
+| REQ-NF-007 | Rule Data Pipeline | `RuleDataPipeline` · `RuleFreshnessChecker` | TC-NF-007 |
+| REQ-NF-008 | Future Spend Input · Evidence Service | `InitialValueSuggester` · `JourneyTimer` | TC-NF-008 |
+| REQ-EXC-001 | Future Spend Input · Rule Engine | `CalculationOrchestrator` | TC-EXC-001 |
+| REQ-EXC-002 | Evidence Service | `EvidenceAssembler` | TC-EXC-002 |
+| REQ-EXC-003 | MyData Connector | `DegradedModeHandler` | TC-EXC-003 |
+| REQ-EXC-004 | MyData Connector | `ConsentGuard` | TC-EXC-004 |
+| REQ-EXC-005 | Rule Engine · Combination Optimizer | `CalculationOrchestrator.resolveStatus()` | TC-EXC-005 |
+| REQ-EXC-006 | Rule Data Pipeline · Combination Optimizer | **`PlanExpiryPolicy`** | TC-EXC-006 |
 
-구현 클래스는 설계 단계 산출물이므로 전량 TBD로 표기한다. 모듈 열은 3장이 정의한 내부 구성요소로 채웠다. 각 요구사항에 대응하는 인수 기준과 검증 실험은 4.1·4.2·4.3의 검증 방식 및 인수 기준 열에 기재한다.
+모듈 열은 3장이 정의한 내부 구성요소, 구현 클래스 열은 `cardfit-design-v1_0.md` 3장 클래스 다이어그램에서 가져온 것이다. 각 요구사항에 대응하는 인수 기준과 검증 실험은 4.1·4.2·4.3의 검증 방식 및 인수 기준 열에 기재한다.
+
+**클래스명에 정책이 드러난 3건** — `GatingPolicy`는 임계값(D2)이 미정이라 정책만 교체할 수 있게 분리했고, `PlanExpiryPolicy`는 만료 판정(ADR-06)을 한 곳에 모았으며, `AccessOwnershipVerifier`는 오조회 차단(GR5)을 API 계층에서 전건 대조한다.
 
 ---
 
@@ -723,6 +892,80 @@ CREATE TABLE audit_logs (
 
 > **확장 절** — 근거: ISO/IEC/IEEE 29148:2018 **9.6.12 b)** *Functions — exact sequence of operations*. PRD 6-3에 이미 정의된 상태 전이를 명세로 옮겼다.
 
+> **그림 읽는 법** — 상자가 상태, 화살표가 상태를 바꾸는 사건이다. 검은 점이 시작, 이중 원이 끝이다.
+
+<table><tr><td width="50%">
+
+**마이데이터 동의**
+
+```mermaid
+stateDiagram-v2
+    [*] --> 미동의
+    미동의 --> 동의 : 동의 획득
+    동의 --> 만료 : 유효기간 경과
+    동의 --> 철회 : 사용자 철회
+    만료 --> 동의 : 재동의
+    철회 --> [*] : 데이터 파기 24h 내
+    note right of 만료
+        계산 요청 → 400
+    end note
+```
+
+</td><td width="50%">
+
+**Calculation**
+
+```mermaid
+stateDiagram-v2
+    [*] --> 요청
+    요청 --> 성공 : 3건 전부 성공
+    요청 --> 부분 : 1건 이상 실패
+    요청 --> 실패 : 필수 데이터 누락
+    성공 --> [*]
+    부분 --> [*] : 추천 중단
+    실패 --> [*] : 추천 중단
+    note right of 부분
+        성공분만 내놓지 않는다
+    end note
+```
+
+</td></tr><tr><td width="50%">
+
+**PlanCandidate**
+
+```mermaid
+stateDiagram-v2
+    [*] --> 제시
+    제시 --> 선택 : 저장·확정
+    제시 --> 미선택 : 7일 경과
+    제시 --> 만료 : 버전 변경·기준일+30일
+    선택 --> 만료 : 버전 변경·기준일+30일
+    미선택 --> [*]
+    만료 --> [*] : 재계산 필요
+    note right of 선택
+        북극성 분자에 집계
+    end note
+```
+
+</td><td width="50%">
+
+**OutcomeLog**
+
+```mermaid
+stateDiagram-v2
+    [*] --> 미발송
+    미발송 --> 발송 : 선택 +30일 1회만
+    발송 --> 응답 : 사용자 응답
+    발송 --> 무응답 : 응답 없음
+    응답 --> [*]
+    무응답 --> [*] : 미완주로 집계
+    note right of 발송
+        재발송·독려 없음
+    end note
+```
+
+</td></tr></table>
+
 | 객체 | 상태값 | 전이 규칙 |
 | --- | --- | --- |
 | **마이데이터 동의** | 미동의 → 동의 → (만료 / 철회) | 만료·철회 상태의 계산 요청은 **`400`**. 철회 시 수집 데이터 파기 (REQ-EXC-004) |
@@ -799,6 +1042,62 @@ CREATE TABLE audit_logs (
 
 ### 8.2 사용 시나리오 (User Stories)
 
+> **그림 읽는 법** — 사람 모양이 **행위자**(서비스를 쓰는 사람), 둥근 상자가 그 사람이 **하는 일**이다. 점선은 외부 시스템 연결이다. 유스케이스 상세 명세는 `cardfit-design-v1_0.md` 1장에 있다.
+
+```mermaid
+flowchart LR
+    U(["👤 사용자<br/>카드 보유자"])
+    DO(["👤 데이터 운영"])
+    QA(["👤 계산 품질"])
+    CO(["👤 컴플라이언스·보안"])
+    PM(["👤 제품 책임자"])
+    MD[/"🏦 마이데이터 API"/]
+    IS[/"🏦 카드사 신청 페이지"/]
+
+    subgraph SYS["CardFit"]
+        direction TB
+        A(["마이데이터 연동·동의"])
+        B(["미래지출 입력"])
+        C(["제약조건 설정"])
+        D(["시나리오 계산 요청"])
+        E(["조합 결론 확인"])
+        F(["배분안 확인"])
+        G(["계산 근거 열람"])
+        H(["조합안 선택"])
+        I(["카드사 이동"])
+        J(["완주 응답"])
+        K(["약관 수집·버전 관리"])
+        L(["게이팅·계산 품질 감시"])
+        M(["오조회 감시·중단"])
+        N(["금지어 검수"])
+        O(["지표·Guardrail 리포트"])
+    end
+
+    U --- A
+    U --- B
+    U --- C
+    U --- D
+    U --- E
+    U --- F
+    U --- G
+    U --- H
+    U --- I
+    U --- J
+    DO --- K
+    QA --- L
+    CO --- M
+    CO --- N
+    PM --- O
+    A -.-> MD
+    K -.-> MD
+    I -.-> IS
+
+    style SYS fill:#F5F5F5,stroke:#616161
+    style U fill:#BBDEFB,stroke:#1565C0
+```
+
+**행위자 5명 중 4명이 운영 인력이다.** 이 서비스는 사용자 기능만으로 성립하지 않는다 — 약관을 수집하는 사람이 없으면 계산이 비고, 감시하는 사람이 없으면 Guardrail이 작동하지 않는다. 2장 이해관계자 표가 이 그림의 왼쪽·오른쪽에 대응한다.
+
 | # | 스토리 | 우선순위 | 대응 요구사항 |
 | :---: | --- | :---: | --- |
 | **US-A** | 소비가 곧 바뀔 사용자로서, 미래 지출을 카드 혜택과 연결해 계산받고 싶다 | 1 | REQ-FUNC-001·002·003·004·005 |
@@ -813,6 +1112,40 @@ CREATE TABLE audit_logs (
 ### 8.3 정상 흐름
 
 마이데이터 연동 → 초기값 제안 → 미래지출 입력 → 제약조건 입력 → **3개 시나리오 계산** → "예상대로" 탭 결론 제시(조합 또는 유지) → 근거 확인 → 선택 → (30일 후) 완주 여부 계측
+
+```mermaid
+flowchart TD
+    S(["시작"]) --> A["마이데이터 연동 · 동의"]
+    A --> B["과거 패턴으로 초기값 자동 제안"]
+    B --> C["미래지출 입력 · 수정"]
+    C --> D["제약조건 입력"]
+    D --> E{"미래 입력<br/>1건 이상?"}
+    E -->|"아니오"| E1["400 · 입력 요구"] --> C
+    E -->|"예"| F["3개 시나리오 사전 계산"]
+    F --> G{"계산 상태"}
+    G -->|"부분 · 실패"| G1(["추천 중단"])
+    G -->|"성공"| H["예상대로 탭 결론 노출"]
+    H --> I{"게이팅 판정"}
+    I -->|"임계 미달"| J["현재 조합 유지"]
+    I -->|"임계 통과"| K["조합 변경 + 차액 원 단위"]
+    J --> L["근거 6항목 확인"]
+    K --> L
+    L --> M{"조합안 선택?"}
+    M -->|"아니오"| Z1(["종료 — 분모에 포함"])
+    M -->|"예"| N["경계 안내 노출<br/>신청·해지는 카드사에서 직접"]
+    N --> O["카드사 페이지로 이동 — 링크만"]
+    O --> P["30일 대기"]
+    P --> Q["완주 여부 계측 — 1회"]
+    Q --> Z2(["종료"])
+
+    style J fill:#C8E6C9,stroke:#2E7D32
+    style E1 fill:#FFCDD2,stroke:#C62828
+    style G1 fill:#FFCDD2,stroke:#C62828
+```
+
+**두 개의 종료 경로가 모두 정상이다.** 초록 상자("현재 조합 유지")로 끝난 사용자는 북극성 지표 **분모에서 제외**된다(9장 ADR-05) — 선택할 조합안이 애초에 없기 때문이다. `Z1`(선택 안 함)은 분모에 포함된다. 이 구분이 지표 설계의 핵심이며 11.1에서 다시 다룬다.
+
+**목표는 입력 완료부터 결론까지 p95 5분 이내**다(REQ-NF-008). 기준선은 수기 판단 240분이다.
 
 ---
 

@@ -16,6 +16,9 @@ CardFit 서비스의 **PRD 문서를 SRS 문서로 변환**하는 작업 저장�
 | 요구사항 26건 추적표 등재 | ✅ 완료 — REQ-FUNC 12 · REQ-NF 8 · REQ-EXC 6 |
 | 데이터 모델 (ERD · DDL) | ✅ 완료 — 6.4 ERD 15개 엔터티 + 테이블 정의 15건 (계산 입력 3종 관계 명시) |
 | 템플릿 양식 준수 검증 | ✅ 완료 — 1~7장 장 구조·핵심 표 4개 열 수 일치, 해설형 문체 제거 |
+| 기술 설계 문서 (SDD) | ✅ 완료 — UseCase·Component·Class·Sequence 10종·Flowchart 5종·State 4종 |
+| SRS 5장 구현 클래스 | ✅ 완료 — TBD 26건을 클래스 다이어그램 기반으로 채움 |
+| SRS 다이어그램 배치 | ✅ 완료 — 3·4·4.3·6.4.1·6.5·8.2·8.3장에 11개 |
 | 테스트 케이스 명세 | ⬜ **미작성** — 추적표에 TC ID 26건만 발행됨 |
 | 설계 단계 TBD 확정 | ⬜ 대기 — 구현 클래스, 물리 스키마, 의존성 D1~D5 |
 
@@ -51,7 +54,8 @@ PRD에는 예시 SRS가 담지 않는 내용이 있습니다(KPI·Guardrail, 검
 | 파일 | 역할 |
 | --- | --- |
 | `cardfit-prd-v1_0.md` | **입력물** — CardFit PRD 겸 요구사항 추적표 (PRD-CARDFIT-001 v1.0) |
-| `cardfit-srs-v1_0.md` | **산출물** — 변환된 SRS (SRS-CARDFIT-001 v1.0) |
+| `cardfit-srs-v1_0.md` | **산출물** — 변환된 SRS (SRS-CARDFIT-001 v1.0). 다이어그램 11개 배치 |
+| `cardfit-design-v1_0.md` | **산출물** — 기술 설계 명세서 (SDD-CARDFIT-001 v1.0). 다이어그램 27개 |
 | `[SRS 문서] AD-Core-Platform (한글).md` | **포맷 기준** — 광고 플랫폼 SRS. 목표 문서의 형식 견본 |
 | `29148-2018-ISOIECIEEE.pdf` | **준거 표준** — 예시 SRS 범위를 벗어난 부분을 확장할 때만 참조 |
 | `README.md` | 이 문서 |
