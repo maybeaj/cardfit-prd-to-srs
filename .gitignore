@@ -6,3 +6,6 @@
 
 # macOS
 .DS_Store
+
+# 생성물 (생성기로 재생산 가능하나, 게이트 입력이라 커밋한다)
+# gate/boundary-cases.json

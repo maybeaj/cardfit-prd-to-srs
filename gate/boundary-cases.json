@@ -1,0 +1,4395 @@
+{
+ "spec": "STD-CARDFIT-001 D8 / 배포 게이트 ① (TC-NF-002)",
+ "version": "1.0",
+ "params_bound": false,
+ "params": {
+  "abs_threshold": null,
+  "rel_threshold": null,
+  "scenario_delta": null
+ },
+ "total": 260,
+ "by_kind": {
+  "single": 53,
+  "pair": 207
+ },
+ "by_dimension": {
+  "perf_tier": 72,
+  "discount_cap": 20,
+  "annual_fee": 54,
+  "exclusion": 45,
+  "scenario": 42,
+  "gating": 88,
+  "allocation": 36,
+  "expiry": 56,
+  "card_count": 54
+ },
+ "cases": [
+  {
+   "case_id": "BC-0001",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN"
+   },
+   "description": "최저 구간 하한 미달 (0원)",
+   "expected": "혜택 미적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0002",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1"
+   },
+   "description": "구간 하한 -1원",
+   "expected": "직전 구간 적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0003",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT"
+   },
+   "description": "구간 하한 정확히",
+   "expected": "해당 구간 적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0004",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1"
+   },
+   "description": "구간 하한 +1원",
+   "expected": "해당 구간 적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0005",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1"
+   },
+   "description": "구간 상한 -1원",
+   "expected": "해당 구간 적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0006",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT"
+   },
+   "description": "구간 상한 정확히",
+   "expected": "해당 구간 적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0007",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1"
+   },
+   "description": "구간 상한 +1원",
+   "expected": "다음 구간 적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0008",
+   "kind": "single",
+   "dimension": "perf_tier",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP"
+   },
+   "description": "최고 구간 초과",
+   "expected": "최고 구간 적용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0009",
+   "kind": "single",
+   "dimension": "discount_cap",
+   "factors": {
+    "discount_cap": "CAP_MINUS_1"
+   },
+   "description": "혜택 합계 = 한도 -1원",
+   "expected": "전액 지급",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0010",
+   "kind": "single",
+   "dimension": "discount_cap",
+   "factors": {
+    "discount_cap": "CAP_EXACT"
+   },
+   "description": "혜택 합계 = 한도",
+   "expected": "전액 지급",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0011",
+   "kind": "single",
+   "dimension": "discount_cap",
+   "factors": {
+    "discount_cap": "CAP_PLUS_1"
+   },
+   "description": "혜택 합계 = 한도 +1원",
+   "expected": "한도까지만 지급",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0012",
+   "kind": "single",
+   "dimension": "discount_cap",
+   "factors": {
+    "discount_cap": "CAP_ZERO"
+   },
+   "description": "한도 0원",
+   "expected": "혜택 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0013",
+   "kind": "single",
+   "dimension": "discount_cap",
+   "factors": {
+    "discount_cap": "CAP_UNLIMITED"
+   },
+   "description": "한도 없음 (NULL)",
+   "expected": "전액 지급",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0014",
+   "kind": "single",
+   "dimension": "annual_fee",
+   "factors": {
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "연회비 0원",
+   "expected": "전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0015",
+   "kind": "single",
+   "dimension": "annual_fee",
+   "factors": {
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "일반 연회비",
+   "expected": "전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0016",
+   "kind": "single",
+   "dimension": "annual_fee",
+   "factors": {
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "사용자 연회비 상한 -1원",
+   "expected": "제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0017",
+   "kind": "single",
+   "dimension": "annual_fee",
+   "factors": {
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "사용자 연회비 상한 정확히",
+   "expected": "제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0018",
+   "kind": "single",
+   "dimension": "annual_fee",
+   "factors": {
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "사용자 연회비 상한 +1원",
+   "expected": "후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0019",
+   "kind": "single",
+   "dimension": "annual_fee",
+   "factors": {
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "조합 합산이 상한 초과",
+   "expected": "후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0020",
+   "kind": "single",
+   "dimension": "exclusion",
+   "factors": {
+    "exclusion": "EXC_NONE"
+   },
+   "description": "제외 없음",
+   "expected": "전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0021",
+   "kind": "single",
+   "dimension": "exclusion",
+   "factors": {
+    "exclusion": "EXC_ALL"
+   },
+   "description": "전액 제외",
+   "expected": "실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0022",
+   "kind": "single",
+   "dimension": "exclusion",
+   "factors": {
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "일부 업종 제외",
+   "expected": "제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0023",
+   "kind": "single",
+   "dimension": "exclusion",
+   "factors": {
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "실적 산정에만 제외 적용",
+   "expected": "혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0024",
+   "kind": "single",
+   "dimension": "exclusion",
+   "factors": {
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "혜택 적용에만 제외 적용",
+   "expected": "실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0025",
+   "kind": "single",
+   "dimension": "scenario",
+   "factors": {
+    "scenario": "SC_LESS"
+   },
+   "description": "적게 — 입력 × (1 - delta)",
+   "expected": "독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0026",
+   "kind": "single",
+   "dimension": "scenario",
+   "factors": {
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "예상대로 — 입력값 그대로",
+   "expected": "기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0027",
+   "kind": "single",
+   "dimension": "scenario",
+   "factors": {
+    "scenario": "SC_MORE"
+   },
+   "description": "많이 — 입력 × (1 + delta)",
+   "expected": "독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0028",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 -1원",
+   "expected": "KEEP_CURRENT",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0029",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_ABS_EXACT"
+   },
+   "description": "Net Benefit = 절대 임계 정확히",
+   "expected": "RECOMMEND_CHANGE",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0030",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 +1원",
+   "expected": "RECOMMEND_CHANGE",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0031",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_REL_MINUS"
+   },
+   "description": "상대 임계 미달",
+   "expected": "KEEP_CURRENT",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0032",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_REL_EXACT"
+   },
+   "description": "상대 임계 정확히",
+   "expected": "RECOMMEND_CHANGE",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0033",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG"
+   },
+   "description": "절대 통과 · 상대 미달",
+   "expected": "KEEP_CURRENT",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0034",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK"
+   },
+   "description": "절대 미달 · 상대 통과",
+   "expected": "KEEP_CURRENT",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0035",
+   "kind": "single",
+   "dimension": "gating",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE"
+   },
+   "description": "Net Benefit 음수",
+   "expected": "KEEP_CURRENT",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0036",
+   "kind": "single",
+   "dimension": "allocation",
+   "factors": {
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "총액이 카드 수로 나누어떨어짐",
+   "expected": "오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0037",
+   "kind": "single",
+   "dimension": "allocation",
+   "factors": {
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "1원 남음",
+   "expected": "오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0038",
+   "kind": "single",
+   "dimension": "allocation",
+   "factors": {
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "2원 남음",
+   "expected": "오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0039",
+   "kind": "single",
+   "dimension": "allocation",
+   "factors": {
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "3분할 (0.333… 반복)",
+   "expected": "오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0040",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_DAY_29"
+   },
+   "description": "기준일 +29일",
+   "expected": "유효",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0041",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_DAY_30"
+   },
+   "description": "기준일 +30일",
+   "expected": "만료",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0042",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_DAY_31"
+   },
+   "description": "기준일 +31일",
+   "expected": "만료",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0043",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_RULE_SAME"
+   },
+   "description": "rule_version 동일",
+   "expected": "유효",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0044",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_RULE_CHANGED"
+   },
+   "description": "rule_version 변경",
+   "expected": "만료",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0045",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_FRESH_29"
+   },
+   "description": "verified_at 29일 경과",
+   "expected": "계산 대상",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0046",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_FRESH_30"
+   },
+   "description": "verified_at 30일 경과",
+   "expected": "계산 대상",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0047",
+   "kind": "single",
+   "dimension": "expiry",
+   "factors": {
+    "expiry": "EXP_FRESH_31"
+   },
+   "description": "verified_at 31일 경과",
+   "expected": "계산 대상 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006"
+  },
+  {
+   "case_id": "BC-0048",
+   "kind": "single",
+   "dimension": "card_count",
+   "factors": {
+    "card_count": "CARD_0"
+   },
+   "description": "0장",
+   "expected": "계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0049",
+   "kind": "single",
+   "dimension": "card_count",
+   "factors": {
+    "card_count": "CARD_1"
+   },
+   "description": "1장",
+   "expected": "계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0050",
+   "kind": "single",
+   "dimension": "card_count",
+   "factors": {
+    "card_count": "CARD_2"
+   },
+   "description": "2장",
+   "expected": "조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0051",
+   "kind": "single",
+   "dimension": "card_count",
+   "factors": {
+    "card_count": "CARD_5"
+   },
+   "description": "5장",
+   "expected": "일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0052",
+   "kind": "single",
+   "dimension": "card_count",
+   "factors": {
+    "card_count": "CARD_10"
+   },
+   "description": "10장",
+   "expected": "일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0053",
+   "kind": "single",
+   "dimension": "card_count",
+   "factors": {
+    "card_count": "CARD_20"
+   },
+   "description": "20장",
+   "expected": "Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0054",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 제외 없음",
+   "expected": "혜택 미적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0055",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 전액 제외",
+   "expected": "혜택 미적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0056",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 일부 업종 제외",
+   "expected": "혜택 미적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0057",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 실적 산정에만 제외 적용",
+   "expected": "혜택 미적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0058",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 혜택 적용에만 제외 적용",
+   "expected": "혜택 미적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0059",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "구간 하한 -1원 + 제외 없음",
+   "expected": "직전 구간 적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0060",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "구간 하한 -1원 + 전액 제외",
+   "expected": "직전 구간 적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0061",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "구간 하한 -1원 + 일부 업종 제외",
+   "expected": "직전 구간 적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0062",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "구간 하한 -1원 + 실적 산정에만 제외 적용",
+   "expected": "직전 구간 적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0063",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "구간 하한 -1원 + 혜택 적용에만 제외 적용",
+   "expected": "직전 구간 적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0064",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "구간 하한 정확히 + 제외 없음",
+   "expected": "해당 구간 적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0065",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "구간 하한 정확히 + 전액 제외",
+   "expected": "해당 구간 적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0066",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "구간 하한 정확히 + 일부 업종 제외",
+   "expected": "해당 구간 적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0067",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "구간 하한 정확히 + 실적 산정에만 제외 적용",
+   "expected": "해당 구간 적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0068",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "구간 하한 정확히 + 혜택 적용에만 제외 적용",
+   "expected": "해당 구간 적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0069",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "구간 하한 +1원 + 제외 없음",
+   "expected": "해당 구간 적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0070",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "구간 하한 +1원 + 전액 제외",
+   "expected": "해당 구간 적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0071",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "구간 하한 +1원 + 일부 업종 제외",
+   "expected": "해당 구간 적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0072",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "구간 하한 +1원 + 실적 산정에만 제외 적용",
+   "expected": "해당 구간 적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0073",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "구간 하한 +1원 + 혜택 적용에만 제외 적용",
+   "expected": "해당 구간 적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0074",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "구간 상한 -1원 + 제외 없음",
+   "expected": "해당 구간 적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0075",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "구간 상한 -1원 + 전액 제외",
+   "expected": "해당 구간 적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0076",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "구간 상한 -1원 + 일부 업종 제외",
+   "expected": "해당 구간 적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0077",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "구간 상한 -1원 + 실적 산정에만 제외 적용",
+   "expected": "해당 구간 적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0078",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "구간 상한 -1원 + 혜택 적용에만 제외 적용",
+   "expected": "해당 구간 적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0079",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "구간 상한 정확히 + 제외 없음",
+   "expected": "해당 구간 적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0080",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "구간 상한 정확히 + 전액 제외",
+   "expected": "해당 구간 적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0081",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "구간 상한 정확히 + 일부 업종 제외",
+   "expected": "해당 구간 적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0082",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "구간 상한 정확히 + 실적 산정에만 제외 적용",
+   "expected": "해당 구간 적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0083",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "구간 상한 정확히 + 혜택 적용에만 제외 적용",
+   "expected": "해당 구간 적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0084",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "구간 상한 +1원 + 제외 없음",
+   "expected": "다음 구간 적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0085",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "구간 상한 +1원 + 전액 제외",
+   "expected": "다음 구간 적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0086",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "구간 상한 +1원 + 일부 업종 제외",
+   "expected": "다음 구간 적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0087",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "구간 상한 +1원 + 실적 산정에만 제외 적용",
+   "expected": "다음 구간 적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0088",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "구간 상한 +1원 + 혜택 적용에만 제외 적용",
+   "expected": "다음 구간 적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0089",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "exclusion": "EXC_NONE"
+   },
+   "description": "최고 구간 초과 + 제외 없음",
+   "expected": "최고 구간 적용 / 전액 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0090",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "exclusion": "EXC_ALL"
+   },
+   "description": "최고 구간 초과 + 전액 제외",
+   "expected": "최고 구간 적용 / 실적·혜택 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0091",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "exclusion": "EXC_PARTIAL"
+   },
+   "description": "최고 구간 초과 + 일부 업종 제외",
+   "expected": "최고 구간 적용 / 제외분 차감",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0092",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "exclusion": "EXC_PERF_ONLY"
+   },
+   "description": "최고 구간 초과 + 실적 산정에만 제외 적용",
+   "expected": "최고 구간 적용 / 혜택은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0093",
+   "kind": "pair",
+   "dimension": "perf_tier×exclusion",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "exclusion": "EXC_BENEFIT_ONLY"
+   },
+   "description": "최고 구간 초과 + 혜택 적용에만 제외 적용",
+   "expected": "최고 구간 적용 / 실적은 인정",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0094",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "scenario": "SC_LESS"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 적게 — 입력 × (1 - delta)",
+   "expected": "혜택 미적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0095",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 예상대로 — 입력값 그대로",
+   "expected": "혜택 미적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0096",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_BELOW_MIN",
+    "scenario": "SC_MORE"
+   },
+   "description": "최저 구간 하한 미달 (0원) + 많이 — 입력 × (1 + delta)",
+   "expected": "혜택 미적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0097",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "scenario": "SC_LESS"
+   },
+   "description": "구간 하한 -1원 + 적게 — 입력 × (1 - delta)",
+   "expected": "직전 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0098",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "구간 하한 -1원 + 예상대로 — 입력값 그대로",
+   "expected": "직전 구간 적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0099",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_MINUS_1",
+    "scenario": "SC_MORE"
+   },
+   "description": "구간 하한 -1원 + 많이 — 입력 × (1 + delta)",
+   "expected": "직전 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0100",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "scenario": "SC_LESS"
+   },
+   "description": "구간 하한 정확히 + 적게 — 입력 × (1 - delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0101",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "구간 하한 정확히 + 예상대로 — 입력값 그대로",
+   "expected": "해당 구간 적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0102",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_EXACT",
+    "scenario": "SC_MORE"
+   },
+   "description": "구간 하한 정확히 + 많이 — 입력 × (1 + delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0103",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "scenario": "SC_LESS"
+   },
+   "description": "구간 하한 +1원 + 적게 — 입력 × (1 - delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0104",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "구간 하한 +1원 + 예상대로 — 입력값 그대로",
+   "expected": "해당 구간 적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0105",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MIN_PLUS_1",
+    "scenario": "SC_MORE"
+   },
+   "description": "구간 하한 +1원 + 많이 — 입력 × (1 + delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0106",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "scenario": "SC_LESS"
+   },
+   "description": "구간 상한 -1원 + 적게 — 입력 × (1 - delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0107",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "구간 상한 -1원 + 예상대로 — 입력값 그대로",
+   "expected": "해당 구간 적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0108",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_MINUS_1",
+    "scenario": "SC_MORE"
+   },
+   "description": "구간 상한 -1원 + 많이 — 입력 × (1 + delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0109",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "scenario": "SC_LESS"
+   },
+   "description": "구간 상한 정확히 + 적게 — 입력 × (1 - delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0110",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "구간 상한 정확히 + 예상대로 — 입력값 그대로",
+   "expected": "해당 구간 적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0111",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_EXACT",
+    "scenario": "SC_MORE"
+   },
+   "description": "구간 상한 정확히 + 많이 — 입력 × (1 + delta)",
+   "expected": "해당 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0112",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "scenario": "SC_LESS"
+   },
+   "description": "구간 상한 +1원 + 적게 — 입력 × (1 - delta)",
+   "expected": "다음 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0113",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "구간 상한 +1원 + 예상대로 — 입력값 그대로",
+   "expected": "다음 구간 적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0114",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_MAX_PLUS_1",
+    "scenario": "SC_MORE"
+   },
+   "description": "구간 상한 +1원 + 많이 — 입력 × (1 + delta)",
+   "expected": "다음 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0115",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "scenario": "SC_LESS"
+   },
+   "description": "최고 구간 초과 + 적게 — 입력 × (1 - delta)",
+   "expected": "최고 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0116",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "최고 구간 초과 + 예상대로 — 입력값 그대로",
+   "expected": "최고 구간 적용 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0117",
+   "kind": "pair",
+   "dimension": "perf_tier×scenario",
+   "factors": {
+    "perf_tier": "TIER_ABOVE_TOP",
+    "scenario": "SC_MORE"
+   },
+   "description": "최고 구간 초과 + 많이 — 입력 × (1 + delta)",
+   "expected": "최고 구간 적용 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0118",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_MINUS_1",
+    "scenario": "SC_LESS"
+   },
+   "description": "혜택 합계 = 한도 -1원 + 적게 — 입력 × (1 - delta)",
+   "expected": "전액 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0119",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_MINUS_1",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "혜택 합계 = 한도 -1원 + 예상대로 — 입력값 그대로",
+   "expected": "전액 지급 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0120",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_MINUS_1",
+    "scenario": "SC_MORE"
+   },
+   "description": "혜택 합계 = 한도 -1원 + 많이 — 입력 × (1 + delta)",
+   "expected": "전액 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0121",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_EXACT",
+    "scenario": "SC_LESS"
+   },
+   "description": "혜택 합계 = 한도 + 적게 — 입력 × (1 - delta)",
+   "expected": "전액 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0122",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_EXACT",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "혜택 합계 = 한도 + 예상대로 — 입력값 그대로",
+   "expected": "전액 지급 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0123",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_EXACT",
+    "scenario": "SC_MORE"
+   },
+   "description": "혜택 합계 = 한도 + 많이 — 입력 × (1 + delta)",
+   "expected": "전액 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0124",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_PLUS_1",
+    "scenario": "SC_LESS"
+   },
+   "description": "혜택 합계 = 한도 +1원 + 적게 — 입력 × (1 - delta)",
+   "expected": "한도까지만 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0125",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_PLUS_1",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "혜택 합계 = 한도 +1원 + 예상대로 — 입력값 그대로",
+   "expected": "한도까지만 지급 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0126",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_PLUS_1",
+    "scenario": "SC_MORE"
+   },
+   "description": "혜택 합계 = 한도 +1원 + 많이 — 입력 × (1 + delta)",
+   "expected": "한도까지만 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0127",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_ZERO",
+    "scenario": "SC_LESS"
+   },
+   "description": "한도 0원 + 적게 — 입력 × (1 - delta)",
+   "expected": "혜택 0원 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0128",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_ZERO",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "한도 0원 + 예상대로 — 입력값 그대로",
+   "expected": "혜택 0원 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0129",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_ZERO",
+    "scenario": "SC_MORE"
+   },
+   "description": "한도 0원 + 많이 — 입력 × (1 + delta)",
+   "expected": "혜택 0원 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0130",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_UNLIMITED",
+    "scenario": "SC_LESS"
+   },
+   "description": "한도 없음 (NULL) + 적게 — 입력 × (1 - delta)",
+   "expected": "전액 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0131",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_UNLIMITED",
+    "scenario": "SC_AS_EXPECTED"
+   },
+   "description": "한도 없음 (NULL) + 예상대로 — 입력값 그대로",
+   "expected": "전액 지급 / 기본 탭",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0132",
+   "kind": "pair",
+   "dimension": "discount_cap×scenario",
+   "factors": {
+    "discount_cap": "CAP_UNLIMITED",
+    "scenario": "SC_MORE"
+   },
+   "description": "한도 없음 (NULL) + 많이 — 입력 × (1 + delta)",
+   "expected": "전액 지급 / 독립 계산",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-003·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0133",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "KEEP_CURRENT / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0134",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 1원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0135",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 2원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0136",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 3분할 (0.333… 반복)",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0137",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "RECOMMEND_CHANGE / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0138",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 1원 남음",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0139",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 2원 남음",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0140",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 3분할 (0.333… 반복)",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0141",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "RECOMMEND_CHANGE / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0142",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 1원 남음",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0143",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 2원 남음",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0144",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 3분할 (0.333… 반복)",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0145",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "상대 임계 미달 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "KEEP_CURRENT / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0146",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "상대 임계 미달 + 1원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0147",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "상대 임계 미달 + 2원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0148",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "상대 임계 미달 + 3분할 (0.333… 반복)",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0149",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "상대 임계 정확히 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "RECOMMEND_CHANGE / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0150",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "상대 임계 정확히 + 1원 남음",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0151",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "상대 임계 정확히 + 2원 남음",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0152",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "상대 임계 정확히 + 3분할 (0.333… 반복)",
+   "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0153",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "절대 통과 · 상대 미달 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "KEEP_CURRENT / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0154",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "절대 통과 · 상대 미달 + 1원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0155",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "절대 통과 · 상대 미달 + 2원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0156",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "절대 통과 · 상대 미달 + 3분할 (0.333… 반복)",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0157",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "절대 미달 · 상대 통과 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "KEEP_CURRENT / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0158",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "절대 미달 · 상대 통과 + 1원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0159",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "절대 미달 · 상대 통과 + 2원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0160",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "절대 미달 · 상대 통과 + 3분할 (0.333… 반복)",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0161",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "allocation": "ALLOC_EXACT"
+   },
+   "description": "Net Benefit 음수 + 총액이 카드 수로 나누어떨어짐",
+   "expected": "KEEP_CURRENT / 오차 0원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0162",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "allocation": "ALLOC_REM_1"
+   },
+   "description": "Net Benefit 음수 + 1원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0163",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "allocation": "ALLOC_REM_2"
+   },
+   "description": "Net Benefit 음수 + 2원 남음",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0164",
+   "kind": "pair",
+   "dimension": "gating×allocation",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "allocation": "ALLOC_THIRD"
+   },
+   "description": "Net Benefit 음수 + 3분할 (0.333… 반복)",
+   "expected": "KEEP_CURRENT / 오차 ≤ 1원",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-005"
+  },
+  {
+   "case_id": "BC-0165",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 연회비 0원",
+   "expected": "KEEP_CURRENT / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0166",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 일반 연회비",
+   "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0167",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 사용자 연회비 상한 -1원",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0168",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 사용자 연회비 상한 정확히",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0169",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 사용자 연회비 상한 +1원",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0170",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_MINUS_1",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "Net Benefit = 절대 임계 -1원 + 조합 합산이 상한 초과",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0171",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 연회비 0원",
+   "expected": "RECOMMEND_CHANGE / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0172",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 일반 연회비",
+   "expected": "RECOMMEND_CHANGE / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0173",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 사용자 연회비 상한 -1원",
+   "expected": "RECOMMEND_CHANGE / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0174",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 사용자 연회비 상한 정확히",
+   "expected": "RECOMMEND_CHANGE / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0175",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 사용자 연회비 상한 +1원",
+   "expected": "RECOMMEND_CHANGE / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0176",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_EXACT",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "Net Benefit = 절대 임계 정확히 + 조합 합산이 상한 초과",
+   "expected": "RECOMMEND_CHANGE / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0177",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 연회비 0원",
+   "expected": "RECOMMEND_CHANGE / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0178",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 일반 연회비",
+   "expected": "RECOMMEND_CHANGE / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0179",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 사용자 연회비 상한 -1원",
+   "expected": "RECOMMEND_CHANGE / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0180",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 사용자 연회비 상한 정확히",
+   "expected": "RECOMMEND_CHANGE / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0181",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 사용자 연회비 상한 +1원",
+   "expected": "RECOMMEND_CHANGE / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0182",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_PLUS_1",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "Net Benefit = 절대 임계 +1원 + 조합 합산이 상한 초과",
+   "expected": "RECOMMEND_CHANGE / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0183",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "상대 임계 미달 + 연회비 0원",
+   "expected": "KEEP_CURRENT / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0184",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "상대 임계 미달 + 일반 연회비",
+   "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0185",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "상대 임계 미달 + 사용자 연회비 상한 -1원",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0186",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "상대 임계 미달 + 사용자 연회비 상한 정확히",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0187",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "상대 임계 미달 + 사용자 연회비 상한 +1원",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0188",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_MINUS",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "상대 임계 미달 + 조합 합산이 상한 초과",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0189",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "상대 임계 정확히 + 연회비 0원",
+   "expected": "RECOMMEND_CHANGE / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0190",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "상대 임계 정확히 + 일반 연회비",
+   "expected": "RECOMMEND_CHANGE / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0191",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "상대 임계 정확히 + 사용자 연회비 상한 -1원",
+   "expected": "RECOMMEND_CHANGE / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0192",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "상대 임계 정확히 + 사용자 연회비 상한 정확히",
+   "expected": "RECOMMEND_CHANGE / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0193",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "상대 임계 정확히 + 사용자 연회비 상한 +1원",
+   "expected": "RECOMMEND_CHANGE / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0194",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_REL_EXACT",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "상대 임계 정확히 + 조합 합산이 상한 초과",
+   "expected": "RECOMMEND_CHANGE / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0195",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "절대 통과 · 상대 미달 + 연회비 0원",
+   "expected": "KEEP_CURRENT / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0196",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "절대 통과 · 상대 미달 + 일반 연회비",
+   "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0197",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "절대 통과 · 상대 미달 + 사용자 연회비 상한 -1원",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0198",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "절대 통과 · 상대 미달 + 사용자 연회비 상한 정확히",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0199",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "절대 통과 · 상대 미달 + 사용자 연회비 상한 +1원",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0200",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_OK_REL_NG",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "절대 통과 · 상대 미달 + 조합 합산이 상한 초과",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0201",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "절대 미달 · 상대 통과 + 연회비 0원",
+   "expected": "KEEP_CURRENT / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0202",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "절대 미달 · 상대 통과 + 일반 연회비",
+   "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0203",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "절대 미달 · 상대 통과 + 사용자 연회비 상한 -1원",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0204",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "절대 미달 · 상대 통과 + 사용자 연회비 상한 정확히",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0205",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "절대 미달 · 상대 통과 + 사용자 연회비 상한 +1원",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0206",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_ABS_NG_REL_OK",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "절대 미달 · 상대 통과 + 조합 합산이 상한 초과",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0207",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "annual_fee": "FEE_ZERO"
+   },
+   "description": "Net Benefit 음수 + 연회비 0원",
+   "expected": "KEEP_CURRENT / 전환비용 ① = 0",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0208",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "annual_fee": "FEE_NORMAL"
+   },
+   "description": "Net Benefit 음수 + 일반 연회비",
+   "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0209",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "annual_fee": "FEE_CAP_MINUS_1"
+   },
+   "description": "Net Benefit 음수 + 사용자 연회비 상한 -1원",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0210",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "annual_fee": "FEE_CAP_EXACT"
+   },
+   "description": "Net Benefit 음수 + 사용자 연회비 상한 정확히",
+   "expected": "KEEP_CURRENT / 제약 통과",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0211",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "annual_fee": "FEE_CAP_PLUS_1"
+   },
+   "description": "Net Benefit 음수 + 사용자 연회비 상한 +1원",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0212",
+   "kind": "pair",
+   "dimension": "gating×annual_fee",
+   "factors": {
+    "gating": "GATE_NET_NEGATIVE",
+    "annual_fee": "FEE_SUM_OVER_CAP"
+   },
+   "description": "Net Benefit 음수 + 조합 합산이 상한 초과",
+   "expected": "KEEP_CURRENT / 후보에서 제외",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-FUNC-004·REQ-FUNC-004"
+  },
+  {
+   "case_id": "BC-0213",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_29",
+    "card_count": "CARD_0"
+   },
+   "description": "기준일 +29일 + 0장",
+   "expected": "유효 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0214",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_29",
+    "card_count": "CARD_1"
+   },
+   "description": "기준일 +29일 + 1장",
+   "expected": "유효 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0215",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_29",
+    "card_count": "CARD_2"
+   },
+   "description": "기준일 +29일 + 2장",
+   "expected": "유효 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0216",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_29",
+    "card_count": "CARD_5"
+   },
+   "description": "기준일 +29일 + 5장",
+   "expected": "유효 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0217",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_29",
+    "card_count": "CARD_10"
+   },
+   "description": "기준일 +29일 + 10장",
+   "expected": "유효 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0218",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_29",
+    "card_count": "CARD_20"
+   },
+   "description": "기준일 +29일 + 20장",
+   "expected": "유효 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0219",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_30",
+    "card_count": "CARD_0"
+   },
+   "description": "기준일 +30일 + 0장",
+   "expected": "만료 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0220",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_30",
+    "card_count": "CARD_1"
+   },
+   "description": "기준일 +30일 + 1장",
+   "expected": "만료 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0221",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_30",
+    "card_count": "CARD_2"
+   },
+   "description": "기준일 +30일 + 2장",
+   "expected": "만료 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0222",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_30",
+    "card_count": "CARD_5"
+   },
+   "description": "기준일 +30일 + 5장",
+   "expected": "만료 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0223",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_30",
+    "card_count": "CARD_10"
+   },
+   "description": "기준일 +30일 + 10장",
+   "expected": "만료 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0224",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_30",
+    "card_count": "CARD_20"
+   },
+   "description": "기준일 +30일 + 20장",
+   "expected": "만료 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0225",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_31",
+    "card_count": "CARD_0"
+   },
+   "description": "기준일 +31일 + 0장",
+   "expected": "만료 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0226",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_31",
+    "card_count": "CARD_1"
+   },
+   "description": "기준일 +31일 + 1장",
+   "expected": "만료 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0227",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_31",
+    "card_count": "CARD_2"
+   },
+   "description": "기준일 +31일 + 2장",
+   "expected": "만료 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0228",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_31",
+    "card_count": "CARD_5"
+   },
+   "description": "기준일 +31일 + 5장",
+   "expected": "만료 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0229",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_31",
+    "card_count": "CARD_10"
+   },
+   "description": "기준일 +31일 + 10장",
+   "expected": "만료 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0230",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_DAY_31",
+    "card_count": "CARD_20"
+   },
+   "description": "기준일 +31일 + 20장",
+   "expected": "만료 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0231",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_SAME",
+    "card_count": "CARD_0"
+   },
+   "description": "rule_version 동일 + 0장",
+   "expected": "유효 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0232",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_SAME",
+    "card_count": "CARD_1"
+   },
+   "description": "rule_version 동일 + 1장",
+   "expected": "유효 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0233",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_SAME",
+    "card_count": "CARD_2"
+   },
+   "description": "rule_version 동일 + 2장",
+   "expected": "유효 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0234",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_SAME",
+    "card_count": "CARD_5"
+   },
+   "description": "rule_version 동일 + 5장",
+   "expected": "유효 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0235",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_SAME",
+    "card_count": "CARD_10"
+   },
+   "description": "rule_version 동일 + 10장",
+   "expected": "유효 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0236",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_SAME",
+    "card_count": "CARD_20"
+   },
+   "description": "rule_version 동일 + 20장",
+   "expected": "유효 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0237",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_CHANGED",
+    "card_count": "CARD_0"
+   },
+   "description": "rule_version 변경 + 0장",
+   "expected": "만료 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0238",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_CHANGED",
+    "card_count": "CARD_1"
+   },
+   "description": "rule_version 변경 + 1장",
+   "expected": "만료 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0239",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_CHANGED",
+    "card_count": "CARD_2"
+   },
+   "description": "rule_version 변경 + 2장",
+   "expected": "만료 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0240",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_CHANGED",
+    "card_count": "CARD_5"
+   },
+   "description": "rule_version 변경 + 5장",
+   "expected": "만료 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0241",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_CHANGED",
+    "card_count": "CARD_10"
+   },
+   "description": "rule_version 변경 + 10장",
+   "expected": "만료 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0242",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_RULE_CHANGED",
+    "card_count": "CARD_20"
+   },
+   "description": "rule_version 변경 + 20장",
+   "expected": "만료 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0243",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_29",
+    "card_count": "CARD_0"
+   },
+   "description": "verified_at 29일 경과 + 0장",
+   "expected": "계산 대상 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0244",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_29",
+    "card_count": "CARD_1"
+   },
+   "description": "verified_at 29일 경과 + 1장",
+   "expected": "계산 대상 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0245",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_29",
+    "card_count": "CARD_2"
+   },
+   "description": "verified_at 29일 경과 + 2장",
+   "expected": "계산 대상 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0246",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_29",
+    "card_count": "CARD_5"
+   },
+   "description": "verified_at 29일 경과 + 5장",
+   "expected": "계산 대상 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0247",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_29",
+    "card_count": "CARD_10"
+   },
+   "description": "verified_at 29일 경과 + 10장",
+   "expected": "계산 대상 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0248",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_29",
+    "card_count": "CARD_20"
+   },
+   "description": "verified_at 29일 경과 + 20장",
+   "expected": "계산 대상 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0249",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_30",
+    "card_count": "CARD_0"
+   },
+   "description": "verified_at 30일 경과 + 0장",
+   "expected": "계산 대상 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0250",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_30",
+    "card_count": "CARD_1"
+   },
+   "description": "verified_at 30일 경과 + 1장",
+   "expected": "계산 대상 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0251",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_30",
+    "card_count": "CARD_2"
+   },
+   "description": "verified_at 30일 경과 + 2장",
+   "expected": "계산 대상 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0252",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_30",
+    "card_count": "CARD_5"
+   },
+   "description": "verified_at 30일 경과 + 5장",
+   "expected": "계산 대상 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0253",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_30",
+    "card_count": "CARD_10"
+   },
+   "description": "verified_at 30일 경과 + 10장",
+   "expected": "계산 대상 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0254",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_30",
+    "card_count": "CARD_20"
+   },
+   "description": "verified_at 30일 경과 + 20장",
+   "expected": "계산 대상 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0255",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_31",
+    "card_count": "CARD_0"
+   },
+   "description": "verified_at 31일 경과 + 0장",
+   "expected": "계산 대상 제외 / 계산 불가 — 필수 데이터 누락",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0256",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_31",
+    "card_count": "CARD_1"
+   },
+   "description": "verified_at 31일 경과 + 1장",
+   "expected": "계산 대상 제외 / 계산 가능",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0257",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_31",
+    "card_count": "CARD_2"
+   },
+   "description": "verified_at 31일 경과 + 2장",
+   "expected": "계산 대상 제외 / 조합 탐색 최소",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0258",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_31",
+    "card_count": "CARD_5"
+   },
+   "description": "verified_at 31일 경과 + 5장",
+   "expected": "계산 대상 제외 / 일반",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0259",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_31",
+    "card_count": "CARD_10"
+   },
+   "description": "verified_at 31일 경과 + 10장",
+   "expected": "계산 대상 제외 / 일반 상한",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  },
+  {
+   "case_id": "BC-0260",
+   "kind": "pair",
+   "dimension": "expiry×card_count",
+   "factors": {
+    "expiry": "EXP_FRESH_31",
+    "card_count": "CARD_20"
+   },
+   "description": "verified_at 31일 경과 + 20장",
+   "expected": "계산 대상 제외 / Won't 범위 경계 — 성능 관측용",
+   "params": {
+    "abs_threshold": "TBD",
+    "rel_threshold": "TBD",
+    "scenario_delta": "TBD"
+   },
+   "requirement": "REQ-EXC-006·REQ-FUNC-003"
+  }
+ ]
+}
