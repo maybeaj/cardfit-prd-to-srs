@@ -62,7 +62,7 @@
 
 **조건부 범위** — REQ-FUNC-011·012(우선순위 Could)는 Must·Should가 전부 완료되고 스프린트 여유가 남을 때만 착수한다. 미착수가 기본값이며, 빠져도 v1은 성립한다.
 
-> **신규 카드는 카드사 공식 신청 페이지로 이동 링크만 제공한다** — 신청서 작성·제출을 대신하지 않아 대행이 아니다. 해지는 이 단계 대상이 아니다. 근거는 8장 **ADR-04**.
+신규 카드는 카드사 공식 신청 페이지로 이동하는 링크만 제공하며, 신청서 작성·제출을 대행하지 않는다. 해지는 본 명세의 대상이 아니다. 이 범위 결정의 근거는 9장 ADR-04에 기록한다.
 
 ### 1.3 정의, 약어, 축약어
 
@@ -104,9 +104,9 @@
 | 개발 엔지니어 | 개발팀 | 규칙 엔진·연동·계측 구현 및 단위 테스트 |
 | 시스템 운영자 | 운영팀 | 배포 · 가용성·성능 모니터링 · 비용(호출량) 모니터링 |
 
-> **오조회만 PM을 우회한다** — 타인 데이터 노출은 사업 판단 대상이 아니라 즉시 신고 의무 사항이다.
+오조회(타인 데이터 노출)는 사업 판단 대상이 아닌 즉시 신고 의무 사항이므로, 컴플라이언스·보안 역할만 제품 책임자를 우회해 단독으로 서비스를 중단할 수 있다.
 
-**요구사항 단위의 개인 담당자 배정은 TBD**다. 본 문서의 담당자 열에는 PRD 6-4가 정의한 **역할**을 기재했다.
+요구사항 단위의 개인 담당자 배정은 TBD다. 본 문서의 담당자 열에는 역할을 기재한다.
 
 ---
 
@@ -138,15 +138,15 @@
 | ID | 제목 | 출처 | 우선순위 | 유형 | 검증 방식 | 인수 기준 | 상태 | 담당자 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **REQ-FUNC-001** | 미래지출 입력 (카테고리·금액·시점) | PRD 3절 F-01 | Must Have | Functional | 1) 입력 흐름 테스트<br>2) 이벤트 비종속 검증<br>3) QA 검증 | 카테고리(자유 입력 허용)·금액·시점·확실도를 입력해 저장할 수 있어야 한다. **이벤트 필수 선택 단계가 0개**여야 하며, 지출 **감소** 방향 처리 실패가 0건이어야 한다 (AC-07) | Proposed | 개발 엔지니어 |
-| **REQ-FUNC-002** | 마이데이터 연동 및 제약조건 수집 | PRD 3절 F-02 | Must Have | Functional | 1) 연동 통합 테스트<br>2) 동의 상태 전이 테스트<br>3) 보안 감사 | 과거 소비·보유카드를 자동 수집하고, 최대 카드 수·연회비 상한·신규 발급 허용 여부를 입력받아야 한다. **동의 만료·철회 상태에서 계산 요청은 400을 반환**해야 한다 (AC-F4) | Proposed | 개발 엔지니어 |
+| **REQ-FUNC-002** | 마이데이터 연동 및 제약조건 수집 | PRD 3절 F-02 | Must Have | Functional | 1) 연동 통합 테스트<br>2) 동의 상태 전이 테스트<br>3) 보안 감사 | 과거 소비·보유카드를 자동 수집하고, 최대 카드 수·연회비 상한·신규 발급 허용 여부를 입력받아야 한다. **동의 만료·철회 상태에서 계산 요청은 400을 반환**해야 한다 (AC-01, AC-F4) | Proposed | 개발 엔지니어 |
 | **REQ-FUNC-003** | 순혜택 시나리오 계산 (3개 시나리오) | PRD 3절 F-03 | Must Have | Functional | 1) 경계값 회귀 테스트 (E4, ≥ 200건)<br>2) 결정론성 검증<br>3) 사전 계산 검증 | 실적구간·통합할인한도·연회비·제외항목을 반영해 순혜택을 산출하고, **적게·예상대로·많이 3개 시나리오를 모두 사전 계산**해야 한다. **탭 전환 시 재계산 0건**, 각 탭에 지출 가정 캡션 누락 0건 (AC-06) | Proposed | 계산 품질 |
-| **REQ-FUNC-004** | 조합 최적화 및 **Net Benefit 게이팅** | PRD 3절 F-04 | Must Have | Functional | 1) 게이팅 판정 전건 대조<br>2) 임계값 경계 테스트<br>3) QA 검증 | 해지·유지·신규추가 조합 후보를 생성하고 Net Benefit을 산출해야 한다. **임계 미달 시 "현재 조합 유지"를 결론으로 반환**하며 반환률 100%. 임계 미달인데 변경을 제안한 건수 **0건** (AC-05, GR2) | Proposed | 계산 품질 |
-| **REQ-FUNC-005** | 결제수단 배분 | PRD 3절 F-05 | Must Have | Functional | 1) 배분 합계 검증<br>2) QA 검증 | 카드별 역할과 배분 금액을 제시해야 한다. **배분 합계와 입력 총액의 오차 ≤ 1원**. 실행 대행은 포함하지 않는다 | Proposed | 개발 엔지니어 |
-| **REQ-FUNC-006** | 계산 근거 공개 | PRD 3절 F-06 | Must Have | Functional | 1) 근거 항목 수 검증<br>2) 미반영 항목 표기 검증<br>3) QA 검증 | 적용 규칙·**제외조건**·기준일·`rule_version`을 포함해 **공개 항목 ≥ 6개**를 표기해야 한다. 계산에 못 넣은 비용은 "이 계산에는 포함되지 않았습니다"로 표기하고 누락률 0%. **6항목 미달이면 응답을 거부**한다 (AC-02, AC-F2, GR3) | Proposed | 계산 품질 |
+| **REQ-FUNC-004** | 조합 최적화 및 **Net Benefit 게이팅** | PRD 3절 F-04 | Must Have | Functional | 1) 게이팅 판정 전건 대조<br>2) 임계값 경계 테스트<br>3) Concierge Test (E2)<br>4) QA 검증 | 해지·유지·신규추가 조합 후보를 생성하고 Net Benefit을 산출해야 한다. **임계 미달 시 "현재 조합 유지"를 결론으로 반환**하며 반환률 100%. 임계 미달인데 변경을 제안한 건수 **0건** (AC-05, GR2) | Proposed | 계산 품질 |
+| **REQ-FUNC-005** | 결제수단 배분 | PRD 3절 F-05 | Must Have | Functional | 1) 배분 합계 검증<br>2) QA 검증 | 카드별 역할과 배분 금액을 제시해야 한다. **배분 합계와 입력 총액의 오차 ≤ 1원** (AC-01). 실행 대행은 포함하지 않는다 | Proposed | 개발 엔지니어 |
+| **REQ-FUNC-006** | 계산 근거 공개 | PRD 3절 F-06 | Must Have | Functional | 1) 근거 항목 수 검증<br>2) 미반영 항목 표기 검증<br>3) 신뢰 점수 전후 비교 (E2)<br>4) QA 검증 | 적용 규칙·**제외조건**·기준일·`rule_version`을 포함해 **공개 항목 ≥ 6개**를 표기해야 한다. 계산에 못 넣은 비용은 "이 계산에는 포함되지 않았습니다"로 표기하고 누락률 0%. **6항목 미달이면 응답을 거부**한다 (AC-02, AC-F2, GR3) | Proposed | 계산 품질 |
 | **REQ-FUNC-007** | 과거 패턴 기반 초기값 자동 제안 | PRD 3절 F-11 | Must Have | Functional | 1) 제안값 산출 테스트<br>2) A/B 테스트 (E3, n=500)<br>3) 수정률 관측 | 과거 소비 패턴으로 미래지출 초기값을 제안해야 한다. **직접 입력 강제 항목 0개**. 온보딩 완료율 ≥ 60% 및 A군 대비 +15%p 달성, 초기값 수정률이 정상 범위여야 한다 | Proposed | 개발 엔지니어 |
 | **REQ-FUNC-008** | 이벤트 비종속 입력 | PRD 3절 F-08 | Should Have | Functional | 1) 자유 카테고리 입력 테스트<br>2) 증감 양방향 테스트 | 자유 카테고리 입력과 증감 양방향 처리를 지원해야 한다. 이벤트 선택 단계를 **두지 않는 것**으로 충족한다 | Proposed | 개발 엔지니어 |
 | **REQ-FUNC-009** | 스코프 경계 고지 및 **금지어 자동 검수** | PRD 3절 F-12 | Should Have | Functional | 1) 경계 안내 노출 검증<br>2) 금지어 정적·런타임 스캔<br>3) 사후 설문 (E6) | "해지" 항목 포함 결론에 **"신청·해지는 카드사에서 직접 진행하셔야 합니다"** 안내가 노출돼야 한다. 미노출 **0건**, 금지어 적발 **0건**, 범위 인지율 ≥ 90% (AC-03, GR4) | Proposed | 컴플라이언스·보안 |
-| **REQ-FUNC-010** | 실행 완주율 계측 (측정 전용) | PRD 3절 F-13 | Should Have | Functional | 1) 발송·집계 테스트<br>2) 개입 없음 검증 | 조합안 선택 **+30일에 1회만** 발송하고 완주 여부를 집계해야 한다. 응답 수집률 ≥ 30%, 집계 실패 0건. **무응답은 미완주로 집계**하며, 재발송·독려·자동 후속 액션 트리거가 **0건**이어야 한다 (AC-04) | Proposed | 제품 책임자 (PM) |
+| **REQ-FUNC-010** | 실행 완주율 계측 (측정 전용) | PRD 3절 F-13 | Should Have | Functional | 1) 발송·집계 테스트<br>2) 개입 없음 검증<br>3) 완주율 관측 (E7a·E7b) | 조합안 선택 **+30일에 1회만** 발송하고 완주 여부를 집계해야 한다. 응답 수집률 ≥ 30%, 집계 실패 0건. **무응답은 미완주로 집계**하며, 재발송·독려·자동 후속 액션 트리거가 **0건**이어야 한다 (AC-04) | Proposed | 제품 책임자 (PM) |
 | REQ-FUNC-011 | 단계적 전환 제안 (효과 큰 카드부터) | PRD 3절 F-07 | Could Have | Functional | 1) 정렬 로직 테스트<br>2) QA 검증 | 조합 변경 항목을 효과 크기 순으로 제시해야 한다. **제시 방식이며 실행 지원이 아니다** | Proposed | 개발 엔지니어 |
 | REQ-FUNC-012 | 소득·지출 범위(최소~평균) 입력 | PRD 3절 F-09 | Could Have | Functional | 1) 범위 입력 테스트<br>2) QA 검증 | 단일값 대신 범위로 입력할 수 있어야 한다 | Proposed | 개발 엔지니어 |
 
@@ -165,18 +165,16 @@
 
 | ID | 제목 | 출처 | 우선순위 | 유형 | 검증 방식 | 인수 기준 (임계치 · 모니터링 항목) | 상태 | 담당자 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **REQ-NF-001** | 응답 시간 및 여정 소요 | PRD 4절 NFR-01 | Must Have | Performance | 3개 시나리오 동시 산출 조건 부하 테스트 | **임계치**: `POST /calculate` **p95 ≤ 5s** · `GET .../evidence` **p95 ≤ 1s** · 결론 도달 **p95 ≤ 5분**<br>**모니터링**: 엔드포인트별 p50·p95·p99 레이턴시, 여정 단계별 소요시간 분포, 타임아웃 건수 (실시간 · 일간) | Proposed | 시스템 운영자 |
+| **REQ-NF-001** | 응답 시간 및 여정 소요 | PRD 4절 NFR-01 | Must Have | Performance | 3개 시나리오 동시 산출 조건 부하 테스트 (AC-01·AC-02) | **임계치**: `POST /calculate` **p95 ≤ 5s** · `GET .../evidence` **p95 ≤ 1s** · 결론 도달 **p95 ≤ 5분**<br>**모니터링**: 엔드포인트별 p50·p95·p99 레이턴시, 여정 단계별 소요시간 분포, 타임아웃 건수 (실시간 · 일간) | Proposed | 시스템 운영자 |
 | **REQ-NF-002** | 계산 정확성 및 결정론성 | PRD 4절 NFR-02 | Must Have | Accuracy | 경계값 회귀 스위트 (E4) · 동일입력 응답 해시 비교 | **임계치**: 계산 오류율 **≤ 0.1%** · 동일 입력 재계산 **불일치 0건** · 배분 합계 오차 **≤ 1원**<br>**모니터링**: 회귀 200건 통과율, 응답 해시 불일치 건수, 배분 합계 검증 실패 건수 (배포마다 · 일간) | Proposed | 계산 품질 |
-| **REQ-NF-003** | 가용성 및 부분 장애 시 거동 | PRD 4절 NFR-03 | Must Have | Reliability | SLA 모니터링 · 장애 주입 테스트 | **임계치**: 월 가용성 **≥ 99.5%** (월 허용 다운타임 **3시간 39분**) · 마이데이터 장애 시 경고 표시 후 계산 계속 · 필수 데이터 누락 시 추천 중단<br>**모니터링**: 월 가용률, 마이데이터 API 오류율·타임아웃율, 계산 실패율, 경고 표시 후 완주율 (실시간 알림 · 월간 SLA) | Proposed | 시스템 운영자 |
-| **REQ-NF-004** | 인증·인가 및 오조회 차단 | PRD 4절 NFR-04 | Must Have | Security | 보안 감사 · 접근 제어 테스트 · 응답 주체 전건 대조 | **임계치**: 오조회 **0건** (1건 = 즉시 중단·신고) · 마이데이터 인가 요건 준수(자본금·물적설비·보안) · 동의 범위 최소화 · 철회 시 파기 **24시간 내**<br>**모니터링**: 응답 주인 ≠ 로그인 사용자 검출 수, 동의 만료·철회 후 접근 시도 수, 파기 SLA 준수율, 동의 항목 수 변동 (실시간 알림) | Proposed | 컴플라이언스·보안 |
-| **REQ-NF-005** | **비용 — 마이데이터 호출 과금 통제** | PRD 4절 NFR-05 | Must Have | Cost / Efficiency | 호출량 계측 · 단위경제 리포트 | **임계치**: **결론 1건당 마이데이터 호출 ≤ 1회** · 시나리오 확장으로 인한 추가 호출 **0건** · 결론 1건당 단위원가 상한 **TBD**(의존성 D3 확정 시)<br>**모니터링**: 결론당 호출 수, 일 호출량·과금액, 재계산 반복 호출 수, 결론 없이 종료된 낭비 호출 비율 (일간 · 주간) | Proposed | 시스템 운영자 |
+| **REQ-NF-003** | 가용성 및 부분 장애 시 거동 | PRD 4절 NFR-03 | Must Have | Reliability | SLA 모니터링 · 장애 주입 테스트 (AC-F3·AC-F5) | **임계치**: 월 가용성 **≥ 99.5%** (월 허용 다운타임 **3시간 39분**) · 마이데이터 장애 시 경고 표시 후 계산 계속 · 필수 데이터 누락 시 추천 중단<br>**모니터링**: 월 가용률, 마이데이터 API 오류율·타임아웃율, 계산 실패율, 경고 표시 후 완주율 (실시간 알림 · 월간 SLA) | Proposed | 시스템 운영자 |
+| **REQ-NF-004** | 인증·인가 및 오조회 차단 | PRD 4절 NFR-04 | Must Have | Security | 보안 감사 · 접근 제어 테스트 · 응답 주체 전건 대조 (AC-F4) | **임계치**: 오조회 **0건** (1건 = 즉시 중단·신고) · 마이데이터 인가 요건 준수(자본금·물적설비·보안) · 동의 범위 최소화 · 철회 시 파기 **24시간 내**<br>**모니터링**: 응답 주인 ≠ 로그인 사용자 검출 수, 동의 만료·철회 후 접근 시도 수, 파기 SLA 준수율, 동의 항목 수 변동 (실시간 알림) | Proposed | 컴플라이언스·보안 |
+| **REQ-NF-005** | **비용 — 마이데이터 호출 과금 통제** | PRD 4절 NFR-05 | Must Have | Cost / Efficiency | 호출량 계측 · 단위경제 리포트 (AC-06) | **임계치**: 마이데이터는 호출당 과금되므로 **결론 1건당 호출 ≤ 1회**로 제한하고, 시나리오 3개는 1회 수집 데이터로 계산해야 한다 · 시나리오 확장으로 인한 추가 호출 **0건** · 결론 1건당 단위원가 상한 **TBD**(의존성 D3 확정 시)<br>**모니터링**: 결론당 호출 수, 일 호출량·과금액, 재계산 반복 호출 수, 결론 없이 종료된 낭비 호출 비율 (일간 · 주간) | Proposed | 시스템 운영자 |
 | **REQ-NF-006** | 감사 증적 — 계산 재현성 | PRD 4절 NFR-06 | Must Have | Auditability | 적재율 검증 · 재현 테스트 | **임계치**: 계산 요청·응답, `rule_version`, 입력 스냅샷, 마이데이터 응답 코드 **전건 보존** · 적재 누락 **0건** · 보존기간 **TBD**(D9 규제 분류 확정 시)<br>**모니터링**: 감사로그 적재율(100% 기준), 재현 테스트 성공률 (일간) | Proposed | 컴플라이언스·보안 |
-| **REQ-NF-007** | 데이터 최신성 — Rule 버전 관리 | PRD 4절 NFR-07 | Must Have | Maintainability | 최신성 점검 배치 · 제외 처리 검증 | **임계치**: 갱신 지연 **≤ 30일** · 초과 시 해당 카드 **계산 대상 제외**(무단 사용 0건) · `rule_version` 적용 시작·종료일 필수<br>**모니터링**: 카드별 약관 최종 확인일 경과일수, 30일 초과 카드 수·제외 처리 건수, 최신성 경고 노출률 (일간) | Proposed | 데이터 운영 |
+| **REQ-NF-007** | 데이터 최신성 — Rule 버전 관리 | PRD 4절 NFR-07 | Must Have | Maintainability | 최신성 점검 배치 · 제외 처리 검증 (AC-F6) | **임계치**: 갱신 지연 **≤ 30일** · 초과 시 해당 카드 **계산 대상 제외**(무단 사용 0건) · `rule_version` 적용 시작·종료일 필수<br>**모니터링**: 카드별 약관 최종 확인일 경과일수, 30일 초과 카드 수·제외 처리 건수, 최신성 경고 노출률 (일간) | Proposed | 데이터 운영 |
 | **REQ-NF-008** | 사용성 — 입력 부담 및 결론 도달 | PRD 4절 · 7-2 | Should Have | Usability | A/B 테스트 (E3) · 여정 계측 | **임계치**: 온보딩 완료율 **≥ 60%** · 결론 도달 **p95 ≤ 5분**(기준선 수기 240분) · 직접 입력 강제 항목 **0개**<br>**모니터링**: 온보딩 완료율, 결론 도달 소요시간 p95, 초기값 수정률 (일간) | Proposed | 제품 책임자 (PM) |
 
 **대시보드 요구** — 북극성 · 보조 지표 · Guardrail 5개 · REQ-NF-001~008의 모니터링 항목을 한 화면에 두고 **페르소나 층별로 분해**한다. 임계치를 넘긴 항목은 2장의 담당 역할에게 자동 알림한다.
-
-> **비용을 비기능 요구로 올린 이유** — 마이데이터는 호출당 과금이다. 시나리오를 3개로 늘리면 호출량이 늘 수 있는데, 이 요구사항이 없으면 **성능을 올리려 호출을 늘리는 선택이 아무 저항 없이 통과**한다. `결론 1건당 호출 ≤ 1회`가 그 저항선이다.
 
 ### 4.3 예외·실패 처리 요구사항
 
@@ -197,36 +195,36 @@
 
 ## 5. 추적성 매트릭스
 
-| 요구사항 ID | 모듈 | 구현 클래스 | 대응 인수 기준 · 실험 | 테스트 케이스 ID |
-| --- | --- | --- | --- | --- |
-| REQ-FUNC-001 | Future Spend Input | TBD | AC-07 | TC-FUNC-001 |
-| REQ-FUNC-002 | MyData Connector | TBD | AC-01 · AC-F4 | TC-FUNC-002 |
-| REQ-FUNC-003 | Rule Engine | TBD | AC-06 · **E4** | TC-FUNC-003 |
-| REQ-FUNC-004 | Combination Optimizer | TBD | AC-05 · **E2** | TC-FUNC-004 |
-| REQ-FUNC-005 | Allocation Service | TBD | AC-01 | TC-FUNC-005 |
-| REQ-FUNC-006 | Evidence Service | TBD | AC-02 · **E2** | TC-FUNC-006 |
-| REQ-FUNC-007 | Future Spend Input · MyData Connector | TBD | **E3** | TC-FUNC-007 |
-| REQ-FUNC-008 | Future Spend Input | TBD | AC-07 | TC-FUNC-008 |
-| REQ-FUNC-009 | Evidence Service · 문구 스캐너 | TBD | AC-03 · **E6** | TC-FUNC-009 |
-| REQ-FUNC-010 | Outcome Tracker | TBD | AC-04 · **E7a·E7b** | TC-FUNC-010 |
-| REQ-FUNC-011 | Combination Optimizer | TBD | — | TC-FUNC-011 |
-| REQ-FUNC-012 | Future Spend Input | TBD | — | TC-FUNC-012 |
-| REQ-NF-001 | 전 모듈 (API Gateway 계측) | TBD | AC-01 · AC-02 | TC-NF-001 |
-| REQ-NF-002 | Rule Engine | TBD | **E4** | TC-NF-002 |
-| REQ-NF-003 | MyData Connector · Rule Engine | TBD | AC-F3 · AC-F5 | TC-NF-003 |
-| REQ-NF-004 | 전 모듈 (인가·동의 관리) | TBD | AC-F4 | TC-NF-004 |
-| REQ-NF-005 | MyData Connector | TBD | AC-06 | TC-NF-005 |
-| REQ-NF-006 | Audit Log Store | TBD | — | TC-NF-006 |
-| REQ-NF-007 | Rule Data Pipeline | TBD | AC-F6 | TC-NF-007 |
-| REQ-NF-008 | Future Spend Input · Evidence Service | TBD | **E3** | TC-NF-008 |
-| REQ-EXC-001 | Future Spend Input · Rule Engine | TBD | AC-F1 | TC-EXC-001 |
-| REQ-EXC-002 | Evidence Service | TBD | AC-F2 | TC-EXC-002 |
-| REQ-EXC-003 | MyData Connector | TBD | AC-F3 | TC-EXC-003 |
-| REQ-EXC-004 | MyData Connector | TBD | AC-F4 | TC-EXC-004 |
-| REQ-EXC-005 | Rule Engine · Combination Optimizer | TBD | AC-F5 | TC-EXC-005 |
-| REQ-EXC-006 | Rule Data Pipeline · Combination Optimizer | TBD | AC-F6 | TC-EXC-006 |
+| 요구사항 ID | 모듈 | 구현 클래스 | 테스트 케이스 ID |
+| --- | --- | --- | --- |
+| REQ-FUNC-001 | Future Spend Input | TBD | TC-FUNC-001 |
+| REQ-FUNC-002 | MyData Connector | TBD | TC-FUNC-002 |
+| REQ-FUNC-003 | Rule Engine | TBD | TC-FUNC-003 |
+| REQ-FUNC-004 | Combination Optimizer | TBD | TC-FUNC-004 |
+| REQ-FUNC-005 | Allocation Service | TBD | TC-FUNC-005 |
+| REQ-FUNC-006 | Evidence Service | TBD | TC-FUNC-006 |
+| REQ-FUNC-007 | Future Spend Input · MyData Connector | TBD | TC-FUNC-007 |
+| REQ-FUNC-008 | Future Spend Input | TBD | TC-FUNC-008 |
+| REQ-FUNC-009 | Evidence Service · 문구 스캐너 | TBD | TC-FUNC-009 |
+| REQ-FUNC-010 | Outcome Tracker | TBD | TC-FUNC-010 |
+| REQ-FUNC-011 | Combination Optimizer | TBD | TC-FUNC-011 |
+| REQ-FUNC-012 | Future Spend Input | TBD | TC-FUNC-012 |
+| REQ-NF-001 | 전 모듈 (API Gateway 계측) | TBD | TC-NF-001 |
+| REQ-NF-002 | Rule Engine | TBD | TC-NF-002 |
+| REQ-NF-003 | MyData Connector · Rule Engine | TBD | TC-NF-003 |
+| REQ-NF-004 | 전 모듈 (인가·동의 관리) | TBD | TC-NF-004 |
+| REQ-NF-005 | MyData Connector | TBD | TC-NF-005 |
+| REQ-NF-006 | Audit Log Store | TBD | TC-NF-006 |
+| REQ-NF-007 | Rule Data Pipeline | TBD | TC-NF-007 |
+| REQ-NF-008 | Future Spend Input · Evidence Service | TBD | TC-NF-008 |
+| REQ-EXC-001 | Future Spend Input · Rule Engine | TBD | TC-EXC-001 |
+| REQ-EXC-002 | Evidence Service | TBD | TC-EXC-002 |
+| REQ-EXC-003 | MyData Connector | TBD | TC-EXC-003 |
+| REQ-EXC-004 | MyData Connector | TBD | TC-EXC-004 |
+| REQ-EXC-005 | Rule Engine · Combination Optimizer | TBD | TC-EXC-005 |
+| REQ-EXC-006 | Rule Data Pipeline · Combination Optimizer | TBD | TC-EXC-006 |
 
-**구현 클래스가 전량 TBD인 이유** — 입력 PRD에 모듈 내부 설계가 없다. 모듈 열은 3장이 정의한 내부 구성요소로 채웠고, 클래스 배정은 설계 단계 산출물이다. **추정 클래스명을 채워 넣지 않았다.**
+구현 클래스는 설계 단계 산출물이므로 전량 TBD로 표기한다. 모듈 열은 3장이 정의한 내부 구성요소로 채웠다. 각 요구사항에 대응하는 인수 기준과 검증 실험은 4.1·4.2·4.3의 검증 방식 및 인수 기준 열에 기재한다.
 
 ---
 
@@ -700,7 +698,7 @@ CREATE TABLE audit_logs (
 | **PlanCandidate** | 제시 → (선택 / 미선택) → 만료 | **`rule_version` 변경 또는 기준일 +30일 경과 시 만료.** 만료 조합안은 재계산 없이 실행 대상이 되지 않는다 (REQ-EXC-006) |
 | **OutcomeLog** | 미발송 → 발송 → (응답 / 무응답) | 발송은 선택 +30일 **1회만**. **무응답은 미완주로 집계**. 재발송·독려 없음 (REQ-FUNC-010) |
 
-> **조합안 만료가 근거 공개의 최소 조건이다.** 3주 전 결과를 들고 실행하려는 사이 약관이 갱신되면 계산 근거가 이미 틀린 것이다.
+조합안 만료는 근거 공개 요구(REQ-FUNC-006)의 성립 조건이다. 기준일 이후 약관이 갱신되면 이미 제시된 계산 근거가 무효가 되므로, 만료 조합안은 재계산 없이 실행 대상이 되지 않아야 한다.
 
 ### 6.6 논리 데이터베이스 요구사항
 
