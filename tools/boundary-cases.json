@@ -1,11 +1,11 @@
 {
  "spec": "STD-CARDFIT-001 D8 / 배포 게이트 ① (TC-NF-002)",
  "version": "1.0",
- "params_bound": false,
+ "params_bound": true,
  "params": {
-  "abs_threshold": null,
-  "rel_threshold": null,
-  "scenario_delta": null
+  "abs_threshold": 3000,
+  "rel_threshold": 0.1,
+  "scenario_delta": 0.2
  },
  "total": 260,
  "by_kind": {
@@ -34,9 +34,9 @@
    "description": "최저 구간 하한 미달 (0원)",
    "expected": "혜택 미적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -50,9 +50,9 @@
    "description": "구간 하한 -1원",
    "expected": "직전 구간 적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -66,9 +66,9 @@
    "description": "구간 하한 정확히",
    "expected": "해당 구간 적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -82,9 +82,9 @@
    "description": "구간 하한 +1원",
    "expected": "해당 구간 적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -98,9 +98,9 @@
    "description": "구간 상한 -1원",
    "expected": "해당 구간 적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -114,9 +114,9 @@
    "description": "구간 상한 정확히",
    "expected": "해당 구간 적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -130,9 +130,9 @@
    "description": "구간 상한 +1원",
    "expected": "다음 구간 적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -146,9 +146,9 @@
    "description": "최고 구간 초과",
    "expected": "최고 구간 적용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -162,9 +162,9 @@
    "description": "혜택 합계 = 한도 -1원",
    "expected": "전액 지급",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -178,9 +178,9 @@
    "description": "혜택 합계 = 한도",
    "expected": "전액 지급",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -194,9 +194,9 @@
    "description": "혜택 합계 = 한도 +1원",
    "expected": "한도까지만 지급",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -210,9 +210,9 @@
    "description": "한도 0원",
    "expected": "혜택 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -226,9 +226,9 @@
    "description": "한도 없음 (NULL)",
    "expected": "전액 지급",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -242,9 +242,9 @@
    "description": "연회비 0원",
    "expected": "전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -258,9 +258,9 @@
    "description": "일반 연회비",
    "expected": "전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -274,9 +274,9 @@
    "description": "사용자 연회비 상한 -1원",
    "expected": "제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -290,9 +290,9 @@
    "description": "사용자 연회비 상한 정확히",
    "expected": "제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -306,9 +306,9 @@
    "description": "사용자 연회비 상한 +1원",
    "expected": "후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -322,9 +322,9 @@
    "description": "조합 합산이 상한 초과",
    "expected": "후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -338,9 +338,9 @@
    "description": "제외 없음",
    "expected": "전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -354,9 +354,9 @@
    "description": "전액 제외",
    "expected": "실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -370,9 +370,9 @@
    "description": "일부 업종 제외",
    "expected": "제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -386,9 +386,9 @@
    "description": "실적 산정에만 제외 적용",
    "expected": "혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -402,9 +402,9 @@
    "description": "혜택 적용에만 제외 적용",
    "expected": "실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -418,9 +418,9 @@
    "description": "적게 — 입력 × (1 - delta)",
    "expected": "독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -434,9 +434,9 @@
    "description": "예상대로 — 입력값 그대로",
    "expected": "기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -450,9 +450,9 @@
    "description": "많이 — 입력 × (1 + delta)",
    "expected": "독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -466,9 +466,9 @@
    "description": "Net Benefit = 절대 임계 -1원",
    "expected": "KEEP_CURRENT",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -482,9 +482,9 @@
    "description": "Net Benefit = 절대 임계 정확히",
    "expected": "RECOMMEND_CHANGE",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -498,9 +498,9 @@
    "description": "Net Benefit = 절대 임계 +1원",
    "expected": "RECOMMEND_CHANGE",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -514,9 +514,9 @@
    "description": "상대 임계 미달",
    "expected": "KEEP_CURRENT",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -530,9 +530,9 @@
    "description": "상대 임계 정확히",
    "expected": "RECOMMEND_CHANGE",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -546,9 +546,9 @@
    "description": "절대 통과 · 상대 미달",
    "expected": "KEEP_CURRENT",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -562,9 +562,9 @@
    "description": "절대 미달 · 상대 통과",
    "expected": "KEEP_CURRENT",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -578,9 +578,9 @@
    "description": "Net Benefit 음수",
    "expected": "KEEP_CURRENT",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004"
   },
@@ -594,9 +594,9 @@
    "description": "총액이 카드 수로 나누어떨어짐",
    "expected": "오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-005"
   },
@@ -610,9 +610,9 @@
    "description": "1원 남음",
    "expected": "오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-005"
   },
@@ -626,9 +626,9 @@
    "description": "2원 남음",
    "expected": "오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-005"
   },
@@ -642,9 +642,9 @@
    "description": "3분할 (0.333… 반복)",
    "expected": "오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-005"
   },
@@ -658,9 +658,9 @@
    "description": "기준일 +29일",
    "expected": "유효",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -674,9 +674,9 @@
    "description": "기준일 +30일",
    "expected": "만료",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -690,9 +690,9 @@
    "description": "기준일 +31일",
    "expected": "만료",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -706,9 +706,9 @@
    "description": "rule_version 동일",
    "expected": "유효",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -722,9 +722,9 @@
    "description": "rule_version 변경",
    "expected": "만료",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -738,9 +738,9 @@
    "description": "verified_at 29일 경과",
    "expected": "계산 대상",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -754,9 +754,9 @@
    "description": "verified_at 30일 경과",
    "expected": "계산 대상",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -770,9 +770,9 @@
    "description": "verified_at 31일 경과",
    "expected": "계산 대상 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006"
   },
@@ -786,9 +786,9 @@
    "description": "0장",
    "expected": "계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -802,9 +802,9 @@
    "description": "1장",
    "expected": "계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -818,9 +818,9 @@
    "description": "2장",
    "expected": "조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -834,9 +834,9 @@
    "description": "5장",
    "expected": "일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -850,9 +850,9 @@
    "description": "10장",
    "expected": "일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -866,9 +866,9 @@
    "description": "20장",
    "expected": "Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003"
   },
@@ -883,9 +883,9 @@
    "description": "최저 구간 하한 미달 (0원) + 제외 없음",
    "expected": "혜택 미적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -900,9 +900,9 @@
    "description": "최저 구간 하한 미달 (0원) + 전액 제외",
    "expected": "혜택 미적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -917,9 +917,9 @@
    "description": "최저 구간 하한 미달 (0원) + 일부 업종 제외",
    "expected": "혜택 미적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -934,9 +934,9 @@
    "description": "최저 구간 하한 미달 (0원) + 실적 산정에만 제외 적용",
    "expected": "혜택 미적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -951,9 +951,9 @@
    "description": "최저 구간 하한 미달 (0원) + 혜택 적용에만 제외 적용",
    "expected": "혜택 미적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -968,9 +968,9 @@
    "description": "구간 하한 -1원 + 제외 없음",
    "expected": "직전 구간 적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -985,9 +985,9 @@
    "description": "구간 하한 -1원 + 전액 제외",
    "expected": "직전 구간 적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1002,9 +1002,9 @@
    "description": "구간 하한 -1원 + 일부 업종 제외",
    "expected": "직전 구간 적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1019,9 +1019,9 @@
    "description": "구간 하한 -1원 + 실적 산정에만 제외 적용",
    "expected": "직전 구간 적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1036,9 +1036,9 @@
    "description": "구간 하한 -1원 + 혜택 적용에만 제외 적용",
    "expected": "직전 구간 적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1053,9 +1053,9 @@
    "description": "구간 하한 정확히 + 제외 없음",
    "expected": "해당 구간 적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1070,9 +1070,9 @@
    "description": "구간 하한 정확히 + 전액 제외",
    "expected": "해당 구간 적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1087,9 +1087,9 @@
    "description": "구간 하한 정확히 + 일부 업종 제외",
    "expected": "해당 구간 적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1104,9 +1104,9 @@
    "description": "구간 하한 정확히 + 실적 산정에만 제외 적용",
    "expected": "해당 구간 적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1121,9 +1121,9 @@
    "description": "구간 하한 정확히 + 혜택 적용에만 제외 적용",
    "expected": "해당 구간 적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1138,9 +1138,9 @@
    "description": "구간 하한 +1원 + 제외 없음",
    "expected": "해당 구간 적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1155,9 +1155,9 @@
    "description": "구간 하한 +1원 + 전액 제외",
    "expected": "해당 구간 적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1172,9 +1172,9 @@
    "description": "구간 하한 +1원 + 일부 업종 제외",
    "expected": "해당 구간 적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1189,9 +1189,9 @@
    "description": "구간 하한 +1원 + 실적 산정에만 제외 적용",
    "expected": "해당 구간 적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1206,9 +1206,9 @@
    "description": "구간 하한 +1원 + 혜택 적용에만 제외 적용",
    "expected": "해당 구간 적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1223,9 +1223,9 @@
    "description": "구간 상한 -1원 + 제외 없음",
    "expected": "해당 구간 적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1240,9 +1240,9 @@
    "description": "구간 상한 -1원 + 전액 제외",
    "expected": "해당 구간 적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1257,9 +1257,9 @@
    "description": "구간 상한 -1원 + 일부 업종 제외",
    "expected": "해당 구간 적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1274,9 +1274,9 @@
    "description": "구간 상한 -1원 + 실적 산정에만 제외 적용",
    "expected": "해당 구간 적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1291,9 +1291,9 @@
    "description": "구간 상한 -1원 + 혜택 적용에만 제외 적용",
    "expected": "해당 구간 적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1308,9 +1308,9 @@
    "description": "구간 상한 정확히 + 제외 없음",
    "expected": "해당 구간 적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1325,9 +1325,9 @@
    "description": "구간 상한 정확히 + 전액 제외",
    "expected": "해당 구간 적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1342,9 +1342,9 @@
    "description": "구간 상한 정확히 + 일부 업종 제외",
    "expected": "해당 구간 적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1359,9 +1359,9 @@
    "description": "구간 상한 정확히 + 실적 산정에만 제외 적용",
    "expected": "해당 구간 적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1376,9 +1376,9 @@
    "description": "구간 상한 정확히 + 혜택 적용에만 제외 적용",
    "expected": "해당 구간 적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1393,9 +1393,9 @@
    "description": "구간 상한 +1원 + 제외 없음",
    "expected": "다음 구간 적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1410,9 +1410,9 @@
    "description": "구간 상한 +1원 + 전액 제외",
    "expected": "다음 구간 적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1427,9 +1427,9 @@
    "description": "구간 상한 +1원 + 일부 업종 제외",
    "expected": "다음 구간 적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1444,9 +1444,9 @@
    "description": "구간 상한 +1원 + 실적 산정에만 제외 적용",
    "expected": "다음 구간 적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1461,9 +1461,9 @@
    "description": "구간 상한 +1원 + 혜택 적용에만 제외 적용",
    "expected": "다음 구간 적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1478,9 +1478,9 @@
    "description": "최고 구간 초과 + 제외 없음",
    "expected": "최고 구간 적용 / 전액 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1495,9 +1495,9 @@
    "description": "최고 구간 초과 + 전액 제외",
    "expected": "최고 구간 적용 / 실적·혜택 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1512,9 +1512,9 @@
    "description": "최고 구간 초과 + 일부 업종 제외",
    "expected": "최고 구간 적용 / 제외분 차감",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1529,9 +1529,9 @@
    "description": "최고 구간 초과 + 실적 산정에만 제외 적용",
    "expected": "최고 구간 적용 / 혜택은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1546,9 +1546,9 @@
    "description": "최고 구간 초과 + 혜택 적용에만 제외 적용",
    "expected": "최고 구간 적용 / 실적은 인정",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1563,9 +1563,9 @@
    "description": "최저 구간 하한 미달 (0원) + 적게 — 입력 × (1 - delta)",
    "expected": "혜택 미적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1580,9 +1580,9 @@
    "description": "최저 구간 하한 미달 (0원) + 예상대로 — 입력값 그대로",
    "expected": "혜택 미적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1597,9 +1597,9 @@
    "description": "최저 구간 하한 미달 (0원) + 많이 — 입력 × (1 + delta)",
    "expected": "혜택 미적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1614,9 +1614,9 @@
    "description": "구간 하한 -1원 + 적게 — 입력 × (1 - delta)",
    "expected": "직전 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1631,9 +1631,9 @@
    "description": "구간 하한 -1원 + 예상대로 — 입력값 그대로",
    "expected": "직전 구간 적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1648,9 +1648,9 @@
    "description": "구간 하한 -1원 + 많이 — 입력 × (1 + delta)",
    "expected": "직전 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1665,9 +1665,9 @@
    "description": "구간 하한 정확히 + 적게 — 입력 × (1 - delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1682,9 +1682,9 @@
    "description": "구간 하한 정확히 + 예상대로 — 입력값 그대로",
    "expected": "해당 구간 적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1699,9 +1699,9 @@
    "description": "구간 하한 정확히 + 많이 — 입력 × (1 + delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1716,9 +1716,9 @@
    "description": "구간 하한 +1원 + 적게 — 입력 × (1 - delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1733,9 +1733,9 @@
    "description": "구간 하한 +1원 + 예상대로 — 입력값 그대로",
    "expected": "해당 구간 적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1750,9 +1750,9 @@
    "description": "구간 하한 +1원 + 많이 — 입력 × (1 + delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1767,9 +1767,9 @@
    "description": "구간 상한 -1원 + 적게 — 입력 × (1 - delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1784,9 +1784,9 @@
    "description": "구간 상한 -1원 + 예상대로 — 입력값 그대로",
    "expected": "해당 구간 적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1801,9 +1801,9 @@
    "description": "구간 상한 -1원 + 많이 — 입력 × (1 + delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1818,9 +1818,9 @@
    "description": "구간 상한 정확히 + 적게 — 입력 × (1 - delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1835,9 +1835,9 @@
    "description": "구간 상한 정확히 + 예상대로 — 입력값 그대로",
    "expected": "해당 구간 적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1852,9 +1852,9 @@
    "description": "구간 상한 정확히 + 많이 — 입력 × (1 + delta)",
    "expected": "해당 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1869,9 +1869,9 @@
    "description": "구간 상한 +1원 + 적게 — 입력 × (1 - delta)",
    "expected": "다음 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1886,9 +1886,9 @@
    "description": "구간 상한 +1원 + 예상대로 — 입력값 그대로",
    "expected": "다음 구간 적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1903,9 +1903,9 @@
    "description": "구간 상한 +1원 + 많이 — 입력 × (1 + delta)",
    "expected": "다음 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1920,9 +1920,9 @@
    "description": "최고 구간 초과 + 적게 — 입력 × (1 - delta)",
    "expected": "최고 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1937,9 +1937,9 @@
    "description": "최고 구간 초과 + 예상대로 — 입력값 그대로",
    "expected": "최고 구간 적용 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1954,9 +1954,9 @@
    "description": "최고 구간 초과 + 많이 — 입력 × (1 + delta)",
    "expected": "최고 구간 적용 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1971,9 +1971,9 @@
    "description": "혜택 합계 = 한도 -1원 + 적게 — 입력 × (1 - delta)",
    "expected": "전액 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -1988,9 +1988,9 @@
    "description": "혜택 합계 = 한도 -1원 + 예상대로 — 입력값 그대로",
    "expected": "전액 지급 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2005,9 +2005,9 @@
    "description": "혜택 합계 = 한도 -1원 + 많이 — 입력 × (1 + delta)",
    "expected": "전액 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2022,9 +2022,9 @@
    "description": "혜택 합계 = 한도 + 적게 — 입력 × (1 - delta)",
    "expected": "전액 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2039,9 +2039,9 @@
    "description": "혜택 합계 = 한도 + 예상대로 — 입력값 그대로",
    "expected": "전액 지급 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2056,9 +2056,9 @@
    "description": "혜택 합계 = 한도 + 많이 — 입력 × (1 + delta)",
    "expected": "전액 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2073,9 +2073,9 @@
    "description": "혜택 합계 = 한도 +1원 + 적게 — 입력 × (1 - delta)",
    "expected": "한도까지만 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2090,9 +2090,9 @@
    "description": "혜택 합계 = 한도 +1원 + 예상대로 — 입력값 그대로",
    "expected": "한도까지만 지급 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2107,9 +2107,9 @@
    "description": "혜택 합계 = 한도 +1원 + 많이 — 입력 × (1 + delta)",
    "expected": "한도까지만 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2124,9 +2124,9 @@
    "description": "한도 0원 + 적게 — 입력 × (1 - delta)",
    "expected": "혜택 0원 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2141,9 +2141,9 @@
    "description": "한도 0원 + 예상대로 — 입력값 그대로",
    "expected": "혜택 0원 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2158,9 +2158,9 @@
    "description": "한도 0원 + 많이 — 입력 × (1 + delta)",
    "expected": "혜택 0원 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2175,9 +2175,9 @@
    "description": "한도 없음 (NULL) + 적게 — 입력 × (1 - delta)",
    "expected": "전액 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2192,9 +2192,9 @@
    "description": "한도 없음 (NULL) + 예상대로 — 입력값 그대로",
    "expected": "전액 지급 / 기본 탭",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2209,9 +2209,9 @@
    "description": "한도 없음 (NULL) + 많이 — 입력 × (1 + delta)",
    "expected": "전액 지급 / 독립 계산",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-003·REQ-FUNC-003"
   },
@@ -2226,9 +2226,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 총액이 카드 수로 나누어떨어짐",
    "expected": "KEEP_CURRENT / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2243,9 +2243,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 1원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2260,9 +2260,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 2원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2277,9 +2277,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 3분할 (0.333… 반복)",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2294,9 +2294,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 총액이 카드 수로 나누어떨어짐",
    "expected": "RECOMMEND_CHANGE / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2311,9 +2311,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 1원 남음",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2328,9 +2328,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 2원 남음",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2345,9 +2345,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 3분할 (0.333… 반복)",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2362,9 +2362,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 총액이 카드 수로 나누어떨어짐",
    "expected": "RECOMMEND_CHANGE / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2379,9 +2379,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 1원 남음",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2396,9 +2396,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 2원 남음",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2413,9 +2413,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 3분할 (0.333… 반복)",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2430,9 +2430,9 @@
    "description": "상대 임계 미달 + 총액이 카드 수로 나누어떨어짐",
    "expected": "KEEP_CURRENT / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2447,9 +2447,9 @@
    "description": "상대 임계 미달 + 1원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2464,9 +2464,9 @@
    "description": "상대 임계 미달 + 2원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2481,9 +2481,9 @@
    "description": "상대 임계 미달 + 3분할 (0.333… 반복)",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2498,9 +2498,9 @@
    "description": "상대 임계 정확히 + 총액이 카드 수로 나누어떨어짐",
    "expected": "RECOMMEND_CHANGE / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2515,9 +2515,9 @@
    "description": "상대 임계 정확히 + 1원 남음",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2532,9 +2532,9 @@
    "description": "상대 임계 정확히 + 2원 남음",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2549,9 +2549,9 @@
    "description": "상대 임계 정확히 + 3분할 (0.333… 반복)",
    "expected": "RECOMMEND_CHANGE / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2566,9 +2566,9 @@
    "description": "절대 통과 · 상대 미달 + 총액이 카드 수로 나누어떨어짐",
    "expected": "KEEP_CURRENT / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2583,9 +2583,9 @@
    "description": "절대 통과 · 상대 미달 + 1원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2600,9 +2600,9 @@
    "description": "절대 통과 · 상대 미달 + 2원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2617,9 +2617,9 @@
    "description": "절대 통과 · 상대 미달 + 3분할 (0.333… 반복)",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2634,9 +2634,9 @@
    "description": "절대 미달 · 상대 통과 + 총액이 카드 수로 나누어떨어짐",
    "expected": "KEEP_CURRENT / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2651,9 +2651,9 @@
    "description": "절대 미달 · 상대 통과 + 1원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2668,9 +2668,9 @@
    "description": "절대 미달 · 상대 통과 + 2원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2685,9 +2685,9 @@
    "description": "절대 미달 · 상대 통과 + 3분할 (0.333… 반복)",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2702,9 +2702,9 @@
    "description": "Net Benefit 음수 + 총액이 카드 수로 나누어떨어짐",
    "expected": "KEEP_CURRENT / 오차 0원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2719,9 +2719,9 @@
    "description": "Net Benefit 음수 + 1원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2736,9 +2736,9 @@
    "description": "Net Benefit 음수 + 2원 남음",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2753,9 +2753,9 @@
    "description": "Net Benefit 음수 + 3분할 (0.333… 반복)",
    "expected": "KEEP_CURRENT / 오차 ≤ 1원",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-005"
   },
@@ -2770,9 +2770,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 연회비 0원",
    "expected": "KEEP_CURRENT / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2787,9 +2787,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 일반 연회비",
    "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2804,9 +2804,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 사용자 연회비 상한 -1원",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2821,9 +2821,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 사용자 연회비 상한 정확히",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2838,9 +2838,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 사용자 연회비 상한 +1원",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2855,9 +2855,9 @@
    "description": "Net Benefit = 절대 임계 -1원 + 조합 합산이 상한 초과",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2872,9 +2872,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 연회비 0원",
    "expected": "RECOMMEND_CHANGE / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2889,9 +2889,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 일반 연회비",
    "expected": "RECOMMEND_CHANGE / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2906,9 +2906,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 사용자 연회비 상한 -1원",
    "expected": "RECOMMEND_CHANGE / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2923,9 +2923,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 사용자 연회비 상한 정확히",
    "expected": "RECOMMEND_CHANGE / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2940,9 +2940,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 사용자 연회비 상한 +1원",
    "expected": "RECOMMEND_CHANGE / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2957,9 +2957,9 @@
    "description": "Net Benefit = 절대 임계 정확히 + 조합 합산이 상한 초과",
    "expected": "RECOMMEND_CHANGE / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2974,9 +2974,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 연회비 0원",
    "expected": "RECOMMEND_CHANGE / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -2991,9 +2991,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 일반 연회비",
    "expected": "RECOMMEND_CHANGE / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3008,9 +3008,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 사용자 연회비 상한 -1원",
    "expected": "RECOMMEND_CHANGE / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3025,9 +3025,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 사용자 연회비 상한 정확히",
    "expected": "RECOMMEND_CHANGE / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3042,9 +3042,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 사용자 연회비 상한 +1원",
    "expected": "RECOMMEND_CHANGE / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3059,9 +3059,9 @@
    "description": "Net Benefit = 절대 임계 +1원 + 조합 합산이 상한 초과",
    "expected": "RECOMMEND_CHANGE / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3076,9 +3076,9 @@
    "description": "상대 임계 미달 + 연회비 0원",
    "expected": "KEEP_CURRENT / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3093,9 +3093,9 @@
    "description": "상대 임계 미달 + 일반 연회비",
    "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3110,9 +3110,9 @@
    "description": "상대 임계 미달 + 사용자 연회비 상한 -1원",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3127,9 +3127,9 @@
    "description": "상대 임계 미달 + 사용자 연회비 상한 정확히",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3144,9 +3144,9 @@
    "description": "상대 임계 미달 + 사용자 연회비 상한 +1원",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3161,9 +3161,9 @@
    "description": "상대 임계 미달 + 조합 합산이 상한 초과",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3178,9 +3178,9 @@
    "description": "상대 임계 정확히 + 연회비 0원",
    "expected": "RECOMMEND_CHANGE / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3195,9 +3195,9 @@
    "description": "상대 임계 정확히 + 일반 연회비",
    "expected": "RECOMMEND_CHANGE / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3212,9 +3212,9 @@
    "description": "상대 임계 정확히 + 사용자 연회비 상한 -1원",
    "expected": "RECOMMEND_CHANGE / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3229,9 +3229,9 @@
    "description": "상대 임계 정확히 + 사용자 연회비 상한 정확히",
    "expected": "RECOMMEND_CHANGE / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3246,9 +3246,9 @@
    "description": "상대 임계 정확히 + 사용자 연회비 상한 +1원",
    "expected": "RECOMMEND_CHANGE / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3263,9 +3263,9 @@
    "description": "상대 임계 정확히 + 조합 합산이 상한 초과",
    "expected": "RECOMMEND_CHANGE / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3280,9 +3280,9 @@
    "description": "절대 통과 · 상대 미달 + 연회비 0원",
    "expected": "KEEP_CURRENT / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3297,9 +3297,9 @@
    "description": "절대 통과 · 상대 미달 + 일반 연회비",
    "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3314,9 +3314,9 @@
    "description": "절대 통과 · 상대 미달 + 사용자 연회비 상한 -1원",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3331,9 +3331,9 @@
    "description": "절대 통과 · 상대 미달 + 사용자 연회비 상한 정확히",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3348,9 +3348,9 @@
    "description": "절대 통과 · 상대 미달 + 사용자 연회비 상한 +1원",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3365,9 +3365,9 @@
    "description": "절대 통과 · 상대 미달 + 조합 합산이 상한 초과",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3382,9 +3382,9 @@
    "description": "절대 미달 · 상대 통과 + 연회비 0원",
    "expected": "KEEP_CURRENT / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3399,9 +3399,9 @@
    "description": "절대 미달 · 상대 통과 + 일반 연회비",
    "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3416,9 +3416,9 @@
    "description": "절대 미달 · 상대 통과 + 사용자 연회비 상한 -1원",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3433,9 +3433,9 @@
    "description": "절대 미달 · 상대 통과 + 사용자 연회비 상한 정확히",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3450,9 +3450,9 @@
    "description": "절대 미달 · 상대 통과 + 사용자 연회비 상한 +1원",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3467,9 +3467,9 @@
    "description": "절대 미달 · 상대 통과 + 조합 합산이 상한 초과",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3484,9 +3484,9 @@
    "description": "Net Benefit 음수 + 연회비 0원",
    "expected": "KEEP_CURRENT / 전환비용 ① = 0",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3501,9 +3501,9 @@
    "description": "Net Benefit 음수 + 일반 연회비",
    "expected": "KEEP_CURRENT / 전환비용 ①에 반영",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3518,9 +3518,9 @@
    "description": "Net Benefit 음수 + 사용자 연회비 상한 -1원",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3535,9 +3535,9 @@
    "description": "Net Benefit 음수 + 사용자 연회비 상한 정확히",
    "expected": "KEEP_CURRENT / 제약 통과",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3552,9 +3552,9 @@
    "description": "Net Benefit 음수 + 사용자 연회비 상한 +1원",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3569,9 +3569,9 @@
    "description": "Net Benefit 음수 + 조합 합산이 상한 초과",
    "expected": "KEEP_CURRENT / 후보에서 제외",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-FUNC-004·REQ-FUNC-004"
   },
@@ -3586,9 +3586,9 @@
    "description": "기준일 +29일 + 0장",
    "expected": "유효 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3603,9 +3603,9 @@
    "description": "기준일 +29일 + 1장",
    "expected": "유효 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3620,9 +3620,9 @@
    "description": "기준일 +29일 + 2장",
    "expected": "유효 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3637,9 +3637,9 @@
    "description": "기준일 +29일 + 5장",
    "expected": "유효 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3654,9 +3654,9 @@
    "description": "기준일 +29일 + 10장",
    "expected": "유효 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3671,9 +3671,9 @@
    "description": "기준일 +29일 + 20장",
    "expected": "유효 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3688,9 +3688,9 @@
    "description": "기준일 +30일 + 0장",
    "expected": "만료 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3705,9 +3705,9 @@
    "description": "기준일 +30일 + 1장",
    "expected": "만료 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3722,9 +3722,9 @@
    "description": "기준일 +30일 + 2장",
    "expected": "만료 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3739,9 +3739,9 @@
    "description": "기준일 +30일 + 5장",
    "expected": "만료 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3756,9 +3756,9 @@
    "description": "기준일 +30일 + 10장",
    "expected": "만료 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3773,9 +3773,9 @@
    "description": "기준일 +30일 + 20장",
    "expected": "만료 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3790,9 +3790,9 @@
    "description": "기준일 +31일 + 0장",
    "expected": "만료 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3807,9 +3807,9 @@
    "description": "기준일 +31일 + 1장",
    "expected": "만료 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3824,9 +3824,9 @@
    "description": "기준일 +31일 + 2장",
    "expected": "만료 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3841,9 +3841,9 @@
    "description": "기준일 +31일 + 5장",
    "expected": "만료 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3858,9 +3858,9 @@
    "description": "기준일 +31일 + 10장",
    "expected": "만료 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3875,9 +3875,9 @@
    "description": "기준일 +31일 + 20장",
    "expected": "만료 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3892,9 +3892,9 @@
    "description": "rule_version 동일 + 0장",
    "expected": "유효 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3909,9 +3909,9 @@
    "description": "rule_version 동일 + 1장",
    "expected": "유효 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3926,9 +3926,9 @@
    "description": "rule_version 동일 + 2장",
    "expected": "유효 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3943,9 +3943,9 @@
    "description": "rule_version 동일 + 5장",
    "expected": "유효 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3960,9 +3960,9 @@
    "description": "rule_version 동일 + 10장",
    "expected": "유효 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3977,9 +3977,9 @@
    "description": "rule_version 동일 + 20장",
    "expected": "유효 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -3994,9 +3994,9 @@
    "description": "rule_version 변경 + 0장",
    "expected": "만료 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4011,9 +4011,9 @@
    "description": "rule_version 변경 + 1장",
    "expected": "만료 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4028,9 +4028,9 @@
    "description": "rule_version 변경 + 2장",
    "expected": "만료 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4045,9 +4045,9 @@
    "description": "rule_version 변경 + 5장",
    "expected": "만료 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4062,9 +4062,9 @@
    "description": "rule_version 변경 + 10장",
    "expected": "만료 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4079,9 +4079,9 @@
    "description": "rule_version 변경 + 20장",
    "expected": "만료 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4096,9 +4096,9 @@
    "description": "verified_at 29일 경과 + 0장",
    "expected": "계산 대상 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4113,9 +4113,9 @@
    "description": "verified_at 29일 경과 + 1장",
    "expected": "계산 대상 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4130,9 +4130,9 @@
    "description": "verified_at 29일 경과 + 2장",
    "expected": "계산 대상 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4147,9 +4147,9 @@
    "description": "verified_at 29일 경과 + 5장",
    "expected": "계산 대상 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4164,9 +4164,9 @@
    "description": "verified_at 29일 경과 + 10장",
    "expected": "계산 대상 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4181,9 +4181,9 @@
    "description": "verified_at 29일 경과 + 20장",
    "expected": "계산 대상 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4198,9 +4198,9 @@
    "description": "verified_at 30일 경과 + 0장",
    "expected": "계산 대상 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4215,9 +4215,9 @@
    "description": "verified_at 30일 경과 + 1장",
    "expected": "계산 대상 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4232,9 +4232,9 @@
    "description": "verified_at 30일 경과 + 2장",
    "expected": "계산 대상 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4249,9 +4249,9 @@
    "description": "verified_at 30일 경과 + 5장",
    "expected": "계산 대상 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4266,9 +4266,9 @@
    "description": "verified_at 30일 경과 + 10장",
    "expected": "계산 대상 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4283,9 +4283,9 @@
    "description": "verified_at 30일 경과 + 20장",
    "expected": "계산 대상 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4300,9 +4300,9 @@
    "description": "verified_at 31일 경과 + 0장",
    "expected": "계산 대상 제외 / 계산 불가 — 필수 데이터 누락",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4317,9 +4317,9 @@
    "description": "verified_at 31일 경과 + 1장",
    "expected": "계산 대상 제외 / 계산 가능",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4334,9 +4334,9 @@
    "description": "verified_at 31일 경과 + 2장",
    "expected": "계산 대상 제외 / 조합 탐색 최소",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4351,9 +4351,9 @@
    "description": "verified_at 31일 경과 + 5장",
    "expected": "계산 대상 제외 / 일반",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4368,9 +4368,9 @@
    "description": "verified_at 31일 경과 + 10장",
    "expected": "계산 대상 제외 / 일반 상한",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   },
@@ -4385,9 +4385,9 @@
    "description": "verified_at 31일 경과 + 20장",
    "expected": "계산 대상 제외 / Won't 범위 경계 — 성능 관측용",
    "params": {
-    "abs_threshold": "TBD",
-    "rel_threshold": "TBD",
-    "scenario_delta": "TBD"
+    "abs_threshold": 3000,
+    "rel_threshold": 0.1,
+    "scenario_delta": 0.2
    },
    "requirement": "REQ-EXC-006·REQ-FUNC-003"
   }
