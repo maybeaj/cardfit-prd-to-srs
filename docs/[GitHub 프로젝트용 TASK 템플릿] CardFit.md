@@ -112,6 +112,13 @@ Scenario 2: 중복된 이메일 가입 시도
 | `layer:` | `in` `da` `be` `fe` `qa` `ds` |
 | `priority:` | `p0`(Guardrail 대응) · `p1`(Must) · `p2`(Should·Could) |
 | `blocked:` | `d16` `d2` `d5` `d11` `d4` `dec-3b` — 착수 차단 태스크에만 |
+| `cqrs:` | `query`(상태 불변) · `command`(상태 변경) · `mixed`(분해 검토) — BE 42건 |
+| `nfr:` | `req-nf-001` ~ `req-nf-009` — 해당 NFR을 만족시키는 태스크 |
+| `contract:` | `api`(CT) · `mock`(MK) · `db`(DA) — 계약 정의 태스크 |
+
+**`cqrs:` 라벨의 실무 의미** — `command`는 상태를 바꾸므로 마이그레이션·롤백 계획이 필요하고, `query`는 롤백이 불필요해 리뷰 부담이 낮다. 같은 복잡도 `M`이라도 배포 위험이 다르다.
+
+**`nfr:` 라벨이 필요한 이유** — REQ-NF를 만족시키는 태스크가 `IN`·`DA`·`BE`·`QA`에 흩어져 있다(예: REQ-NF-004 → DA-011·BE-002·QA-006). 라벨 필터로 *"이 NFR을 만족시키는 태스크가 다 발급됐는가"* 를 한눈에 본다.
 
 **`priority:p0`는 STD 0.4의 P0 6건과 일치시킨다** — TC-FUNC-004·006·009, TC-NF-002·004, TC-EXC-002에 대응하는 태스크다.
 

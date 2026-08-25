@@ -826,6 +826,92 @@ classDiagram
 
 **PRD에 정의된 인터페이스는 위가 전부다.** 동의 발급·갱신 등 마이데이터 표준 규격에 속하는 엔드포인트는 PRD에 기술되지 않아 **추가하지 않았다**.
 
+#### 6.1.1 공통 응답 봉투
+
+> 근거: ISO/IEC/IEEE 29148:2018 **9.6.11** *External interfaces* — 각 인터페이스는 이름·목적·유효 범위·단위·타이밍·데이터 형식을 포함해야 한다.
+
+모든 응답은 아래 봉투를 쓴다. **`warning`은 오류가 아니다** — 마이데이터 장애 시 계산을 계속하면서 기준일을 알리는 통로다(REQ-EXC-003).
+
+```json
+{
+  "data":    { },
+  "warning": { "code": "CF-2001", "message": "…", "baseDate": "2026-08-25" },
+  "error":   { "code": "CF-4001", "message": "…", "requirement": "REQ-EXC-001" }
+}
+```
+
+| 필드 | 규칙 |
+| --- | --- |
+| `data` | 성공 시에만 존재. 실패 시 **`null`이 아니라 키 자체가 없다** |
+| `warning` | 성공이지만 주의가 필요할 때. `data`와 **함께** 존재할 수 있다 |
+| `error` | 실패 시에만 존재. `requirement`로 어느 요구사항이 거부 근거인지 밝힌다 |
+
+**금액은 전부 정수(원)로 직렬화한다.** 부동소수점 표현을 쓰지 않는다 — 배분 합계 오차 ≤ 1원(REQ-FUNC-005)과 재계산 불일치 0건(REQ-NF-002)을 JSON 경계에서도 유지하기 위해서다.
+
+#### 6.1.2 에러 코드 체계
+
+**4.3의 예외 6건에 코드를 부여한다.** 코드 없이 HTTP 상태만 쓰면 `400`이 두 가지 다른 거부(미래 입력 0건 · 동의 실효)를 가리켜 클라이언트가 분기할 수 없다.
+
+| 코드 | HTTP | 이름 | 발생 조건 | 근거 |
+| :---: | :---: | --- | --- | :---: |
+| **CF-4001** | `400` | `FUTURE_SPEND_REQUIRED` | 미래지출 입력 0건 | REQ-EXC-001 |
+| **CF-4002** | `400` | `CONSENT_INVALID` | 마이데이터 동의 만료 또는 철회 | REQ-EXC-004 |
+| **CF-4030** | `403` | `OWNERSHIP_MISMATCH` | 응답 주체 ≠ 로그인 사용자 | REQ-NF-004 · GR5 |
+| **CF-4100** | `410` | `PLAN_EXPIRED` | `rule_version` 변경 또는 기준일 +30일 경과 | REQ-EXC-006 |
+| **CF-4221** | `422` | `EVIDENCE_INSUFFICIENT` | 근거 공개 항목 6개 미달 | REQ-EXC-002 · GR3 |
+| **CF-4222** | `422` | `CALCULATION_PARTIAL` | 시나리오 3건 중 1건 이상 실패 | REQ-EXC-005 |
+| **CF-2001** | `200` | `DATA_STALE` *(warning)* | 마이데이터 장애 — 최근 확인 스냅샷으로 계산 | REQ-EXC-003 |
+
+**`CF-2001`만 `warning`이고 나머지는 `error`다.** 4.3.1의 순서도에서 마이데이터 장애만 "계속"이고 나머지 다섯이 "중단"인 것과 정확히 대응한다.
+
+> **`CF-4030`을 클라이언트에 노출할 때 주의한다.** 오조회는 GR5 위반으로 즉시 중단·신고 대상이다. 응답에 **타인의 어떤 정보도 담기지 않아야** 하며, 코드와 메시지만 반환한다.
+
+#### 6.1.3 엔드포인트별 요청·응답
+
+**`POST /api/v1/calculate`**
+
+| | 필드 | 타입 | 규칙 |
+| --- | --- | --- | --- |
+| 요청 | `futureSpendPlanIds` | `int64[]` | **1건 이상 필수.** 0건이면 `CF-4001` (REQ-EXC-001) |
+| 요청 | `constraintId` | `int64` | 선택. 없으면 제약 없이 계산 |
+| 응답 | `calculationId` | `int64` | |
+| 응답 | `status` | `enum` | `SUCCESS` · `PARTIAL` · `FAILED` (6.2 `CalculationStatus`) |
+| 응답 | `baseDate` | `date` | 근거 화면의 기준일 |
+| 응답 | `scenarios[]` | `object[]` | **정확히 3건.** `scenarioType`(`LESS`·`AS_EXPECTED`·`MORE`) · `assumptionCaption` · `planCandidates[]` |
+| 응답 | `defaultScenario` | `enum` | 항상 `AS_EXPECTED` (6.3 규칙6) |
+| SLO | | | **p95 ≤ 5s** (REQ-NF-001) |
+
+`planCandidates[]` 항목: `planCandidateId` · `composition` · `grossBenefitWon` · `transitionCost{annualFeeDeltaWon, performanceRebuildCostWon, executionBurdenCostWon}` · `netBenefitWon` · `gatingResult`(`KEEP_CURRENT`·`RECOMMEND_CHANGE`) · `benefitDeltaWon` · `expiresAt`
+
+> **`gatingResult: KEEP_CURRENT`는 오류가 아니다.** `200`으로 반환하며 `error` 키를 두지 않는다. ADR-01의 "유지도 정답"을 프로토콜 수준에서 지키는 지점이다.
+
+**`GET /api/v1/calculations/{calculationId}`** — 위 응답과 동일 스키마. 만료 시 `CF-4100`.
+
+**`GET /api/v1/calculations/{calculationId}/evidence`**
+
+| | 필드 | 타입 | 규칙 |
+| --- | --- | --- | --- |
+| 응답 | `items[]` | `object[]` | **6건 이상 필수.** 미달 시 `data` 없이 `CF-4221` (REQ-EXC-002) |
+| 응답 | `items[].type` | `enum` | `PERFORMANCE_TIER` · `DISCOUNT_CAP` · `ANNUAL_FEE` · `EXCLUSION` · `BASE_DATE` · `UNREFLECTED` |
+| 응답 | `unreflectedItems[]` | `object[]` | 미반영 항목. 없으면 빈 배열 — **키 생략 금지** |
+| 응답 | `ruleVersions[]` | `string[]` | 적용된 전건 (REQ-NF-006) |
+| 응답 | `termsSummary` | `string?` | AI 약관 요약. 생성 실패 시 `null`, 원문 근거는 그대로 반환 |
+| 응답 | `rationale` | `string?` | AI 근거 설명. 상동 |
+| 응답 | `scopeNotice` | `string` | "해지" 포함 결론 시 **필수** (REQ-FUNC-009) |
+| SLO | | | **p95 ≤ 1s** (REQ-NF-001) |
+
+> **`termsSummary`·`rationale`이 `null`이어도 응답은 성공이다.** AI는 보조 기능이므로 실패해도 근거 6항목은 그대로 노출된다(ADR-02).
+
+**`POST /api/v1/outcomes/{outcomeId}/completion`**
+
+| | 필드 | 타입 | 규칙 |
+| --- | --- | --- | --- |
+| 요청 | `completed` | `boolean` | |
+| 요청 | `incompleteReason` | `string?` | **집계 전용.** 어떤 후속 액션도 트리거하지 않는다 (REQ-FUNC-010) |
+| 응답 | `recorded` | `boolean` | |
+
+> **응답에 재시도·독려를 유도하는 필드를 두지 않는다.** 측정 전용 엔드포인트이며, 실행 개입 엔드포인트는 존재하지 않는다(ADR-04).
+
 ### 6.2 데이터 모델 정의
 
 ```java
