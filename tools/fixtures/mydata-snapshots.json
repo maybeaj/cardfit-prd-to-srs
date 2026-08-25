@@ -1,0 +1,3247 @@
+{
+ "spec": "FXT-CARDFIT-001",
+ "version": "1.0",
+ "rule_spec": "CALC-CARDFIT-001 v1.0",
+ "demo_now": "2026-08-25",
+ "seed": 20260825,
+ "params": {
+  "abs_threshold": 3000,
+  "rel_threshold": 0.1,
+  "scenario_delta": 0.2,
+  "cost_rebuild": 5000,
+  "cost_execution": 10000,
+  "max_candidates": 20,
+  "held_cut": 8,
+  "new_pool": 3
+ },
+ "total": 5,
+ "snapshots": [
+  {
+   "persona_id": "P1",
+   "as_of": "2026-08-25",
+   "consent_status": "CONSENTED",
+   "held_cards": [
+    {
+     "card_product_id": "SHC-LIFE",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    },
+    {
+     "card_product_id": "WRC-MOVE",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    }
+   ],
+   "transactions": [
+    {
+     "tx_id": "P1-202605-0004",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 49310,
+     "paid_at": "2026-05-04",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0005",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 53420,
+     "paid_at": "2026-05-05",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0017",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 62840,
+     "paid_at": "2026-05-08",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0008",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 46650,
+     "paid_at": "2026-05-10",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0010",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 38390,
+     "paid_at": "2026-05-10",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0014",
+     "merchant": "세븐일레븐 삼성점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 70000,
+     "paid_at": "2026-05-10",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0020",
+     "merchant": "LGU+ 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 55000,
+     "paid_at": "2026-05-10",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0006",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 37460,
+     "paid_at": "2026-05-11",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0001",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 37190,
+     "paid_at": "2026-05-12",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0009",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 78100,
+     "paid_at": "2026-05-12",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0002",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 62930,
+     "paid_at": "2026-05-15",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0022",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 59270,
+     "paid_at": "2026-05-17",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0007",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 34230,
+     "paid_at": "2026-05-18",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0016",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 45500,
+     "paid_at": "2026-05-18",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0021",
+     "merchant": "서울도시가스",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 30730,
+     "paid_at": "2026-05-21",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0015",
+     "merchant": "홈플러스 강동점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 41660,
+     "paid_at": "2026-05-22",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0012",
+     "merchant": "투썸플레이스 삼성점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 38840,
+     "paid_at": "2026-05-24",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0013",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 88000,
+     "paid_at": "2026-05-24",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0003",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 42320,
+     "paid_at": "2026-05-25",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0019",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 69650,
+     "paid_at": "2026-05-25",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202605-0011",
+     "merchant": "메가커피 역삼점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 56160,
+     "paid_at": "2026-05-26",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202605-0018",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 50350,
+     "paid_at": "2026-05-26",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0029",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 36210,
+     "paid_at": "2026-06-01",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0037",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 42740,
+     "paid_at": "2026-06-01",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0030",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 53650,
+     "paid_at": "2026-06-02",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0038",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 46150,
+     "paid_at": "2026-06-03",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0025",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 41730,
+     "paid_at": "2026-06-04",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0032",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 60900,
+     "paid_at": "2026-06-05",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0023",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 54090,
+     "paid_at": "2026-06-06",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0035",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 88000,
+     "paid_at": "2026-06-06",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0042",
+     "merchant": "LGU+ 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 55000,
+     "paid_at": "2026-06-13",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0044",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 37960,
+     "paid_at": "2026-06-15",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0024",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 44430,
+     "paid_at": "2026-06-16",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0027",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 57370,
+     "paid_at": "2026-06-16",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0039",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 61110,
+     "paid_at": "2026-06-16",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0041",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 44570,
+     "paid_at": "2026-06-18",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0033",
+     "merchant": "스타벅스 테헤란로점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 47100,
+     "paid_at": "2026-06-21",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0034",
+     "merchant": "스타벅스 테헤란로점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 47900,
+     "paid_at": "2026-06-21",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0043",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 52040,
+     "paid_at": "2026-06-21",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0026",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 42270,
+     "paid_at": "2026-06-24",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0036",
+     "merchant": "GS25 역삼점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 70000,
+     "paid_at": "2026-06-27",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0028",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 48960,
+     "paid_at": "2026-06-28",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202606-0031",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 40390,
+     "paid_at": "2026-06-28",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202606-0040",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 75430,
+     "paid_at": "2026-06-28",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0055",
+     "merchant": "메가커피 역삼점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 35410,
+     "paid_at": "2026-07-01",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0063",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 63480,
+     "paid_at": "2026-07-01",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0054",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 29420,
+     "paid_at": "2026-07-05",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0061",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 46530,
+     "paid_at": "2026-07-05",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0058",
+     "merchant": "CU 논현점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 70000,
+     "paid_at": "2026-07-07",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0056",
+     "merchant": "투썸플레이스 삼성점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 59590,
+     "paid_at": "2026-07-09",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0052",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 54460,
+     "paid_at": "2026-07-11",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0048",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 36060,
+     "paid_at": "2026-07-12",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0053",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 44230,
+     "paid_at": "2026-07-14",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0057",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 88000,
+     "paid_at": "2026-07-15",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0062",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 56520,
+     "paid_at": "2026-07-15",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0059",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 53880,
+     "paid_at": "2026-07-16",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0050",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 48010,
+     "paid_at": "2026-07-18",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0051",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 50730,
+     "paid_at": "2026-07-20",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0066",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 41860,
+     "paid_at": "2026-07-20",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0047",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 45210,
+     "paid_at": "2026-07-21",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0064",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 55000,
+     "paid_at": "2026-07-21",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0065",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 48140,
+     "paid_at": "2026-07-23",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0045",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 66030,
+     "paid_at": "2026-07-26",
+     "card_product_id": "WRC-MOVE"
+    },
+    {
+     "tx_id": "P1-202607-0049",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 48470,
+     "paid_at": "2026-07-27",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0060",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 49590,
+     "paid_at": "2026-07-27",
+     "card_product_id": "SHC-LIFE"
+    },
+    {
+     "tx_id": "P1-202607-0046",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 57380,
+     "paid_at": "2026-07-28",
+     "card_product_id": "SHC-LIFE"
+    }
+   ]
+  },
+  {
+   "persona_id": "P2",
+   "as_of": "2026-08-25",
+   "consent_status": "CONSENTED",
+   "held_cards": [
+    {
+     "card_product_id": "HDC-MOVE",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    },
+    {
+     "card_product_id": "KBC-FIXED",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    }
+   ],
+   "transactions": [
+    {
+     "tx_id": "P2-202605-0004",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 48130,
+     "paid_at": "2026-05-01",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0007",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 38410,
+     "paid_at": "2026-05-01",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0010",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 29670,
+     "paid_at": "2026-05-01",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0023",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 37260,
+     "paid_at": "2026-05-01",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0008",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 64990,
+     "paid_at": "2026-05-05",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0016",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 49900,
+     "paid_at": "2026-05-05",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0009",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 54110,
+     "paid_at": "2026-05-06",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0013",
+     "merchant": "대한항공",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 51030,
+     "paid_at": "2026-05-06",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0020",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 55700,
+     "paid_at": "2026-05-06",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0024",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 38350,
+     "paid_at": "2026-05-07",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0018",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 44290,
+     "paid_at": "2026-05-08",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0025",
+     "merchant": "강남약국",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 61670,
+     "paid_at": "2026-05-10",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0002",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 34100,
+     "paid_at": "2026-05-12",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0003",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 49030,
+     "paid_at": "2026-05-12",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0027",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 60580,
+     "paid_at": "2026-05-12",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0028",
+     "merchant": "SKT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 39420,
+     "paid_at": "2026-05-12",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0017",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 55810,
+     "paid_at": "2026-05-13",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0011",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 37630,
+     "paid_at": "2026-05-15",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0022",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 74390,
+     "paid_at": "2026-05-16",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0001",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 37100,
+     "paid_at": "2026-05-18",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0015",
+     "merchant": "대한항공",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 37400,
+     "paid_at": "2026-05-19",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0019",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 49420,
+     "paid_at": "2026-05-20",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0012",
+     "merchant": "야놀자",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 52200,
+     "paid_at": "2026-05-21",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0029",
+     "merchant": "CU 논현점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 60000,
+     "paid_at": "2026-05-22",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0014",
+     "merchant": "대한항공",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 59370,
+     "paid_at": "2026-05-23",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0021",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 44880,
+     "paid_at": "2026-05-24",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202605-0005",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 46520,
+     "paid_at": "2026-05-26",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0026",
+     "merchant": "연세이비인후과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 58330,
+     "paid_at": "2026-05-26",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202605-0006",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 60310,
+     "paid_at": "2026-05-27",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0038",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 55460,
+     "paid_at": "2026-06-03",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0039",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 34870,
+     "paid_at": "2026-06-03",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0042",
+     "merchant": "야놀자",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 51450,
+     "paid_at": "2026-06-03",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0053",
+     "merchant": "서울도시가스",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 56810,
+     "paid_at": "2026-06-03",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0030",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 51400,
+     "paid_at": "2026-06-04",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0037",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 50440,
+     "paid_at": "2026-06-04",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0031",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 31110,
+     "paid_at": "2026-06-05",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0047",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 43650,
+     "paid_at": "2026-06-06",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0040",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 55060,
+     "paid_at": "2026-06-07",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0051",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 52280,
+     "paid_at": "2026-06-07",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0058",
+     "merchant": "세븐일레븐 삼성점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 60000,
+     "paid_at": "2026-06-07",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0055",
+     "merchant": "연세이비인후과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 71270,
+     "paid_at": "2026-06-08",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0056",
+     "merchant": "LGU+ 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 63230,
+     "paid_at": "2026-06-08",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0033",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 47420,
+     "paid_at": "2026-06-09",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0049",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 58730,
+     "paid_at": "2026-06-09",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0044",
+     "merchant": "대한항공",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 57640,
+     "paid_at": "2026-06-11",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0035",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 52500,
+     "paid_at": "2026-06-13",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0032",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 36310,
+     "paid_at": "2026-06-14",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0048",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 55300,
+     "paid_at": "2026-06-14",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0057",
+     "merchant": "SKT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 36770,
+     "paid_at": "2026-06-15",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0054",
+     "merchant": "연세이비인후과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 48730,
+     "paid_at": "2026-06-16",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0046",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 68000,
+     "paid_at": "2026-06-18",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0034",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 30840,
+     "paid_at": "2026-06-19",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0043",
+     "merchant": "야놀자",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 55280,
+     "paid_at": "2026-06-19",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0036",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 54590,
+     "paid_at": "2026-06-20",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0052",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 40910,
+     "paid_at": "2026-06-20",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0050",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 35970,
+     "paid_at": "2026-06-23",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202606-0041",
+     "merchant": "야놀자",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 35630,
+     "paid_at": "2026-06-27",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202606-0045",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 38350,
+     "paid_at": "2026-06-28",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0066",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 39620,
+     "paid_at": "2026-07-01",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0072",
+     "merchant": "아고다",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 44750,
+     "paid_at": "2026-07-03",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0079",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 42090,
+     "paid_at": "2026-07-05",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0061",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 48280,
+     "paid_at": "2026-07-06",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0075",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 53780,
+     "paid_at": "2026-07-06",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0065",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 37040,
+     "paid_at": "2026-07-08",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0071",
+     "merchant": "아고다",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 44470,
+     "paid_at": "2026-07-08",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0076",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 48220,
+     "paid_at": "2026-07-09",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0059",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 54630,
+     "paid_at": "2026-07-10",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0074",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 48000,
+     "paid_at": "2026-07-12",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0085",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 56100,
+     "paid_at": "2026-07-12",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0062",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 42220,
+     "paid_at": "2026-07-13",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0082",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 48260,
+     "paid_at": "2026-07-13",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0078",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 64610,
+     "paid_at": "2026-07-16",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0060",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 47340,
+     "paid_at": "2026-07-17",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0080",
+     "merchant": "서울도시가스",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 64020,
+     "paid_at": "2026-07-18",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0084",
+     "merchant": "서울치과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 64620,
+     "paid_at": "2026-07-19",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0087",
+     "merchant": "세븐일레븐 삼성점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 60000,
+     "paid_at": "2026-07-19",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0063",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 31920,
+     "paid_at": "2026-07-20",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0067",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 41880,
+     "paid_at": "2026-07-20",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0064",
+     "merchant": "GS칼텍스 논현주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 45290,
+     "paid_at": "2026-07-23",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0068",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 56450,
+     "paid_at": "2026-07-23",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0077",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 43300,
+     "paid_at": "2026-07-24",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0073",
+     "merchant": "대한항공",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 62470,
+     "paid_at": "2026-07-25",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0081",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 37720,
+     "paid_at": "2026-07-25",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0069",
+     "merchant": "SK에너지 삼성주유소",
+     "category": "GAS",
+     "category_label": "주유",
+     "amount": 55330,
+     "paid_at": "2026-07-26",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0086",
+     "merchant": "SKT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 43900,
+     "paid_at": "2026-07-26",
+     "card_product_id": "HDC-MOVE"
+    },
+    {
+     "tx_id": "P2-202607-0070",
+     "merchant": "아고다",
+     "category": "TRAVEL",
+     "category_label": "여행",
+     "amount": 48310,
+     "paid_at": "2026-07-27",
+     "card_product_id": "KBC-FIXED"
+    },
+    {
+     "tx_id": "P2-202607-0083",
+     "merchant": "서울치과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 55380,
+     "paid_at": "2026-07-28",
+     "card_product_id": "HDC-MOVE"
+    }
+   ]
+  },
+  {
+   "persona_id": "P3",
+   "as_of": "2026-08-25",
+   "consent_status": "CONSENTED",
+   "held_cards": [
+    {
+     "card_product_id": "HDC-PREM",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    },
+    {
+     "card_product_id": "LTC-ONLINE",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    },
+    {
+     "card_product_id": "NHC-BASIC",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    }
+   ],
+   "transactions": [
+    {
+     "tx_id": "P3-202605-0013",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 67240,
+     "paid_at": "2026-05-01",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0017",
+     "merchant": "강남약국",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 80000,
+     "paid_at": "2026-05-01",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0002",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 54090,
+     "paid_at": "2026-05-06",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202605-0010",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 38700,
+     "paid_at": "2026-05-08",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202605-0012",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 40640,
+     "paid_at": "2026-05-08",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0009",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 46110,
+     "paid_at": "2026-05-09",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202605-0014",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 52760,
+     "paid_at": "2026-05-09",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202605-0005",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 45190,
+     "paid_at": "2026-05-10",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202605-0006",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 41970,
+     "paid_at": "2026-05-10",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202605-0015",
+     "merchant": "CGV 강남",
+     "category": "ENTERTAINMENT",
+     "category_label": "문화",
+     "amount": 60930,
+     "paid_at": "2026-05-12",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202605-0001",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 54080,
+     "paid_at": "2026-05-15",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0008",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 44420,
+     "paid_at": "2026-05-16",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0007",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 47500,
+     "paid_at": "2026-05-18",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202605-0003",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 29390,
+     "paid_at": "2026-05-20",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0011",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 70660,
+     "paid_at": "2026-05-20",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202605-0016",
+     "merchant": "CGV 강남",
+     "category": "ENTERTAINMENT",
+     "category_label": "문화",
+     "amount": 39070,
+     "paid_at": "2026-05-20",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0018",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 70000,
+     "paid_at": "2026-05-20",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202605-0004",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 57250,
+     "paid_at": "2026-05-26",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0021",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 63320,
+     "paid_at": "2026-06-04",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202606-0035",
+     "merchant": "연세이비인후과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 80000,
+     "paid_at": "2026-06-06",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202606-0033",
+     "merchant": "넷플릭스",
+     "category": "ENTERTAINMENT",
+     "category_label": "문화",
+     "amount": 43470,
+     "paid_at": "2026-06-07",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202606-0030",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 32470,
+     "paid_at": "2026-06-09",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0031",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 41370,
+     "paid_at": "2026-06-09",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202606-0034",
+     "merchant": "CGV 강남",
+     "category": "ENTERTAINMENT",
+     "category_label": "문화",
+     "amount": 56530,
+     "paid_at": "2026-06-11",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0036",
+     "merchant": "SKT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 70000,
+     "paid_at": "2026-06-11",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0022",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 39380,
+     "paid_at": "2026-06-12",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202606-0032",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 78630,
+     "paid_at": "2026-06-14",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202606-0024",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 40390,
+     "paid_at": "2026-06-15",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0027",
+     "merchant": "배달앱 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 32700,
+     "paid_at": "2026-06-17",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202606-0026",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 62340,
+     "paid_at": "2026-06-18",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0019",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 37390,
+     "paid_at": "2026-06-19",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202606-0020",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 61400,
+     "paid_at": "2026-06-20",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0023",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 38510,
+     "paid_at": "2026-06-20",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0025",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 44570,
+     "paid_at": "2026-06-22",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202606-0028",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 48200,
+     "paid_at": "2026-06-25",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202606-0029",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 69330,
+     "paid_at": "2026-06-28",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202607-0047",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 31830,
+     "paid_at": "2026-07-03",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202607-0053",
+     "merchant": "연세이비인후과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 80000,
+     "paid_at": "2026-07-05",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202607-0040",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 49960,
+     "paid_at": "2026-07-09",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202607-0037",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 49540,
+     "paid_at": "2026-07-11",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202607-0039",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 49370,
+     "paid_at": "2026-07-11",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0038",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 41280,
+     "paid_at": "2026-07-12",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0054",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 70000,
+     "paid_at": "2026-07-16",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0052",
+     "merchant": "넷플릭스",
+     "category": "ENTERTAINMENT",
+     "category_label": "문화",
+     "amount": 44200,
+     "paid_at": "2026-07-19",
+     "card_product_id": "NHC-BASIC"
+    },
+    {
+     "tx_id": "P3-202607-0051",
+     "merchant": "CGV 강남",
+     "category": "ENTERTAINMENT",
+     "category_label": "문화",
+     "amount": 55800,
+     "paid_at": "2026-07-22",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0042",
+     "merchant": "배달앱 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 45360,
+     "paid_at": "2026-07-24",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202607-0043",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 58390,
+     "paid_at": "2026-07-24",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0045",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 47870,
+     "paid_at": "2026-07-24",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0049",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 56920,
+     "paid_at": "2026-07-24",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0046",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 61630,
+     "paid_at": "2026-07-25",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202607-0050",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 63080,
+     "paid_at": "2026-07-26",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0041",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 49850,
+     "paid_at": "2026-07-27",
+     "card_product_id": "HDC-PREM"
+    },
+    {
+     "tx_id": "P3-202607-0044",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 28380,
+     "paid_at": "2026-07-27",
+     "card_product_id": "LTC-ONLINE"
+    },
+    {
+     "tx_id": "P3-202607-0048",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 56540,
+     "paid_at": "2026-07-27",
+     "card_product_id": "NHC-BASIC"
+    }
+   ]
+  },
+  {
+   "persona_id": "P4",
+   "as_of": "2026-08-25",
+   "consent_status": "CONSENTED",
+   "held_cards": [
+    {
+     "card_product_id": "SHC-BASIC",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    }
+   ],
+   "transactions": [
+    {
+     "tx_id": "P4-202605-0025",
+     "merchant": "SKT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 50000,
+     "paid_at": "2026-05-01",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0012",
+     "merchant": "스타벅스 테헤란로점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 51920,
+     "paid_at": "2026-05-02",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0019",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 55150,
+     "paid_at": "2026-05-02",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0020",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 39850,
+     "paid_at": "2026-05-04",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0016",
+     "merchant": "배달앱 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 37730,
+     "paid_at": "2026-05-05",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0021",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 40770,
+     "paid_at": "2026-05-06",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0018",
+     "merchant": "세븐일레븐 삼성점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 45900,
+     "paid_at": "2026-05-07",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0008",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 50440,
+     "paid_at": "2026-05-08",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0022",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 55070,
+     "paid_at": "2026-05-09",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0017",
+     "merchant": "CU 논현점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 74100,
+     "paid_at": "2026-05-10",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0013",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 50090,
+     "paid_at": "2026-05-11",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0007",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 34340,
+     "paid_at": "2026-05-14",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0001",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 59330,
+     "paid_at": "2026-05-16",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0006",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 51480,
+     "paid_at": "2026-05-17",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0009",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 32380,
+     "paid_at": "2026-05-19",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0024",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 50880,
+     "paid_at": "2026-05-19",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0003",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 58410,
+     "paid_at": "2026-05-20",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0011",
+     "merchant": "메가커피 역삼점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 45850,
+     "paid_at": "2026-05-20",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0002",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 49260,
+     "paid_at": "2026-05-22",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0010",
+     "merchant": "스타벅스 테헤란로점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 62230,
+     "paid_at": "2026-05-22",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0004",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 36180,
+     "paid_at": "2026-05-23",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0014",
+     "merchant": "배달앱 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 71080,
+     "paid_at": "2026-05-24",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0005",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 48180,
+     "paid_at": "2026-05-25",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0023",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 33280,
+     "paid_at": "2026-05-27",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202605-0015",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 61100,
+     "paid_at": "2026-05-28",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0029",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 30870,
+     "paid_at": "2026-06-04",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0035",
+     "merchant": "투썸플레이스 삼성점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 38240,
+     "paid_at": "2026-06-04",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0039",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 75250,
+     "paid_at": "2026-06-04",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0028",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 34080,
+     "paid_at": "2026-06-05",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0049",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 55080,
+     "paid_at": "2026-06-05",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0027",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 61700,
+     "paid_at": "2026-06-07",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0026",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 40120,
+     "paid_at": "2026-06-08",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0050",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 50000,
+     "paid_at": "2026-06-09",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0032",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 42190,
+     "paid_at": "2026-06-10",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0037",
+     "merchant": "투썸플레이스 삼성점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 61310,
+     "paid_at": "2026-06-10",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0040",
+     "merchant": "배달앱 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 56520,
+     "paid_at": "2026-06-10",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0034",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 59000,
+     "paid_at": "2026-06-13",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0048",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 50790,
+     "paid_at": "2026-06-13",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0038",
+     "merchant": "배달앱 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 40290,
+     "paid_at": "2026-06-16",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0044",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 51700,
+     "paid_at": "2026-06-16",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0031",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 57330,
+     "paid_at": "2026-06-17",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0043",
+     "merchant": "GS25 역삼점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 55420,
+     "paid_at": "2026-06-17",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0046",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 30500,
+     "paid_at": "2026-06-17",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0033",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 42860,
+     "paid_at": "2026-06-20",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0036",
+     "merchant": "스타벅스 테헤란로점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 60450,
+     "paid_at": "2026-06-20",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0042",
+     "merchant": "CU 논현점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 64580,
+     "paid_at": "2026-06-20",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0030",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 51850,
+     "paid_at": "2026-06-22",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0045",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 43300,
+     "paid_at": "2026-06-23",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0047",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 43630,
+     "paid_at": "2026-06-24",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202606-0041",
+     "merchant": "쿠팡이츠 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 47940,
+     "paid_at": "2026-06-25",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0061",
+     "merchant": "스타벅스 테헤란로점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 67840,
+     "paid_at": "2026-07-02",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0069",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 37000,
+     "paid_at": "2026-07-03",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0052",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 41560,
+     "paid_at": "2026-07-07",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0058",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 32850,
+     "paid_at": "2026-07-07",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0074",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 64890,
+     "paid_at": "2026-07-09",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0051",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 57420,
+     "paid_at": "2026-07-10",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0060",
+     "merchant": "투썸플레이스 삼성점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 57120,
+     "paid_at": "2026-07-11",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0059",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 54340,
+     "paid_at": "2026-07-12",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0067",
+     "merchant": "세븐일레븐 삼성점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 47420,
+     "paid_at": "2026-07-12",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0070",
+     "merchant": "서울교통공사",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 58000,
+     "paid_at": "2026-07-14",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0062",
+     "merchant": "메가커피 역삼점",
+     "category": "CAFE",
+     "category_label": "카페",
+     "amount": 35040,
+     "paid_at": "2026-07-15",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0065",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 62570,
+     "paid_at": "2026-07-15",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0073",
+     "merchant": "쿠팡",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 50700,
+     "paid_at": "2026-07-15",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0055",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 50260,
+     "paid_at": "2026-07-16",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0064",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 46520,
+     "paid_at": "2026-07-17",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0066",
+     "merchant": "배달앱 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 66020,
+     "paid_at": "2026-07-17",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0071",
+     "merchant": "네이버페이",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 28590,
+     "paid_at": "2026-07-17",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0063",
+     "merchant": "요기요 결제",
+     "category": "DELIVERY",
+     "category_label": "배달",
+     "amount": 44890,
+     "paid_at": "2026-07-19",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0054",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 56130,
+     "paid_at": "2026-07-20",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0056",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 39560,
+     "paid_at": "2026-07-20",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0075",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 50000,
+     "paid_at": "2026-07-21",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0068",
+     "merchant": "GS25 역삼점",
+     "category": "CONVENIENCE",
+     "category_label": "편의점",
+     "amount": 72580,
+     "paid_at": "2026-07-22",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0057",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 58230,
+     "paid_at": "2026-07-25",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0072",
+     "merchant": "11번가",
+     "category": "ONLINE",
+     "category_label": "온라인쇼핑",
+     "amount": 35820,
+     "paid_at": "2026-07-26",
+     "card_product_id": "SHC-BASIC"
+    },
+    {
+     "tx_id": "P4-202607-0053",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 29650,
+     "paid_at": "2026-07-27",
+     "card_product_id": "SHC-BASIC"
+    }
+   ]
+  },
+  {
+   "persona_id": "P5",
+   "as_of": "2026-08-25",
+   "consent_status": "EXPIRED",
+   "held_cards": [
+    {
+     "card_product_id": "KBC-LIFE",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    },
+    {
+     "card_product_id": "SSC-FIXED",
+     "issued_at": "2024-03-11",
+     "used_last_3m": true
+    }
+   ],
+   "transactions": [
+    {
+     "tx_id": "P5-202605-0005",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 62350,
+     "paid_at": "2026-05-02",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0012",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 60050,
+     "paid_at": "2026-05-02",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0009",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 54400,
+     "paid_at": "2026-05-04",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0001",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 59760,
+     "paid_at": "2026-05-05",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0013",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 60460,
+     "paid_at": "2026-05-05",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0021",
+     "merchant": "강남약국",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 45200,
+     "paid_at": "2026-05-05",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0007",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 60060,
+     "paid_at": "2026-05-06",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0017",
+     "merchant": "서울도시가스",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 43290,
+     "paid_at": "2026-05-06",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0006",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 45250,
+     "paid_at": "2026-05-07",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0020",
+     "merchant": "서울치과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 44800,
+     "paid_at": "2026-05-07",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0010",
+     "merchant": "홈플러스 강동점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 52190,
+     "paid_at": "2026-05-09",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0019",
+     "merchant": "KT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 70000,
+     "paid_at": "2026-05-11",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0022",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 40000,
+     "paid_at": "2026-05-11",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0002",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 44080,
+     "paid_at": "2026-05-12",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0014",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 37420,
+     "paid_at": "2026-05-15",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0018",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 61120,
+     "paid_at": "2026-05-17",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0008",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 27180,
+     "paid_at": "2026-05-18",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202605-0003",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 42420,
+     "paid_at": "2026-05-20",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0015",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 46800,
+     "paid_at": "2026-05-22",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0016",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 48790,
+     "paid_at": "2026-05-22",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0004",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 46140,
+     "paid_at": "2026-05-24",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202605-0011",
+     "merchant": "홈플러스 강동점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 48240,
+     "paid_at": "2026-05-28",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0030",
+     "merchant": "홈플러스 강동점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 45280,
+     "paid_at": "2026-06-03",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0038",
+     "merchant": "수도요금",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 32130,
+     "paid_at": "2026-06-03",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0033",
+     "merchant": "홈플러스 강동점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 44580,
+     "paid_at": "2026-06-04",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0032",
+     "merchant": "홈플러스 강동점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 49110,
+     "paid_at": "2026-06-05",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0039",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 42860,
+     "paid_at": "2026-06-06",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0023",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 50540,
+     "paid_at": "2026-06-07",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0040",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 64470,
+     "paid_at": "2026-06-07",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0031",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 60800,
+     "paid_at": "2026-06-11",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0035",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 55710,
+     "paid_at": "2026-06-11",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0036",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 56460,
+     "paid_at": "2026-06-11",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0044",
+     "merchant": "티머니 충전",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 40000,
+     "paid_at": "2026-06-11",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0042",
+     "merchant": "강남약국",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 47260,
+     "paid_at": "2026-06-12",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0028",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 56250,
+     "paid_at": "2026-06-15",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0024",
+     "merchant": "본죽 논현점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 57060,
+     "paid_at": "2026-06-18",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0027",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 55900,
+     "paid_at": "2026-06-18",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0041",
+     "merchant": "LGU+ 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 70000,
+     "paid_at": "2026-06-20",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0029",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 37820,
+     "paid_at": "2026-06-22",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0043",
+     "merchant": "서울치과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 42740,
+     "paid_at": "2026-06-22",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0026",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 33070,
+     "paid_at": "2026-06-24",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0034",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 50240,
+     "paid_at": "2026-06-25",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202606-0037",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 60540,
+     "paid_at": "2026-06-25",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202606-0025",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 47180,
+     "paid_at": "2026-06-26",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0048",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 46810,
+     "paid_at": "2026-07-01",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0055",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 61100,
+     "paid_at": "2026-07-02",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0053",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 37640,
+     "paid_at": "2026-07-03",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0056",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 74100,
+     "paid_at": "2026-07-03",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0066",
+     "merchant": "카카오T 택시",
+     "category": "TRANSPORT",
+     "category_label": "대중교통",
+     "amount": 40000,
+     "paid_at": "2026-07-03",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0060",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 46700,
+     "paid_at": "2026-07-04",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0061",
+     "merchant": "서울도시가스",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 46770,
+     "paid_at": "2026-07-05",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0065",
+     "merchant": "연세이비인후과",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 36080,
+     "paid_at": "2026-07-08",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0046",
+     "merchant": "김밥천국 역삼점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 46710,
+     "paid_at": "2026-07-09",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0054",
+     "merchant": "롯데마트 서초점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 42840,
+     "paid_at": "2026-07-13",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0052",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 39540,
+     "paid_at": "2026-07-14",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0057",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 40560,
+     "paid_at": "2026-07-16",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0062",
+     "merchant": "서울도시가스",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 46770,
+     "paid_at": "2026-07-17",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0049",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 45810,
+     "paid_at": "2026-07-18",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0064",
+     "merchant": "강남약국",
+     "category": "MEDICAL",
+     "category_label": "의료",
+     "amount": 53920,
+     "paid_at": "2026-07-19",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0063",
+     "merchant": "SKT 통신요금",
+     "category": "TELECOM",
+     "category_label": "통신",
+     "amount": 70000,
+     "paid_at": "2026-07-22",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0045",
+     "merchant": "미분당 강남점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 50000,
+     "paid_at": "2026-07-23",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0050",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 53120,
+     "paid_at": "2026-07-23",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0047",
+     "merchant": "한솥도시락 선릉점",
+     "category": "FOOD",
+     "category_label": "식비",
+     "amount": 57550,
+     "paid_at": "2026-07-24",
+     "card_product_id": "KBC-LIFE"
+    },
+    {
+     "tx_id": "P5-202607-0051",
+     "merchant": "홈플러스 강동점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 41750,
+     "paid_at": "2026-07-25",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0059",
+     "merchant": "한국전력공사",
+     "category": "UTILITY",
+     "category_label": "공과금",
+     "amount": 59760,
+     "paid_at": "2026-07-25",
+     "card_product_id": "SSC-FIXED"
+    },
+    {
+     "tx_id": "P5-202607-0058",
+     "merchant": "이마트 성수점",
+     "category": "MART",
+     "category_label": "마트",
+     "amount": 62470,
+     "paid_at": "2026-07-26",
+     "card_product_id": "SSC-FIXED"
+    }
+   ]
+  }
+ ]
+}

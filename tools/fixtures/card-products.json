@@ -1,0 +1,936 @@
+{
+ "spec": "FXT-CARDFIT-001",
+ "version": "1.0",
+ "rule_spec": "CALC-CARDFIT-001 v1.0",
+ "demo_now": "2026-08-25",
+ "seed": 20260825,
+ "params": {
+  "abs_threshold": 3000,
+  "rel_threshold": 0.1,
+  "scenario_delta": 0.2,
+  "cost_rebuild": 5000,
+  "cost_execution": 10000,
+  "max_candidates": 20,
+  "held_cut": 8,
+  "new_pool": 3
+ },
+ "total": 24,
+ "issuers": [
+  "신한카드",
+  "삼성카드",
+  "현대카드",
+  "KB국민카드",
+  "롯데카드",
+  "하나카드",
+  "우리카드",
+  "NH농협카드"
+ ],
+ "categories": {
+  "FOOD": "식비",
+  "CAFE": "카페",
+  "DELIVERY": "배달",
+  "MART": "마트",
+  "CONVENIENCE": "편의점",
+  "TRANSPORT": "대중교통",
+  "GAS": "주유",
+  "SHOPPING": "쇼핑",
+  "ONLINE": "온라인쇼핑",
+  "TELECOM": "통신",
+  "UTILITY": "공과금",
+  "MEDICAL": "의료",
+  "EDUCATION": "교육",
+  "TRAVEL": "여행",
+  "ENTERTAINMENT": "문화"
+ },
+ "products": [
+  {
+   "card_product_id": "SHC-LIFE",
+   "issuer": "신한카드",
+   "name": "생활할인형",
+   "annual_fee": 15000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 20000,
+     "rates": {
+      "FOOD": 0.07,
+      "CAFE": 0.1,
+      "CONVENIENCE": 0.05,
+      "MART": 0.03
+     }
+    },
+    {
+     "min_spend": 700000,
+     "monthly_cap": 40000,
+     "rates": {
+      "FOOD": 0.1,
+      "CAFE": 0.1,
+      "CONVENIENCE": 0.07,
+      "MART": 0.05
+     }
+    }
+   ],
+   "category_caps": {
+    "CAFE": 10000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-shc-life",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "SSC-LIFE",
+   "issuer": "삼성카드",
+   "name": "생활적립형",
+   "annual_fee": 10000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 400000,
+     "monthly_cap": 25000,
+     "rates": {
+      "FOOD": 0.05,
+      "MART": 0.07,
+      "DELIVERY": 0.07,
+      "CONVENIENCE": 0.05
+     }
+    },
+    {
+     "min_spend": 800000,
+     "monthly_cap": 45000,
+     "rates": {
+      "FOOD": 0.07,
+      "MART": 0.1,
+      "DELIVERY": 0.1,
+      "CONVENIENCE": 0.05
+     }
+    }
+   ],
+   "category_caps": {
+    "DELIVERY": 12000
+   },
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-ssc-life",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "KBC-LIFE",
+   "issuer": "KB국민카드",
+   "name": "생필품형",
+   "annual_fee": 12000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 22000,
+     "rates": {
+      "MART": 0.07,
+      "CONVENIENCE": 0.07,
+      "FOOD": 0.03
+     }
+    },
+    {
+     "min_spend": 600000,
+     "monthly_cap": 38000,
+     "rates": {
+      "MART": 0.1,
+      "CONVENIENCE": 0.1,
+      "FOOD": 0.05
+     }
+    }
+   ],
+   "category_caps": {
+    "MART": 15000
+   },
+   "exclusions": [
+    "UTILITY",
+    "MEDICAL"
+   ],
+   "rule_version": "2026-08-01-kbc-life",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "WRC-MOVE",
+   "issuer": "우리카드",
+   "name": "교통주유형",
+   "annual_fee": 8000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 18000,
+     "rates": {
+      "TRANSPORT": 0.1,
+      "GAS": 0.07,
+      "CONVENIENCE": 0.03
+     }
+    },
+    {
+     "min_spend": 600000,
+     "monthly_cap": 32000,
+     "rates": {
+      "TRANSPORT": 0.15,
+      "GAS": 0.1,
+      "CONVENIENCE": 0.05
+     }
+    }
+   ],
+   "category_caps": {
+    "TRANSPORT": 12000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-wrc-move",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "NHC-MOVE",
+   "issuer": "NH농협카드",
+   "name": "출퇴근형",
+   "annual_fee": 6000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 250000,
+     "monthly_cap": 15000,
+     "rates": {
+      "TRANSPORT": 0.1,
+      "CAFE": 0.05,
+      "FOOD": 0.03
+     }
+    },
+    {
+     "min_spend": 500000,
+     "monthly_cap": 28000,
+     "rates": {
+      "TRANSPORT": 0.12,
+      "CAFE": 0.07,
+      "FOOD": 0.05
+     }
+    }
+   ],
+   "category_caps": {},
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-nhc-move",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "HDC-MOVE",
+   "issuer": "현대카드",
+   "name": "드라이브형",
+   "annual_fee": 20000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 500000,
+     "monthly_cap": 25000,
+     "rates": {
+      "GAS": 0.1,
+      "TRANSPORT": 0.05,
+      "TRAVEL": 0.05
+     }
+    },
+    {
+     "min_spend": 900000,
+     "monthly_cap": 50000,
+     "rates": {
+      "GAS": 0.15,
+      "TRANSPORT": 0.07,
+      "TRAVEL": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "GAS": 20000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-hdc-move",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "HNC-ONLINE",
+   "issuer": "하나카드",
+   "name": "온라인쇼핑형",
+   "annual_fee": 15000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 400000,
+     "monthly_cap": 25000,
+     "rates": {
+      "ONLINE": 0.07,
+      "SHOPPING": 0.05,
+      "DELIVERY": 0.05
+     }
+    },
+    {
+     "min_spend": 800000,
+     "monthly_cap": 45000,
+     "rates": {
+      "ONLINE": 0.1,
+      "SHOPPING": 0.07,
+      "DELIVERY": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "ONLINE": 20000
+   },
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-hnc-online",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "LTC-ONLINE",
+   "issuer": "롯데카드",
+   "name": "이커머스형",
+   "annual_fee": 12000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 20000,
+     "rates": {
+      "ONLINE": 0.07,
+      "SHOPPING": 0.07,
+      "ENTERTAINMENT": 0.05
+     }
+    },
+    {
+     "min_spend": 700000,
+     "monthly_cap": 40000,
+     "rates": {
+      "ONLINE": 0.1,
+      "SHOPPING": 0.1,
+      "ENTERTAINMENT": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "SHOPPING": 15000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-ltc-online",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "SHC-ONLINE",
+   "issuer": "신한카드",
+   "name": "디지털형",
+   "annual_fee": 18000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 500000,
+     "monthly_cap": 30000,
+     "rates": {
+      "ONLINE": 0.1,
+      "ENTERTAINMENT": 0.1,
+      "TELECOM": 0.05
+     }
+    },
+    {
+     "min_spend": 1000000,
+     "monthly_cap": 55000,
+     "rates": {
+      "ONLINE": 0.12,
+      "ENTERTAINMENT": 0.12,
+      "TELECOM": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "ENTERTAINMENT": 10000
+   },
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-shc-online",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "KBC-FIXED",
+   "issuer": "KB국민카드",
+   "name": "고정지출형",
+   "annual_fee": 10000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 18000,
+     "rates": {
+      "TELECOM": 0.1,
+      "UTILITY": 0.05,
+      "MEDICAL": 0.05
+     }
+    },
+    {
+     "min_spend": 600000,
+     "monthly_cap": 30000,
+     "rates": {
+      "TELECOM": 0.15,
+      "UTILITY": 0.07,
+      "MEDICAL": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "TELECOM": 8000
+   },
+   "exclusions": [],
+   "rule_version": "2026-08-01-kbc-fixed",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "SSC-FIXED",
+   "issuer": "삼성카드",
+   "name": "납부형",
+   "annual_fee": 0,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 12000,
+     "rates": {
+      "UTILITY": 0.05,
+      "TELECOM": 0.05
+     }
+    },
+    {
+     "min_spend": 700000,
+     "monthly_cap": 22000,
+     "rates": {
+      "UTILITY": 0.07,
+      "TELECOM": 0.07
+     }
+    }
+   ],
+   "category_caps": {},
+   "exclusions": [],
+   "rule_version": "2026-08-01-ssc-fixed",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "WRC-FIXED",
+   "issuer": "우리카드",
+   "name": "관리비형",
+   "annual_fee": 5000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 250000,
+     "monthly_cap": 15000,
+     "rates": {
+      "UTILITY": 0.07,
+      "TELECOM": 0.05,
+      "EDUCATION": 0.05
+     }
+    },
+    {
+     "min_spend": 550000,
+     "monthly_cap": 26000,
+     "rates": {
+      "UTILITY": 0.1,
+      "TELECOM": 0.07,
+      "EDUCATION": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "UTILITY": 10000
+   },
+   "exclusions": [],
+   "rule_version": "2026-08-01-wrc-fixed",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "HDC-PREM",
+   "issuer": "현대카드",
+   "name": "프리미엄형",
+   "annual_fee": 100000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 30000,
+     "rates": {
+      "TRAVEL": 0.05,
+      "SHOPPING": 0.03
+     }
+    },
+    {
+     "min_spend": 1000000,
+     "monthly_cap": 80000,
+     "rates": {
+      "TRAVEL": 0.1,
+      "SHOPPING": 0.07,
+      "FOOD": 0.05,
+      "CAFE": 0.05
+     }
+    }
+   ],
+   "category_caps": {},
+   "exclusions": [],
+   "rule_version": "2026-08-01-hdc-prem",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "LTC-TRAVEL",
+   "issuer": "롯데카드",
+   "name": "여행적립형",
+   "annual_fee": 30000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 600000,
+     "monthly_cap": 35000,
+     "rates": {
+      "TRAVEL": 0.1,
+      "TRANSPORT": 0.05,
+      "SHOPPING": 0.05
+     }
+    },
+    {
+     "min_spend": 1200000,
+     "monthly_cap": 60000,
+     "rates": {
+      "TRAVEL": 0.12,
+      "TRANSPORT": 0.07,
+      "SHOPPING": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "TRAVEL": 30000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-ltc-travel",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "HNC-PREM",
+   "issuer": "하나카드",
+   "name": "마일리지형",
+   "annual_fee": 50000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 20000,
+     "rates": {
+      "TRAVEL": 0.05
+     }
+    },
+    {
+     "min_spend": 800000,
+     "monthly_cap": 60000,
+     "rates": {
+      "TRAVEL": 0.1,
+      "ONLINE": 0.05,
+      "FOOD": 0.05
+     }
+    }
+   ],
+   "category_caps": {},
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-hnc-prem",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "NHC-BASIC",
+   "issuer": "NH농협카드",
+   "name": "무연회비형",
+   "annual_fee": 0,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 200000,
+     "monthly_cap": 10000,
+     "rates": {
+      "FOOD": 0.03,
+      "CAFE": 0.03,
+      "TRANSPORT": 0.03,
+      "MART": 0.03
+     }
+    }
+   ],
+   "category_caps": {},
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-nhc-basic",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "KBC-BASIC",
+   "issuer": "KB국민카드",
+   "name": "기본형",
+   "annual_fee": 0,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 12000,
+     "rates": {
+      "FOOD": 0.03,
+      "ONLINE": 0.03,
+      "CONVENIENCE": 0.03
+     }
+    }
+   ],
+   "category_caps": {},
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-kbc-basic",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "SHC-BASIC",
+   "issuer": "신한카드",
+   "name": "첫카드형",
+   "annual_fee": 0,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 200000,
+     "monthly_cap": 10000,
+     "rates": {
+      "CAFE": 0.05,
+      "CONVENIENCE": 0.05,
+      "TRANSPORT": 0.03
+     }
+    }
+   ],
+   "category_caps": {
+    "CAFE": 5000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-shc-basic",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "SSC-CARE",
+   "issuer": "삼성카드",
+   "name": "육아교육형",
+   "annual_fee": 15000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 400000,
+     "monthly_cap": 22000,
+     "rates": {
+      "EDUCATION": 0.1,
+      "MEDICAL": 0.07,
+      "MART": 0.05
+     }
+    },
+    {
+     "min_spend": 800000,
+     "monthly_cap": 40000,
+     "rates": {
+      "EDUCATION": 0.12,
+      "MEDICAL": 0.1,
+      "MART": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "EDUCATION": 15000
+   },
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-ssc-care",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "WRC-CARE",
+   "issuer": "우리카드",
+   "name": "의료형",
+   "annual_fee": 12000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 350000,
+     "monthly_cap": 20000,
+     "rates": {
+      "MEDICAL": 0.1,
+      "EDUCATION": 0.05,
+      "FOOD": 0.03
+     }
+    },
+    {
+     "min_spend": 700000,
+     "monthly_cap": 35000,
+     "rates": {
+      "MEDICAL": 0.12,
+      "EDUCATION": 0.07,
+      "FOOD": 0.05
+     }
+    }
+   ],
+   "category_caps": {
+    "MEDICAL": 12000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-wrc-care",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "HDC-DINE",
+   "issuer": "현대카드",
+   "name": "외식형",
+   "annual_fee": 20000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 500000,
+     "monthly_cap": 25000,
+     "rates": {
+      "FOOD": 0.1,
+      "DELIVERY": 0.07,
+      "CAFE": 0.05
+     }
+    },
+    {
+     "min_spend": 900000,
+     "monthly_cap": 45000,
+     "rates": {
+      "FOOD": 0.12,
+      "DELIVERY": 0.1,
+      "CAFE": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "FOOD": 20000
+   },
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-hdc-dine",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "LTC-CULT",
+   "issuer": "롯데카드",
+   "name": "문화형",
+   "annual_fee": 10000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 18000,
+     "rates": {
+      "ENTERTAINMENT": 0.1,
+      "SHOPPING": 0.05,
+      "CAFE": 0.05
+     }
+    },
+    {
+     "min_spend": 600000,
+     "monthly_cap": 32000,
+     "rates": {
+      "ENTERTAINMENT": 0.15,
+      "SHOPPING": 0.07,
+      "CAFE": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "ENTERTAINMENT": 12000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-ltc-cult",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "NHC-DINE",
+   "issuer": "NH농협카드",
+   "name": "동네상권형",
+   "annual_fee": 8000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 300000,
+     "monthly_cap": 18000,
+     "rates": {
+      "FOOD": 0.07,
+      "MART": 0.05,
+      "CONVENIENCE": 0.05
+     }
+    },
+    {
+     "min_spend": 600000,
+     "monthly_cap": 30000,
+     "rates": {
+      "FOOD": 0.1,
+      "MART": 0.07,
+      "CONVENIENCE": 0.07
+     }
+    }
+   ],
+   "category_caps": {},
+   "exclusions": [
+    "UTILITY"
+   ],
+   "rule_version": "2026-08-01-nhc-dine",
+   "exclusion_mode": "BOTH"
+  },
+  {
+   "card_product_id": "HNC-DINE",
+   "issuer": "하나카드",
+   "name": "미식형",
+   "annual_fee": 25000,
+   "tiers": [
+    {
+     "min_spend": 0,
+     "monthly_cap": 0,
+     "rates": {}
+    },
+    {
+     "min_spend": 600000,
+     "monthly_cap": 28000,
+     "rates": {
+      "FOOD": 0.1,
+      "CAFE": 0.1,
+      "DELIVERY": 0.05
+     }
+    },
+    {
+     "min_spend": 1000000,
+     "monthly_cap": 48000,
+     "rates": {
+      "FOOD": 0.12,
+      "CAFE": 0.12,
+      "DELIVERY": 0.07
+     }
+    }
+   ],
+   "category_caps": {
+    "FOOD": 18000
+   },
+   "exclusions": [
+    "UTILITY",
+    "TELECOM"
+   ],
+   "rule_version": "2026-08-01-hnc-dine",
+   "exclusion_mode": "BOTH"
+  }
+ ]
+}

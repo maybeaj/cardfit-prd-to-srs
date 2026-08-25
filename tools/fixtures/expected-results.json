@@ -1,0 +1,1005 @@
+{
+ "spec": "FXT-CARDFIT-001",
+ "version": "1.0",
+ "rule_spec": "CALC-CARDFIT-001 v1.0",
+ "demo_now": "2026-08-25",
+ "seed": 20260825,
+ "params": {
+  "abs_threshold": 3000,
+  "rel_threshold": 0.1,
+  "scenario_delta": 0.2,
+  "cost_rebuild": 5000,
+  "cost_execution": 10000,
+  "max_candidates": 20,
+  "held_cut": 8,
+  "new_pool": 3
+ },
+ "total": 5,
+ "results": [
+  {
+   "persona_id": "P1",
+   "expect": "KEEP_CURRENT",
+   "note": "유지 결론의 기본형 — 절대 기준부터 미달",
+   "scenarios": {
+    "LESS": {
+     "gating": "KEEP_CURRENT",
+     "current_gross": 53360,
+     "candidate_count": 12,
+     "selected": null,
+     "current_allocation": [
+      {
+       "category": "FOOD",
+       "amount": 384000,
+       "card_product_id": "SHC-LIFE",
+       "benefit": 38400
+      },
+      {
+       "category": "MART",
+       "amount": 120000,
+       "card_product_id": "SHC-LIFE",
+       "benefit": 1600
+      },
+      {
+       "category": "ONLINE",
+       "amount": 96000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "CAFE",
+       "amount": 76000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "UTILITY",
+       "amount": 72000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 70400,
+       "card_product_id": "WRC-MOVE",
+       "benefit": 10560
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 56000,
+       "card_product_id": "WRC-MOVE",
+       "benefit": 2800
+      },
+      {
+       "category": "TELECOM",
+       "amount": 44000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "AS_EXPECTED": {
+     "gating": "KEEP_CURRENT",
+     "current_gross": 55500,
+     "candidate_count": 12,
+     "selected": null,
+     "current_allocation": [
+      {
+       "category": "FOOD",
+       "amount": 480000,
+       "card_product_id": "SHC-LIFE",
+       "benefit": 40000
+      },
+      {
+       "category": "MART",
+       "amount": 150000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "ONLINE",
+       "amount": 120000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "CAFE",
+       "amount": 95000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "UTILITY",
+       "amount": 90000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 88000,
+       "card_product_id": "WRC-MOVE",
+       "benefit": 12000
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 70000,
+       "card_product_id": "WRC-MOVE",
+       "benefit": 3500
+      },
+      {
+       "category": "TELECOM",
+       "amount": 55000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "MORE": {
+     "gating": "KEEP_CURRENT",
+     "current_gross": 56200,
+     "candidate_count": 12,
+     "selected": null,
+     "current_allocation": [
+      {
+       "category": "FOOD",
+       "amount": 576000,
+       "card_product_id": "SHC-LIFE",
+       "benefit": 40000
+      },
+      {
+       "category": "MART",
+       "amount": 180000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "ONLINE",
+       "amount": 144000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "CAFE",
+       "amount": 114000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "UTILITY",
+       "amount": 108000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 105600,
+       "card_product_id": "WRC-MOVE",
+       "benefit": 12000
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 84000,
+       "card_product_id": "WRC-MOVE",
+       "benefit": 4200
+      },
+      {
+       "category": "TELECOM",
+       "amount": 66000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "persona_id": "P2",
+   "expect": "KEEP_CURRENT",
+   "note": "게이팅 두 조건 중 절대 기준만 통과하는 경계 사례 (GR2 감시 대상)",
+   "scenarios": {
+    "LESS": {
+     "gating": "KEEP_CURRENT",
+     "current_gross": 62720,
+     "candidate_count": 12,
+     "selected": null,
+     "current_allocation": [
+      {
+       "category": "GAS",
+       "amount": 400000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 20000
+      },
+      {
+       "category": "TRAVEL",
+       "amount": 160000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 11200
+      },
+      {
+       "category": "FOOD",
+       "amount": 120000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 120000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 8400
+      },
+      {
+       "category": "UTILITY",
+       "amount": 120000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 8400
+      },
+      {
+       "category": "MEDICAL",
+       "amount": 96000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 6720
+      },
+      {
+       "category": "TELECOM",
+       "amount": 80000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 8000
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 48000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "AS_EXPECTED": {
+     "gating": "KEEP_CURRENT",
+     "current_gross": 71400,
+     "candidate_count": 12,
+     "selected": null,
+     "current_allocation": [
+      {
+       "category": "GAS",
+       "amount": 500000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 20000
+      },
+      {
+       "category": "TRAVEL",
+       "amount": 200000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 14000
+      },
+      {
+       "category": "FOOD",
+       "amount": 150000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 150000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 10500
+      },
+      {
+       "category": "UTILITY",
+       "amount": 150000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 10500
+      },
+      {
+       "category": "MEDICAL",
+       "amount": 120000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 8400
+      },
+      {
+       "category": "TELECOM",
+       "amount": 100000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 8000
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 60000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "MORE": {
+     "gating": "KEEP_CURRENT",
+     "current_gross": 79400,
+     "candidate_count": 12,
+     "selected": null,
+     "current_allocation": [
+      {
+       "category": "GAS",
+       "amount": 600000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 20000
+      },
+      {
+       "category": "TRAVEL",
+       "amount": 240000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 16800
+      },
+      {
+       "category": "FOOD",
+       "amount": 180000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 180000,
+       "card_product_id": "HDC-MOVE",
+       "benefit": 12600
+      },
+      {
+       "category": "UTILITY",
+       "amount": 180000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 12600
+      },
+      {
+       "category": "MEDICAL",
+       "amount": 144000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 10080
+      },
+      {
+       "category": "TELECOM",
+       "amount": 120000,
+       "card_product_id": "KBC-FIXED",
+       "benefit": 7320
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 72000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "persona_id": "P3",
+   "expect": "RECOMMEND_CHANGE",
+   "note": "allow_new=false · 전환비용이 음수(연회비 절감)인 변경 결론",
+   "scenarios": {
+    "LESS": {
+     "gating": "RECOMMEND_CHANGE",
+     "current_gross": 23920,
+     "candidate_count": 3,
+     "selected": {
+      "cards": [
+       "LTC-ONLINE",
+       "NHC-BASIC"
+      ],
+      "gross": 23920,
+      "transition_cost": {
+       "annual_fee_delta": -8333,
+       "performance_rebuild": 0,
+       "execution_burden": 833,
+       "total": -7500,
+       "added": [],
+       "removed": [
+        "HDC-PREM"
+       ],
+       "role_changes": 0
+      },
+      "net_benefit": 31420,
+      "delta_net": 7500,
+      "allocation": [
+       {
+        "category": "ONLINE",
+        "amount": 192000,
+        "card_product_id": "LTC-ONLINE",
+        "benefit": 13440
+       },
+       {
+        "category": "DELIVERY",
+        "amount": 144000,
+        "card_product_id": null,
+        "benefit": 0
+       },
+       {
+        "category": "FOOD",
+        "amount": 120000,
+        "card_product_id": "NHC-BASIC",
+        "benefit": 3600
+       },
+       {
+        "category": "TRANSPORT",
+        "amount": 96000,
+        "card_product_id": "NHC-BASIC",
+        "benefit": 2880
+       },
+       {
+        "category": "ENTERTAINMENT",
+        "amount": 80000,
+        "card_product_id": "LTC-ONLINE",
+        "benefit": 4000
+       },
+       {
+        "category": "MEDICAL",
+        "amount": 64000,
+        "card_product_id": null,
+        "benefit": 0
+       },
+       {
+        "category": "TELECOM",
+        "amount": 56000,
+        "card_product_id": null,
+        "benefit": 0
+       }
+      ]
+     },
+     "current_allocation": [
+      {
+       "category": "ONLINE",
+       "amount": 192000,
+       "card_product_id": "LTC-ONLINE",
+       "benefit": 13440
+      },
+      {
+       "category": "DELIVERY",
+       "amount": 144000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "FOOD",
+       "amount": 120000,
+       "card_product_id": "NHC-BASIC",
+       "benefit": 3600
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 96000,
+       "card_product_id": "NHC-BASIC",
+       "benefit": 2880
+      },
+      {
+       "category": "ENTERTAINMENT",
+       "amount": 80000,
+       "card_product_id": "LTC-ONLINE",
+       "benefit": 4000
+      },
+      {
+       "category": "MEDICAL",
+       "amount": 64000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TELECOM",
+       "amount": 56000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "AS_EXPECTED": {
+     "gating": "RECOMMEND_CHANGE",
+     "current_gross": 39100,
+     "candidate_count": 3,
+     "selected": {
+      "cards": [
+       "LTC-ONLINE",
+       "NHC-BASIC"
+      ],
+      "gross": 39100,
+      "transition_cost": {
+       "annual_fee_delta": -8333,
+       "performance_rebuild": 0,
+       "execution_burden": 833,
+       "total": -7500,
+       "added": [],
+       "removed": [
+        "HDC-PREM"
+       ],
+       "role_changes": 0
+      },
+      "net_benefit": 46600,
+      "delta_net": 7500,
+      "allocation": [
+       {
+        "category": "ONLINE",
+        "amount": 240000,
+        "card_product_id": "LTC-ONLINE",
+        "benefit": 24000
+       },
+       {
+        "category": "DELIVERY",
+        "amount": 180000,
+        "card_product_id": null,
+        "benefit": 0
+       },
+       {
+        "category": "FOOD",
+        "amount": 150000,
+        "card_product_id": "NHC-BASIC",
+        "benefit": 4500
+       },
+       {
+        "category": "TRANSPORT",
+        "amount": 120000,
+        "card_product_id": "NHC-BASIC",
+        "benefit": 3600
+       },
+       {
+        "category": "ENTERTAINMENT",
+        "amount": 100000,
+        "card_product_id": "LTC-ONLINE",
+        "benefit": 7000
+       },
+       {
+        "category": "MEDICAL",
+        "amount": 80000,
+        "card_product_id": null,
+        "benefit": 0
+       },
+       {
+        "category": "TELECOM",
+        "amount": 70000,
+        "card_product_id": null,
+        "benefit": 0
+       }
+      ]
+     },
+     "current_allocation": [
+      {
+       "category": "ONLINE",
+       "amount": 240000,
+       "card_product_id": "LTC-ONLINE",
+       "benefit": 24000
+      },
+      {
+       "category": "DELIVERY",
+       "amount": 180000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "FOOD",
+       "amount": 150000,
+       "card_product_id": "NHC-BASIC",
+       "benefit": 4500
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 120000,
+       "card_product_id": "NHC-BASIC",
+       "benefit": 3600
+      },
+      {
+       "category": "ENTERTAINMENT",
+       "amount": 100000,
+       "card_product_id": "LTC-ONLINE",
+       "benefit": 7000
+      },
+      {
+       "category": "MEDICAL",
+       "amount": 80000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TELECOM",
+       "amount": 70000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "MORE": {
+     "gating": "KEEP_CURRENT",
+     "current_gross": 50520,
+     "candidate_count": 3,
+     "selected": null,
+     "current_allocation": [
+      {
+       "category": "ONLINE",
+       "amount": 288000,
+       "card_product_id": "LTC-ONLINE",
+       "benefit": 28800
+      },
+      {
+       "category": "DELIVERY",
+       "amount": 216000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "FOOD",
+       "amount": 180000,
+       "card_product_id": "HDC-PREM",
+       "benefit": 9000
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 144000,
+       "card_product_id": "NHC-BASIC",
+       "benefit": 4320
+      },
+      {
+       "category": "ENTERTAINMENT",
+       "amount": 120000,
+       "card_product_id": "LTC-ONLINE",
+       "benefit": 8400
+      },
+      {
+       "category": "MEDICAL",
+       "amount": 96000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TELECOM",
+       "amount": 84000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "persona_id": "P4",
+   "expect": "RECOMMEND_CHANGE",
+   "note": "북극성 지표(조합안 선택률) 시연 경로",
+   "scenarios": {
+    "LESS": {
+     "gating": "RECOMMEND_CHANGE",
+     "current_gross": 10000,
+     "candidate_count": 7,
+     "selected": {
+      "cards": [
+       "SHC-BASIC",
+       "HDC-DINE"
+      ],
+      "gross": 52080,
+      "transition_cost": {
+       "annual_fee_delta": 1667,
+       "performance_rebuild": 5000,
+       "execution_burden": 1667,
+       "total": 8334,
+       "added": [
+        "HDC-DINE"
+       ],
+       "removed": [],
+       "role_changes": 1
+      },
+      "net_benefit": 43746,
+      "delta_net": 33746,
+      "allocation": [
+       {
+        "category": "FOOD",
+        "amount": 336000,
+        "card_product_id": "HDC-DINE",
+        "benefit": 20000
+       },
+       {
+        "category": "DELIVERY",
+        "amount": 176000,
+        "card_product_id": "HDC-DINE",
+        "benefit": 17600
+       },
+       {
+        "category": "ONLINE",
+        "amount": 144000,
+        "card_product_id": null,
+        "benefit": 0
+       },
+       {
+        "category": "CAFE",
+        "amount": 128000,
+        "card_product_id": "HDC-DINE",
+        "benefit": 7400
+       },
+       {
+        "category": "CONVENIENCE",
+        "amount": 96000,
+        "card_product_id": "SHC-BASIC",
+        "benefit": 4800
+       },
+       {
+        "category": "TRANSPORT",
+        "amount": 76000,
+        "card_product_id": "SHC-BASIC",
+        "benefit": 2280
+       },
+       {
+        "category": "TELECOM",
+        "amount": 40000,
+        "card_product_id": null,
+        "benefit": 0
+       }
+      ]
+     },
+     "current_allocation": [
+      {
+       "category": "FOOD",
+       "amount": 336000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "DELIVERY",
+       "amount": 176000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "ONLINE",
+       "amount": 144000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "CAFE",
+       "amount": 128000,
+       "card_product_id": "SHC-BASIC",
+       "benefit": 5000
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 96000,
+       "card_product_id": "SHC-BASIC",
+       "benefit": 4800
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 76000,
+       "card_product_id": "SHC-BASIC",
+       "benefit": 200
+      },
+      {
+       "category": "TELECOM",
+       "amount": 40000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "AS_EXPECTED": {
+     "gating": "RECOMMEND_CHANGE",
+     "current_gross": 10000,
+     "candidate_count": 7,
+     "selected": {
+      "cards": [
+       "SHC-BASIC",
+       "HNC-DINE"
+      ],
+      "gross": 56850,
+      "transition_cost": {
+       "annual_fee_delta": 2083,
+       "performance_rebuild": 5000,
+       "execution_burden": 1667,
+       "total": 8750,
+       "added": [
+        "HNC-DINE"
+       ],
+       "removed": [],
+       "role_changes": 1
+      },
+      "net_benefit": 48100,
+      "delta_net": 38100,
+      "allocation": [
+       {
+        "category": "FOOD",
+        "amount": 420000,
+        "card_product_id": "HNC-DINE",
+        "benefit": 18000
+       },
+       {
+        "category": "DELIVERY",
+        "amount": 220000,
+        "card_product_id": "HNC-DINE",
+        "benefit": 15400
+       },
+       {
+        "category": "ONLINE",
+        "amount": 180000,
+        "card_product_id": null,
+        "benefit": 0
+       },
+       {
+        "category": "CAFE",
+        "amount": 160000,
+        "card_product_id": "HNC-DINE",
+        "benefit": 14600
+       },
+       {
+        "category": "CONVENIENCE",
+        "amount": 120000,
+        "card_product_id": "SHC-BASIC",
+        "benefit": 6000
+       },
+       {
+        "category": "TRANSPORT",
+        "amount": 95000,
+        "card_product_id": "SHC-BASIC",
+        "benefit": 2850
+       },
+       {
+        "category": "TELECOM",
+        "amount": 50000,
+        "card_product_id": null,
+        "benefit": 0
+       }
+      ]
+     },
+     "current_allocation": [
+      {
+       "category": "FOOD",
+       "amount": 420000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "DELIVERY",
+       "amount": 220000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "ONLINE",
+       "amount": 180000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "CAFE",
+       "amount": 160000,
+       "card_product_id": "SHC-BASIC",
+       "benefit": 5000
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 120000,
+       "card_product_id": "SHC-BASIC",
+       "benefit": 5000
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 95000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TELECOM",
+       "amount": 50000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    },
+    "MORE": {
+     "gating": "RECOMMEND_CHANGE",
+     "current_gross": 10000,
+     "candidate_count": 7,
+     "selected": {
+      "cards": [
+       "SHC-BASIC",
+       "HNC-DINE"
+      ],
+      "gross": 58000,
+      "transition_cost": {
+       "annual_fee_delta": 2083,
+       "performance_rebuild": 5000,
+       "execution_burden": 1667,
+       "total": 8750,
+       "added": [
+        "HNC-DINE"
+       ],
+       "removed": [],
+       "role_changes": 1
+      },
+      "net_benefit": 49250,
+      "delta_net": 39250,
+      "allocation": [
+       {
+        "category": "FOOD",
+        "amount": 504000,
+        "card_product_id": "HNC-DINE",
+        "benefit": 18000
+       },
+       {
+        "category": "DELIVERY",
+        "amount": 264000,
+        "card_product_id": "HNC-DINE",
+        "benefit": 18480
+       },
+       {
+        "category": "ONLINE",
+        "amount": 216000,
+        "card_product_id": null,
+        "benefit": 0
+       },
+       {
+        "category": "CAFE",
+        "amount": 192000,
+        "card_product_id": "HNC-DINE",
+        "benefit": 11520
+       },
+       {
+        "category": "CONVENIENCE",
+        "amount": 144000,
+        "card_product_id": "SHC-BASIC",
+        "benefit": 7200
+       },
+       {
+        "category": "TRANSPORT",
+        "amount": 114000,
+        "card_product_id": "SHC-BASIC",
+        "benefit": 2800
+       },
+       {
+        "category": "TELECOM",
+        "amount": 60000,
+        "card_product_id": null,
+        "benefit": 0
+       }
+      ]
+     },
+     "current_allocation": [
+      {
+       "category": "FOOD",
+       "amount": 504000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "DELIVERY",
+       "amount": 264000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "ONLINE",
+       "amount": 216000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "CAFE",
+       "amount": 192000,
+       "card_product_id": "SHC-BASIC",
+       "benefit": 5000
+      },
+      {
+       "category": "CONVENIENCE",
+       "amount": 144000,
+       "card_product_id": "SHC-BASIC",
+       "benefit": 5000
+      },
+      {
+       "category": "TRANSPORT",
+       "amount": 114000,
+       "card_product_id": null,
+       "benefit": 0
+      },
+      {
+       "category": "TELECOM",
+       "amount": 60000,
+       "card_product_id": null,
+       "benefit": 0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "persona_id": "P5",
+   "expect": "EXCEPTION",
+   "note": "CF 6종 전건과 REQ-EXC-001~006 경로",
+   "scenarios": null
+  }
+ ]
+}

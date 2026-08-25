@@ -1,0 +1,60 @@
+{
+ "spec": "FXT-CARDFIT-001",
+ "version": "1.0",
+ "rule_spec": "CALC-CARDFIT-001 v1.0",
+ "demo_now": "2026-08-25",
+ "seed": 20260825,
+ "params": {
+  "abs_threshold": 3000,
+  "rel_threshold": 0.1,
+  "scenario_delta": 0.2,
+  "cost_rebuild": 5000,
+  "cost_execution": 10000,
+  "max_candidates": 20,
+  "held_cut": 8,
+  "new_pool": 3
+ },
+ "outcome_seeds": [
+  {
+   "persona_id": "P3",
+   "selected_scenario": "AS_EXPECTED",
+   "selected_cards": [
+    "LTC-ONLINE",
+    "NHC-BASIC"
+   ],
+   "selected_at": "2026-07-26",
+   "status": "NOT_SENT",
+   "due_at": "2026-08-25",
+   "note": "선택 +30일 도달 — 발송 대상으로 즉시 조회된다 (REQ-FUNC-010)"
+  },
+  {
+   "persona_id": "P4",
+   "selected_scenario": "AS_EXPECTED",
+   "selected_cards": [
+    "SHC-BASIC",
+    "HNC-DINE"
+   ],
+   "selected_at": "2026-07-26",
+   "status": "NOT_SENT",
+   "due_at": "2026-08-25",
+   "note": "선택 +30일 도달 — 발송 대상으로 즉시 조회된다 (REQ-FUNC-010)"
+  }
+ ],
+ "expiry_seeds": [
+  {
+   "persona_id": "P4",
+   "base_date": "2026-07-11",
+   "reason": "BASE_DATE_PLUS_30",
+   "note": "기준일 +30일 경과 만료 (REQ-EXC-006)"
+  },
+  {
+   "persona_id": "P3",
+   "base_date": "2026-07-26",
+   "reason": "RULE_VERSION_CHANGED",
+   "changed_card": "LTC-ONLINE",
+   "new_rule_version": "2026-08-20-ltc-online",
+   "note": "rule_version 변경 만료 (ADR-06 · REQ-NF-007)"
+  }
+ ],
+ "total": 4
+}

@@ -1,0 +1,166 @@
+{
+ "spec": "FXT-CARDFIT-001",
+ "version": "1.0",
+ "rule_spec": "CALC-CARDFIT-001 v1.0",
+ "demo_now": "2026-08-25",
+ "seed": 20260825,
+ "params": {
+  "abs_threshold": 3000,
+  "rel_threshold": 0.1,
+  "scenario_delta": 0.2,
+  "cost_rebuild": 5000,
+  "cost_execution": 10000,
+  "max_candidates": 20,
+  "held_cut": 8,
+  "new_pool": 3
+ },
+ "total": 5,
+ "personas": [
+  {
+   "persona_id": "P1",
+   "name": "김하늘",
+   "age_band": "30대",
+   "job": "직장인",
+   "summary": "보유 2장이 지출 구조를 이미 덮는다 — 개선 후보가 없는 명백한 유지",
+   "held": [
+    "SHC-LIFE",
+    "WRC-MOVE"
+   ],
+   "expect": "KEEP_CURRENT",
+   "constraints": {
+    "max_cards": 2,
+    "annual_fee_cap": 40000,
+    "allow_new": true
+   },
+   "consent": "CONSENTED",
+   "note": "유지 결론의 기본형 — 절대 기준부터 미달",
+   "future_spend_plan": {
+    "FOOD": 480000,
+    "CAFE": 95000,
+    "TRANSPORT": 88000,
+    "CONVENIENCE": 70000,
+    "MART": 150000,
+    "ONLINE": 120000,
+    "TELECOM": 55000,
+    "UTILITY": 90000
+   },
+   "plan_period_months": 1
+  },
+  {
+   "persona_id": "P2",
+   "name": "이도현",
+   "age_band": "40대",
+   "job": "영업직",
+   "summary": "개선분이 절대 기준은 넘지만 상대 10%에 못 미친다 — 임계 근처 유지",
+   "held": [
+    "HDC-MOVE",
+    "KBC-FIXED"
+   ],
+   "expect": "KEEP_CURRENT",
+   "constraints": {
+    "max_cards": 3,
+    "annual_fee_cap": 40000,
+    "allow_new": true
+   },
+   "consent": "CONSENTED",
+   "note": "게이팅 두 조건 중 절대 기준만 통과하는 경계 사례 (GR2 감시 대상)",
+   "future_spend_plan": {
+    "GAS": 500000,
+    "TRAVEL": 200000,
+    "TRANSPORT": 150000,
+    "FOOD": 150000,
+    "UTILITY": 150000,
+    "MEDICAL": 120000,
+    "TELECOM": 100000,
+    "CONVENIENCE": 60000
+   },
+   "plan_period_months": 1
+  },
+  {
+   "persona_id": "P3",
+   "name": "박서윤",
+   "age_band": "30대",
+   "job": "프리랜서",
+   "summary": "연회비 10만원 프리미엄 카드가 제 값을 못 한다 — 해지만으로 개선",
+   "held": [
+    "HDC-PREM",
+    "LTC-ONLINE",
+    "NHC-BASIC"
+   ],
+   "expect": "RECOMMEND_CHANGE",
+   "constraints": {
+    "max_cards": 3,
+    "annual_fee_cap": 30000,
+    "allow_new": false
+   },
+   "consent": "CONSENTED",
+   "note": "allow_new=false · 전환비용이 음수(연회비 절감)인 변경 결론",
+   "future_spend_plan": {
+    "ONLINE": 240000,
+    "DELIVERY": 180000,
+    "FOOD": 150000,
+    "TRANSPORT": 120000,
+    "ENTERTAINMENT": 100000,
+    "MEDICAL": 80000,
+    "TELECOM": 70000
+   },
+   "plan_period_months": 1
+  },
+  {
+   "persona_id": "P4",
+   "name": "정민재",
+   "age_band": "20대",
+   "job": "사회초년생",
+   "summary": "신규 1장을 더하면 개선폭이 크다 — 신규 발급 포함 변경",
+   "held": [
+    "SHC-BASIC"
+   ],
+   "expect": "RECOMMEND_CHANGE",
+   "constraints": {
+    "max_cards": 2,
+    "annual_fee_cap": 30000,
+    "allow_new": true
+   },
+   "consent": "CONSENTED",
+   "note": "북극성 지표(조합안 선택률) 시연 경로",
+   "future_spend_plan": {
+    "FOOD": 420000,
+    "CAFE": 160000,
+    "DELIVERY": 220000,
+    "CONVENIENCE": 120000,
+    "TRANSPORT": 95000,
+    "ONLINE": 180000,
+    "TELECOM": 50000
+   },
+   "plan_period_months": 1
+  },
+  {
+   "persona_id": "P5",
+   "name": "최유진",
+   "age_band": "50대",
+   "job": "자영업",
+   "summary": "동의 만료 · 수집 장애 · 근거 미달을 재현하는 예외 전용",
+   "held": [
+    "KBC-LIFE",
+    "SSC-FIXED"
+   ],
+   "expect": "EXCEPTION",
+   "constraints": {
+    "max_cards": 4,
+    "annual_fee_cap": 60000,
+    "allow_new": true
+   },
+   "consent": "EXPIRED",
+   "note": "CF 6종 전건과 REQ-EXC-001~006 경로",
+   "future_spend_plan": {
+    "FOOD": 300000,
+    "MART": 400000,
+    "UTILITY": 200000,
+    "TELECOM": 70000,
+    "MEDICAL": 90000,
+    "TRANSPORT": 40000
+   },
+   "plan_period_months": 1
+  }
+ ]
+}
