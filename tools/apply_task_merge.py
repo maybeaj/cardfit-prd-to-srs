@@ -5,7 +5,8 @@
 """
 import re, json, sys, pathlib, collections
 
-SRC = pathlib.Path("docs/[태스크 리스트] CardFit.md")
+import os
+SRC = pathlib.Path(os.environ.get("TASK_SRC", "/tmp/v11.md"))   # 원본 142건 (git: 356c0cb)
 MAP = pathlib.Path("tools/task_merge_map.json")
 ID  = r"(?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{3}[ab]?"
 RANK = {"L": 0, "M": 1, "H": 2}
@@ -28,15 +29,16 @@ def build(rows, groups):
     for g in groups:
         ms = [rows[m] for m in g["members"]]
         deps = sorted({member[d] for m in g["members"] for d in rows[m]["deps"]
-                       if d in member and member[d] != g["id"]})
-        srs = []
+                       if d in member and member[d] != g["id"]}
+                      | set(g.get("extra_deps", [])))
+        srs = list(g.get("srs", []))
         for m in ms:
             for s in re.split(r"\s*·\s*", m["srs"]):
                 s = s.strip()
                 if s and s not in srs: srs.append(s)
         out[g["id"]] = dict(epic=g["epic"], name=g["name"], members=g["members"],
                             deps=deps, srs=srs,
-                            cx=max((m["cx"] for m in ms), key=lambda x: RANK.get(x, 0)),
+                            cx=max((m["cx"] for m in ms), key=lambda x: RANK.get(x, 0)) if ms else "M",
                             blocked=any(m["blocked"] for m in ms))
     blocks = collections.defaultdict(list)
     for gid, g in out.items():
@@ -56,7 +58,7 @@ def topo(out):
 def row(gid, g, max_srs=3):
     srs = " · ".join(g["srs"][:max_srs]) + (" 외" if len(g["srs"]) > max_srs else "")
     return (f"| {'🔴 ' if g['blocked'] else ''}**{gid}** | {g['epic']} | {g['name']} "
-            f"| {', '.join(g['members'])} | {srs} "
+            f"| {str(len(g['members']))+'건' if g['members'] else '신규'} | {srs} "
             f"| {', '.join(g['deps']) or 'None'} | {', '.join(g['blocks']) or '—'} | {g['cx']} |")
 
 if __name__ == "__main__":
@@ -71,7 +73,7 @@ if __name__ == "__main__":
           + (f" · ⚠️ 순환 {cycle}" if cycle else ""))
     print(f"차단 그룹 {sum(1 for g in out.values() if g['blocked'])}개\n")
     if "--emit" in sys.argv:
-        HDR = ("| Task ID | Epic (도메인) | Feature (기능명) | 구성 (원본) | 관련 SRS 섹션 "
+        HDR = ("| Task ID | Epic (도메인) | Feature (기능명) | 작업 수 | 관련 SRS 섹션 "
                "| 선행 태스크 | 후행 태스크 (Blocks) | 복잡도 |\n"
                "| --- | --- | --- | --- | --- | --- | --- | :---: |")
         cur = None

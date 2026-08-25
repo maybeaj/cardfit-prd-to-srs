@@ -6,7 +6,7 @@
 
 **날짜:** 2026-08-25
 
-**근거 문서:** TASK-CARDFIT-001 **v2.0 축약판** (`../[태스크 리스트] CardFit.md`) · SRS-CARDFIT-001 §6.1
+**근거 문서:** TASK-CARDFIT-001 v2.1 (`../[태스크 리스트] CardFit.md`) · SRS-CARDFIT-001 §6.1
 
 **템플릿:** `.github/ISSUE_TEMPLATE/feature-task.md` (TPL-CARDFIT-001)
 
@@ -20,14 +20,12 @@
 
 배치 1을 끝내면 **`MK-01`·`MK-02`가 즉시 착수 가능**해지고, 그 시점에서 FE 7개 그룹의 백엔드 직렬 의존이 풀린다.
 
-| 태스크 | 구성 (원본) | 복잡도 | Blocks | 라벨 |
-| :---: | --- | :---: | --- | --- |
-| **CT-01** | CT-001·002·003 | M | CT-02 · MK-01 · MK-02 · BE-11 · BE-19 | `epic:api` `layer:ct` `priority:p1` `contract:api` |
-| **CT-02** | CT-004 | M | MK-02 · BE-12 · BE-19 | `epic:api` `layer:ct` `priority:p0` `contract:api` |
+| 태스크 | 작업 수 | 복잡도 | Blocks | 라벨 |
+| :---: | :---: | :---: | --- | --- |
+| **CT-01** | 3건 | M | CT-02 · MK-01 · MK-02 · BE-11 · BE-19 | `epic:api` `layer:ct` `priority:p1` `contract:api` |
+| **CT-02** | 1건 | M | MK-02 · BE-12 · BE-19 | `epic:api` `layer:ct` `priority:p0` `contract:api` |
 
 > **`CT-02`가 `priority:p0`인 이유** — 에러 코드 체계는 `CF-4221`(근거 미달, GR3)과 `CF-4030`(오조회, GR5)을 포함한다. Guardrail 2건의 판정 결과를 실어 나르는 통로라 P0다.
-
-> **v2.0 축약 반영** — 이전 판의 `CT-001`·`CT-002`·`CT-003`(도메인별 DTO 3건)이 `CT-01` 한 장으로 합쳐졌다. 세 도메인이 같은 응답 봉투를 공유하므로 나누면 봉투 정의가 중복된다. **AC는 세 도메인 것을 모두 보존했다.**
 
 **공통 기술 전제** — C-TEC-001·002에 따라 Next.js App Router 단일 코드베이스이며, DTO는 **TypeScript 타입 + 런타임 스키마 검증**으로 구현한다. 검증 라이브러리는 미지정이므로 팀 표준을 따른다.
 
@@ -45,7 +43,7 @@ assignees: ''
 ---
 
 ## 🎯 Summary
-- 기능명: [CT-01] API DTO 전 도메인 정의 — 구성: `CT-001` `CT-002` `CT-003`
+- 기능명: [CT-01] API DTO 전 도메인 정의 (Calculation · Evidence · Outcome)
 - 목적: 계산·근거·완주 세 도메인의 요청·응답 타입과 런타임 검증 규칙을 한 곳에 고정해, 백엔드·프론트엔드·Mock이 동일한 계약을 참조하게 한다.
 
 ## 🔗 References (Spec & Context)
@@ -58,7 +56,7 @@ assignees: ''
 - 관련 요구사항: `REQ-FUNC-003`(시나리오 3개) · `REQ-FUNC-004`(게이팅) · `REQ-FUNC-006`(근거 6항목) · `REQ-FUNC-010`(완주 계측) · `REQ-EXC-001`·`002`
 
 ## ✅ Task Breakdown (실행 계획)
-**[A] 공통 기반 — 원본 `CT-001`**
+**[A] 공통 기반 · Calculation 도메인**
 - [ ] 계약 모듈 디렉터리 생성 — BE·FE·Mock이 함께 import 하는 단일 위치 (예: `src/contracts/calculation/`)
 - [ ] 공통 응답 봉투 타입 `ApiResponse<T>` 정의 — `data?` / `warning?` / `error?` 3키, 실패 시 `data` 키 자체를 생략
 - [ ] SRS §6.2의 enum 4종을 계약 타입으로 옮김 — `ScenarioType`(LESS·AS_EXPECTED·MORE) · `CalculationStatus`(REQUESTED·SUCCESS·FAILED·PARTIAL) · `GatingResult`(KEEP_CURRENT·RECOMMEND_CHANGE) · `TransitionCostItem`
@@ -73,7 +71,7 @@ assignees: ''
 - [ ] 계약 스냅샷 테스트 작성 — 스키마 변경 시 진단이 뜨도록
 - [ ] `README` 또는 모듈 주석에 **"이 계약을 바꾸면 FE·Mock·테스트를 함께 갱신한다"** 를 명시
 
-**[B] Evidence 도메인 — 원본 `CT-002`**
+**[B] Evidence 도메인**
 - [ ] `EvidenceItemType` enum 정의 — `PERFORMANCE_TIER` · `DISCOUNT_CAP` · `ANNUAL_FEE` · `EXCLUSION` · `BASE_DATE` · `UNREFLECTED` (SRS §6.1.3)
 - [ ] `EvidenceItem` 스키마 — `type` · `label` · `value` · `sourceRuleVersion?`
 - [ ] `EvidenceResponse` 스키마 — `items[]` · `unreflectedItems[]` · `ruleVersions[]` · `termsSummary?` · `rationale?` · `scopeNotice`
@@ -85,7 +83,7 @@ assignees: ''
 - [ ] 6항목 미달 상황을 표현할 타입을 정의 — 성공 응답이 아니라 `CF-4221` 오류로 귀결됨을 타입 수준에서 분리
 - [ ] 계약 스냅샷 테스트 작성 — 6항목 충족/미달 두 케이스
 
-**[C] Outcome 도메인 — 원본 `CT-003`**
+**[C] Outcome 도메인**
 - [ ] `OutcomeLogStatus` enum을 계약 타입으로 옮김 — `NOT_SENT` · `SENT` · `RESPONDED` · `NO_RESPONSE` (SRS §6.2)
 - [ ] `CompletionRequest` 스키마 — `completed: boolean` · `incompleteReason?: string`
 - [ ] `CompletionResponse` 스키마 — `recorded: boolean`
@@ -144,7 +142,7 @@ Scenario 10: 완주 계측 응답에 실행 개입 필드 부재
 - 정확성: 모든 `*Won` 필드는 **원 단위 정수**다. 부동소수점 표현을 허용하면 배분 합계 오차 ≤ 1원(REQ-FUNC-005)과 재계산 불일치 0건(REQ-NF-002)이 JSON 경계에서 깨진다.
 - 보안: 응답 DTO에 **타인 식별 정보를 담을 수 있는 필드를 두지 않는다.** 오조회 0건(REQ-NF-004 · GR5)의 계약 수준 방어선이다.
 - 성능: 이 계약을 쓰는 `POST /api/v1/calculate`는 p95 ≤ 5s(REQ-NF-001). 검증 로직이 응답 경로에서 병목이 되지 않도록 스키마 컴파일을 요청마다 반복하지 않는다.
-- 아키텍처: 계약 모듈은 계산 로직·AI 모듈 어느 쪽도 import 하지 않는다. 의존성 경계 린트(IN-008) 대상이다.
+- 아키텍처: 계약 모듈은 계산 로직·AI 모듈 어느 쪽도 import 하지 않는다. 의존성 경계 린트(`IN-04`) 대상이다.
 - 성능(근거): `GET /evidence`는 p95 ≤ 1s(REQ-NF-001).
 - 정확성(근거): `items` 최소 6건은 **계약 수준의 하드 제약**이다. 애플리케이션 검증에만 맡기면 GR3의 방어선이 한 겹뿐이 된다.
 - 스코프(완주): 이 계약은 **측정 전용**이다. 실행 개입 엔드포인트는 존재하지 않으며, 계약에도 그 여지를 남기지 않는다(ADR-04).
@@ -179,7 +177,7 @@ assignees: ''
 ---
 
 ## 🎯 Summary
-- 기능명: [CT-02] 공통 에러 코드 체계 구현 — 구성: `CT-004`
+- 기능명: [CT-02] 공통 에러 코드 체계 구현
 - 목적: 예외 6건에 고유 코드를 부여해, **같은 HTTP 상태를 쓰는 서로 다른 거부를 클라이언트가 분기**할 수 있게 한다.
 
 ## 🔗 References (Spec & Context)
@@ -263,4 +261,4 @@ Scenario 5: 매핑 누락 검출
 
 ---
 
-*근거 문서: `../[태스크 리스트] CardFit.md` (TASK-CARDFIT-001 v2.0 축약판)*
+*근거 문서: `../[태스크 리스트] CardFit.md` (TASK-CARDFIT-001 v2.1)*

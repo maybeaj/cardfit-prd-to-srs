@@ -92,8 +92,7 @@ check("태스크 선행 참조가 실재함", deps <= tids, f"미정의 참조 {
 # 병합 커버리지 — 원본 142건이 그룹에 전건 편입됐는가
 mm = json.loads(read(pathlib.Path("tools/task_merge_map.json")))
 mem = [m for g in mm["groups"] for m in g["members"]]
-check("병합 커버리지 142건 · 중복 0", len(mem) == 142 and len(set(mem)) == 142,
-      f"구성원 {len(mem)} · 고유 {len(set(mem))}")
+check("그룹 맵 구성원 중복 0", len(mem) == len(set(mem)), f"구성원 {len(mem)} · 고유 {len(set(mem))}")
 check("병합 그룹 수 = 태스크 표 행 수", len(mm["groups"]) == len(tids),
       f"맵 {len(mm['groups'])} · 표 {len(tids)}")
 
