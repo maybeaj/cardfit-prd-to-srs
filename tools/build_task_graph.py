@@ -7,8 +7,8 @@
 import re, sys, argparse, pathlib, collections
 
 TASKS = pathlib.Path("docs/[태스크 리스트] CardFit.md")
-ID = r"(?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{3}[ab]?"
-ROW = re.compile(rf"^\|\s*(🔴 )?({ID})\s*\|(.*)$")
+ID = r"(?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{2,3}[ab]?"
+ROW = re.compile(rf"^\|\s*(?:🔴 )?\*?\*?({ID})\*?\*?\s*\|(.*)$")
 
 def parse(text):
     rows = []
@@ -16,8 +16,8 @@ def parse(text):
         m = ROW.match(line)
         if not m: continue
         cells = line.split("|")
-        if len(cells) < 8: continue
-        rows.append(dict(line=i, id=m.group(2), blocked=bool(m.group(1)),
+        if len(cells) < 9: continue
+        rows.append(dict(line=i, id=m.group(1), blocked="🔴" in cells[1],
                          deps=[d for d in re.findall(ID, cells[-3])],
                          raw=line))
     return rows

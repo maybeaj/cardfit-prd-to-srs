@@ -81,14 +81,21 @@ check("GTD 문서의 샘플 수 표기 일치", f"**{len(samples)}건**" in gtd,
 
 # ── 6. 태스크 리스트 ────────────────────────────────────
 # 표의 첫 열(행 시작)에 있는 ID만 정의로 인정한다 — 선행 태스크 열과 구분
-rows = re.findall(r"^\|\s*(?:🔴 )?((?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{3}[ab]?)\s*\|", task, re.M)
+rows = re.findall(r"^\|\s*(?:🔴 )?\*\*((?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{2})\*\*\s*\|", task, re.M)
 tids = set(rows)
 check("태스크 ID 중복 없음", len(tids) == len(rows), f"정의 {len(rows)}건 / 고유 {len(tids)}건")
 check("태스크 총계 표기 일치", f"**{len(rows)}** |" in task or f"**{len(rows)}**" in task,
       f"실측 {len(rows)}건")
-deps = set(re.findall(r"(?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{3}[ab]?", task))
-check("태스크 선행 참조가 실재함", deps <= tids | {"DA-001~010"},
-      f"미정의 참조 {sorted(deps - tids)[:5]}")
+deps = set(re.findall(r"(?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{2}(?![0-9])", task))
+check("태스크 선행 참조가 실재함", deps <= tids, f"미정의 참조 {sorted(deps - tids)[:5]}")
+
+# 병합 커버리지 — 원본 142건이 그룹에 전건 편입됐는가
+mm = json.loads(read(pathlib.Path("tools/task_merge_map.json")))
+mem = [m for g in mm["groups"] for m in g["members"]]
+check("병합 커버리지 142건 · 중복 0", len(mem) == 142 and len(set(mem)) == 142,
+      f"구성원 {len(mem)} · 고유 {len(set(mem))}")
+check("병합 그룹 수 = 태스크 표 행 수", len(mm["groups"]) == len(tids),
+      f"맵 {len(mm['groups'])} · 표 {len(tids)}")
 
 # ── 6-2. 태스크 그래프 무결성 (build_task_graph.py 위임) ──
 import subprocess

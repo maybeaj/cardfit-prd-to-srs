@@ -48,13 +48,16 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 │   ├── [태스크 리스트] CardFit.md
 │   ├── [GitHub 프로젝트용 TASK 템플릿] CardFit.md
 │   ├── [태스크 추출 방법론 적합성 평가] CardFit.md
+│   ├── [태스크 축약 분석] CardFit.md
 │   └── tasks/                                ← 배치별 이슈 명세
-│       └── S1-계약-API.md                     (CT-001~004)
+│       └── S1-계약-API.md                     (CT-01 · CT-02)
 ├── .github/ISSUE_TEMPLATE/
 │   └── feature-task.md                       ← GitHub 이슈 템플릿
 └── tools/                                    ← 실행 도구
     ├── verify_docs.py                        ← 문서 정합성 검증
     ├── build_task_graph.py                   ← Blocks 생성·위상 정렬
+    ├── apply_task_merge.py                   ← 병합 맵 적용·표 생성
+    ├── task_merge_map.json                   ← 병합 맵 (142→53)
     ├── generate_boundary_cases.py            ← 경계값 케이스 생성
     ├── scan_prohibited_terms.py              ← 금지어 스캐너
     ├── boundary-cases.json                   ← 생성물 (260건)
@@ -129,9 +132,9 @@ python3 tools/scan_prohibited_terms.py --dict tools/prohibited-terms.json --samp
 | 설계 문서 (SDD) | ✅ UseCase·Component·Class·Sequence·Flowchart·State |
 | 테스트 명세서 (STD) | ✅ 27건 · 추적표 전건 일치 |
 | 배포 게이트 데이터 (GTD) | ✅ D8 해소 — 경계값 260건 · 스캐너 검증 통과 |
-| 태스크 리스트 (TASK) | ✅ **142건** · 위상 계층 10 · 착수 차단 9건 |
+| 태스크 리스트 (TASK) | ✅ **v2.0 축약판 53건** · 커버리지 142/142 · 차단 7건 |
 | Phase 0 방법론 적합화 | ✅ CT·MK 신설 · CQRS 분해 · TS 27건 · Blocks 자동 생성 |
-| **Phase 1 — 배치 1 이슈 명세** | ✅ **CT-001~004** (`docs/tasks/S1-계약-API.md`) |
+| **Phase 1 — 배치 1 이슈 명세** | ✅ **CT-01 · CT-02** (`docs/tasks/S1-계약-API.md`) |
 | **D16 규칙 엔진 계산 명세** | 🔴 **미정 — 기획 결정 필요** (SRS 4.1.0 RE-1~RE-8) |
 | D2 · D5 · D11 · D4 · DEC-3b | 🔴 미정 |
 
