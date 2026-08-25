@@ -46,6 +46,8 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 │   ├── [설계 문서] CardFit (한글).md
 │   ├── [테스트 명세서] CardFit (한글).md
 │   ├── [배포 게이트 데이터] CardFit (한글).md
+│   ├── [계산 명세서] CardFit (한글).md          ← D16·D2·D5 결정본
+│   ├── [픽스처 데이터 명세] CardFit (한글).md     ← D1·D4·D11·D13·D14 해소
 │   ├── [태스크 리스트] CardFit.md
 │   ├── [GitHub 프로젝트용 TASK 템플릿] CardFit.md
 │   └── tasks/                                ← 배치별 이슈 명세
@@ -58,6 +60,8 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
     ├── apply_task_merge.py                   ← 태스크 표 생성
     ├── task_merge_map.json                   ← 그룹 구성 맵
     ├── generate_boundary_cases.py            ← 경계값 케이스 생성
+    ├── generate_fixtures.py                  ← 픽스처 생성 + 참조 계산기
+    ├── fixtures/                             ← 사전 생성 시연 데이터 7종
     ├── scan_prohibited_terms.py              ← 금지어 스캐너
     ├── boundary-cases.json                   ← 생성물 (260건)
     ├── prohibited-terms.json                 ← 금지어 사전
@@ -78,14 +82,18 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 | **SDD-CARDFIT-001** | `docs/[설계 문서] CardFit (한글).md` | 다이어그램 27개 · 클래스·시퀀스·순서도·상태 |
 | **STD-CARDFIT-001** | `docs/[테스트 명세서] CardFit (한글).md` | 테스트 27건 (P0 6건 · 배포 게이트 2건) |
 | **GTD-CARDFIT-001** | `docs/[배포 게이트 데이터] CardFit (한글).md` | 경계값 260건 · 금지어 사전 |
-| **TASK-CARDFIT-001** | `docs/[태스크 리스트] CardFit.md` | 개발 49건 + 디자인 5건 |
+| **CALC-CARDFIT-001** | `docs/[계산 명세서] CardFit (한글).md` | 규칙 엔진 계산 명세 · 게이팅 기준값 (D16·D2·D5) |
+| **FXT-CARDFIT-001** | `docs/[픽스처 데이터 명세] CardFit (한글).md` | 외부 연동 없는 시연 데이터 (D1·D4·D11·D13·D14) |
+| **TASK-CARDFIT-001** | `docs/[태스크 리스트] CardFit.md` | 개발 53건 + 디자인 5건 · 착수 차단 0 |
 
 ### 3.1 문서 파생 관계
 
 ```
 PRD ──> SRS ──┬──> SDD  (어떻게 만드나)
               ├──> STD  (어떻게 확인하나) ──> GTD (게이트 입력)
-              └──> TASK (무엇부터 하나)
+              ├──> CALC (어떻게 계산하나) ──┐
+              ├──> FXT  (무엇으로 시연하나) ─┤
+              └──> TASK (무엇부터 하나) <───┘
 ```
 
 ---
@@ -108,12 +116,14 @@ PRD ──> SRS ──┬──> SDD  (어떻게 만드나)
 ## 5. 도구
 
 ```bash
-# 문서 정합성 검증 — 20개 항목
+# 문서 정합성 검증 — 45개 항목
 python3 tools/verify_docs.py
 
-# 경계값 케이스 생성 (배포 게이트 ①)
-python3 tools/generate_boundary_cases.py
-python3 tools/generate_boundary_cases.py --abs 30000 --rel 0.10 --delta 0.20   # D2·D5 확정 후
+# 픽스처 생성 + 참조 계산기 검증 (시연 데이터)
+python3 tools/generate_fixtures.py
+
+# 경계값 케이스 생성 (배포 게이트 ①) — D2·D5 바인딩 완료
+python3 tools/generate_boundary_cases.py --abs 3000 --rel 0.10 --delta 0.20 -o tools/boundary-cases.json
 
 # 금지어 스캔 (배포 게이트 ②)
 python3 tools/scan_prohibited_terms.py --dict tools/prohibited-terms.json --samples tools/scan-samples.json
@@ -132,15 +142,19 @@ python3 tools/scan_prohibited_terms.py --dict tools/prohibited-terms.json --samp
 | 설계 문서 (SDD) | ✅ UseCase·Component·Class·Sequence·Flowchart·State |
 | 테스트 명세서 (STD) | ✅ 27건 · 추적표 전건 일치 |
 | 배포 게이트 데이터 (GTD) | ✅ D8 해소 — 경계값 260건 · 스캐너 검증 통과 |
-| 태스크 리스트 (TASK) | ✅ **54건** (개발 49 · 디자인 5) · 착수 차단 7건 |
+| 태스크 리스트 (TASK) | ✅ **58건** (개발 53 · 디자인 5) · **착수 차단 0건** |
+| 계산 명세서 (CALC) | ✅ **D16·D2·D5 해소** — RE-1~8 확정 · 임계값 월 3,000원/10% · 증감 폭 ±20% |
+| 픽스처 데이터 (FXT) | ✅ **D1·D4·D11·D13·D14 해소** — 카드 24종 · 페르소나 5인 · 거래 348건 |
 | 태스크 관점 분리 | ✅ UX 설계(DS 5) ↔ 기능 구현(FE 8) 대응 전건 확인 |
 | **Phase 1 — 배치 1 이슈 명세** | ✅ **CT-01 · CT-02** (`docs/tasks/S1-계약-API.md`) |
-| **D16 규칙 엔진 계산 명세** | 🔴 **미정 — 기획 결정 필요** (SRS 4.1.0 RE-1~RE-8) |
-| D2 · D5 · D11 · D4 · DEC-3b | 🔴 미정 |
+| SRS 10.3 미결 의존성 16건 | ✅ 해소 7 · 🟡 시연 범위 해소 5 · ⬜ 범위 밖 4 |
 
 ### 6.1 다음 결정
 
-**D16(규칙 엔진 계산 명세)이 최우선입니다.** 태스크 5건을 동시에 막고 있고, D2(임계값)보다 선행해야 합니다 — 전환비용 산정 기준(RE-5) 없이 임계값을 정하면 임계값이 무의미해집니다.
+**착수를 막는 의존성은 없습니다.** 남은 판단은 두 갈래입니다.
+
+1. **🟡 5건(D1·D4·D9·D11·D13)** — 픽스처가 미룬 항목입니다. 실서비스 전환 시점에 다시 열리며, 그때 바뀌는 범위는 어댑터(IN-08·BE-20) 뒤로 가둬 뒀습니다.
+2. **전환비용 계수(RE-5)와 임계값(D2)** — 5,000원·10,000원·월 3,000원·10%는 판단값이라 E2(Concierge Test)에서 사용자 납득 여부를 확인한 뒤 조정합니다. 조정하면 `rule_spec_version`을 올리고 경계값 260건을 다시 바인딩합니다.
 
 ---
 

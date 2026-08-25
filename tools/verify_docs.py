@@ -11,6 +11,8 @@ SDD  = D / "[설계 문서] CardFit (한글).md"
 STD  = D / "[테스트 명세서] CardFit (한글).md"
 GTD  = D / "[배포 게이트 데이터] CardFit (한글).md"
 TASK = D / "[태스크 리스트] CardFit.md"
+CALC = D / "[계산 명세서] CardFit (한글).md"
+FXT  = D / "[픽스처 데이터 명세] CardFit (한글).md"
 
 REQ = re.compile(r"REQ-(?:FUNC|NF|EXC)-\d{3}")
 TC  = re.compile(r"TC-(?:FUNC|NF|EXC)-\d{3}")
@@ -28,13 +30,13 @@ def check(name, ok, detail=""):
     if not ok: fails.append(name)
 
 # ── 1. 파일 존재 ─────────────────────────────────────────
-for p in (SRS, SDD, STD, GTD, TASK):
+for p in (SRS, SDD, STD, GTD, TASK, CALC, FXT):
     check(f"파일 존재: {p.name}", p.exists())
 if fails:
     for n, ok, d in checks: print(f"{'✅' if ok else '❌'} {n}")
     sys.exit(1)
 
-srs, sdd, std, gtd, task = map(read, (SRS, SDD, STD, GTD, TASK))
+srs, sdd, std, gtd, task, calc, fxt = map(read, (SRS, SDD, STD, GTD, TASK, CALC, FXT))
 
 # ── 2. 요구사항 ID 일관성 ────────────────────────────────
 srs_req = ids(srs, REQ)
@@ -117,6 +119,58 @@ for tf in sorted(pathlib.Path("docs/tasks").glob("*.md")) if pathlib.Path("docs/
                or len(re.findall(r"^- Given:", b, re.M)) != len(re.findall(r"^- Then:", b, re.M))]
     check(f"이슈 명세 템플릿 준수: {tf.name}", not bad and not gwt_bad and blocks,
           f"섹션누락 {len(bad)} · GWT불일치 {len(gwt_bad)} · 블록 {len(blocks)}")
+
+# ── 6-4. 계산 명세 ↔ 게이트 파라미터 바인딩 ──────────────
+PARAMS = {"abs_threshold": 3000, "rel_threshold": 0.10, "scenario_delta": 0.20}
+check("경계값 파라미터 바인딩 완료", bc.get("params_bound") is True and bc["params"] == PARAMS,
+      f"실측 {bc.get('params')}")
+for label, val in (("절대 임계값", "월 3,000원"), ("상대 임계값", "상대 10%"),
+                   ("증감 폭", "±20%")):
+    check(f"CALC 문서 {label} 표기", val in calc, f"'{val}' 미표기")
+check("SRS 10.3 미결 표기 소거", "🔴 미정" not in srs and "🔴 미확인" not in srs,
+      "10.3에 🔴 잔존")
+blocked_rows = re.findall(r"^\|\s*🔴", task, re.M)
+check("태스크 리스트 착수 차단 0건", not blocked_rows, f"차단 행 {len(blocked_rows)}건")
+
+# ── 6-5. 픽스처 실측 ↔ 문서 주장 ─────────────────────────
+FX = pathlib.Path("tools/fixtures")
+fx = {}
+for name in ("card-products", "terms", "personas", "mydata-snapshots",
+             "expected-results", "ai-cache", "demo-clock"):
+    f = FX / f"{name}.json"
+    check(f"픽스처 존재: {name}.json", f.exists())
+    if f.exists():
+        fx[name] = json.loads(read(f))
+if len(fx) == 7:
+    n_prod = len(fx["card-products"]["products"])
+    n_psn = len(fx["personas"]["personas"])
+    n_tx = sum(len(s["transactions"]) for s in fx["mydata-snapshots"]["snapshots"])
+    check("FXT 문서의 카드 상품 수 표기 일치", f"**{n_prod}종**" in fxt, f"실측 {n_prod}종")
+    check("FXT 문서의 페르소나 수 표기 일치", f"**{n_psn}인**" in fxt, f"실측 {n_psn}인")
+    check("FXT 문서의 거래 건수 표기 일치", f"**{n_tx}건**" in fxt, f"실측 {n_tx}건")
+    exp = {r["persona_id"]: r for r in fx["expected-results"]["results"]}
+    ok = all(r["scenarios"] is None or
+             r["scenarios"]["AS_EXPECTED"]["gating"] == r["expect"] for r in exp.values())
+    check("픽스처 기대 결론 = 참조 계산기 실측", ok,
+          [k for k, r in exp.items()
+           if r["scenarios"] and r["scenarios"]["AS_EXPECTED"]["gating"] != r["expect"]])
+    check("픽스처 계산 파라미터 = CALC 결정값",
+          fx["card-products"]["params"]["abs_threshold"] == PARAMS["abs_threshold"]
+          and fx["card-products"]["params"]["rel_threshold"] == PARAMS["rel_threshold"]
+          and fx["card-products"]["params"]["scenario_delta"] == PARAMS["scenario_delta"],
+          f"실측 {fx['card-products']['params']}")
+    # 픽스처 문구 전건이 금지어 게이트를 통과하는가 (GR4)
+    sys.path.insert(0, "tools")
+    import importlib.util as _il
+    _s = _il.spec_from_file_location("_scan", "tools/scan_prohibited_terms.py")
+    _m = _il.module_from_spec(_s); _s.loader.exec_module(_m)
+    cats, allow = _m.load("tools/prohibited-terms.json")
+    texts = [x["text"] for x in fx["ai-cache"]["explanations"]] \
+          + [x["summary"] for x in fx["ai-cache"]["term_summaries"]] \
+          + [d["text"] for d in fx["terms"]["documents"]]
+    blocked = [x for x in texts
+               if any(h["severity"] == "block" for h in _m.scan(x, cats, allow))]
+    check(f"픽스처 문구 금지어 0건 ({len(texts)}건 검사)", not blocked, f"적발 {len(blocked)}건")
 
 # ── 7. 깨진 파일 참조 ───────────────────────────────────
 stale = [n for n in ("cardfit-srs-v1_0", "cardfit-design-v1_0",

@@ -6,7 +6,7 @@
 import re, json, sys, pathlib, collections
 
 import os
-SRC = pathlib.Path(os.environ.get("TASK_SRC", "/tmp/v11.md"))   # 원본 142건 (git: 356c0cb)
+SRC = pathlib.Path(os.environ.get("TASK_SRC", "tools/task-source-v11.md"))  # 원본 142건 (git: 356c0cb)
 MAP = pathlib.Path("tools/task_merge_map.json")
 ID  = r"(?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{3}[ab]?"
 RANK = {"L": 0, "M": 1, "H": 2}
@@ -38,8 +38,9 @@ def build(rows, groups):
                 if s and s not in srs: srs.append(s)
         out[g["id"]] = dict(epic=g["epic"], name=g["name"], members=g["members"],
                             deps=deps, srs=srs,
-                            cx=max((m["cx"] for m in ms), key=lambda x: RANK.get(x, 0)) if ms else "M",
-                            blocked=any(m["blocked"] for m in ms))
+                            cx=g.get("cx") or (max((m["cx"] for m in ms), key=lambda x: RANK.get(x, 0)) if ms else "M"),
+                            blocked=g.get("blocked_override",
+                                          any(m["blocked"] for m in ms)))
     blocks = collections.defaultdict(list)
     for gid, g in out.items():
         for d in g["deps"]: blocks[d].append(gid)

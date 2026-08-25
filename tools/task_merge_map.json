@@ -1,6 +1,6 @@
 {
-  "spec": "RDUC-CARDFIT-001 §3 병합 맵 — 142건 → 53건",
-  "version": "1.0",
+  "spec": "RDUC-CARDFIT-001 §3 병합 맵 — 142건 → 53건 · 신규 5건(FE-08 · DA-05·06 · BE-20 · QA-04)",
+  "version": "2.0",
   "groups": [
     {
       "id": "CT-01",
@@ -85,7 +85,7 @@
     {
       "id": "IN-06",
       "epic": "Infra/Observability",
-      "name": "관측·알림·발송·분석 도구 연동 (**D14 일괄**)",
+      "name": "관측·알림·발송·분석 — **DB 테이블 4종 자체 구현** (D14 해소)",
       "members": [
         "IN-010",
         "IN-011",
@@ -105,10 +105,11 @@
     {
       "id": "IN-08",
       "epic": "Infra/Integration",
-      "name": "마이데이터 연동 경로 (고정IP·인증서)",
+      "name": "마이데이터 어댑터 경계 + **픽스처 프로바이더** (D1·D11 해소)",
       "members": [
         "IN-016"
-      ]
+      ],
+      "blocked_override": false
     },
     {
       "id": "DA-01",
@@ -151,6 +152,37 @@
       ]
     },
     {
+      "id": "DA-05",
+      "epic": "Data/Fixture",
+      "name": "**픽스처 시드 ①** — 카드상품 24종 · 약관 24건 · AI 캐시 적재",
+      "members": [],
+      "extra_deps": [
+        "DA-02"
+      ],
+      "srs": [
+        "FXT 2장 · 4장",
+        "6.4.2",
+        "4.1 REQ-FUNC-003"
+      ],
+      "cx": "M"
+    },
+    {
+      "id": "DA-06",
+      "epic": "Data/Fixture",
+      "name": "**픽스처 시드 ②** — 페르소나 5인 · 거래 348건 · 데모 클럭",
+      "members": [],
+      "extra_deps": [
+        "DA-03",
+        "DA-05"
+      ],
+      "srs": [
+        "FXT 3장 · 6장",
+        "6.4.2",
+        "4.1 REQ-FUNC-002"
+      ],
+      "cx": "M"
+    },
+    {
       "id": "BE-01",
       "epic": "Auth",
       "name": "인증·세션 + `AccessOwnershipVerifier` 전건 대조",
@@ -176,7 +208,8 @@
         "BE-005",
         "BE-006",
         "BE-007"
-      ]
+      ],
+      "blocked_override": false
     },
     {
       "id": "BE-04",
@@ -203,7 +236,8 @@
       "members": [
         "BE-011",
         "BE-012"
-      ]
+      ],
+      "blocked_override": false
     },
     {
       "id": "BE-07",
@@ -212,7 +246,8 @@
       "members": [
         "BE-014",
         "BE-017"
-      ]
+      ],
+      "blocked_override": false
     },
     {
       "id": "BE-08",
@@ -222,7 +257,8 @@
         "BE-015",
         "BE-019",
         "BE-038"
-      ]
+      ],
+      "blocked_override": false
     },
     {
       "id": "BE-09",
@@ -238,7 +274,8 @@
       "name": "`DeterminismVerifier` + 경계값 회귀 스위트 (260건)",
       "members": [
         "BE-020"
-      ]
+      ],
+      "blocked_override": false
     },
     {
       "id": "BE-11",
@@ -282,7 +319,8 @@
         "BE-024",
         "BE-032a",
         "BE-032b"
-      ]
+      ],
+      "blocked_override": false
     },
     {
       "id": "BE-16",
@@ -324,6 +362,23 @@
         "BE-036",
         "BE-037"
       ]
+    },
+    {
+      "id": "BE-20",
+      "epic": "AI/Fixture",
+      "name": "AI 산출물 프로바이더 — 캐시 조회 ↔ 실호출 전환 스위치",
+      "members": [],
+      "extra_deps": [
+        "BE-14",
+        "DA-05",
+        "IN-05"
+      ],
+      "srs": [
+        "FXT 1장 · 4장",
+        "9장 ADR-02",
+        "1.5.3 DEC-3a·3b"
+      ],
+      "cx": "M"
     },
     {
       "id": "FE-01",
@@ -486,6 +541,25 @@
       "members": [
         "QA-007"
       ]
+    },
+    {
+      "id": "QA-04",
+      "epic": "QA/Demo",
+      "name": "**시연 회귀** — 페르소나 5인 × 시나리오 3개 기대 결론 대조",
+      "members": [],
+      "extra_deps": [
+        "BE-09",
+        "BE-12",
+        "DA-06",
+        "FE-03",
+        "FE-07"
+      ],
+      "srs": [
+        "FXT 7장",
+        "4.2 REQ-NF-002",
+        "4.1 REQ-FUNC-004"
+      ],
+      "cx": "H"
     },
     {
       "id": "DS-01",
