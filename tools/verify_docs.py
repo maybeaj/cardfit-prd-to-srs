@@ -97,6 +97,21 @@ g = subprocess.run([sys.executable, "tools/build_task_graph.py"],
 check("태스크 선행 참조 무결성", g.returncode == 0,
       [l for l in g.stdout.split("\n") if "❌" in l][:1])
 
+# ── 6-3. 이슈 명세 템플릿 준수 ───────────────────────────
+SECT = ["## 🎯 Summary", "## 🔗 References (Spec & Context)",
+        "## ✅ Task Breakdown (실행 계획)", "## 🧪 Acceptance Criteria (BDD/GWT)",
+        "## ⚙️ Technical & Non-Functional Constraints",
+        "## 🏁 Definition of Done (DoD)", "## 🚧 Dependencies & Blockers"]
+for tf in sorted(pathlib.Path("docs/tasks").glob("*.md")) if pathlib.Path("docs/tasks").exists() else []:
+    body = read(tf)
+    blocks = re.findall(r"```markdown\n(.*?)\n```", body, re.S)
+    bad = [b[:40] for b in blocks if not all(x in b for x in SECT)]
+    gwt_bad = [b[:40] for b in blocks
+               if len(re.findall(r"^Scenario \d+:", b, re.M)) < 2
+               or len(re.findall(r"^- Given:", b, re.M)) != len(re.findall(r"^- Then:", b, re.M))]
+    check(f"이슈 명세 템플릿 준수: {tf.name}", not bad and not gwt_bad and blocks,
+          f"섹션누락 {len(bad)} · GWT불일치 {len(gwt_bad)} · 블록 {len(blocks)}")
+
 # ── 7. 깨진 파일 참조 ───────────────────────────────────
 stale = [n for n in ("cardfit-srs-v1_0", "cardfit-design-v1_0",
                      "cardfit-testcase-v1_0", "cardfit-gate-data-v1_0", "gate/")
