@@ -42,6 +42,7 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 ├── 29148-2018-ISOIECIEEE.pdf                 ← 준거 표준 (저장소 미포함)
 ├── docs/                                     ← 산출물
 │   ├── [SRS 문서] CardFit (한글).md
+│   ├── [SRS 이해 가이드] CardFit (한글).md      ← 읽는 방법 안내
 │   ├── [설계 문서] CardFit (한글).md
 │   ├── [테스트 명세서] CardFit (한글).md
 │   ├── [배포 게이트 데이터] CardFit (한글).md
@@ -75,6 +76,7 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 | --- | --- | --- |
 | **PRD-CARDFIT-001** | `cardfit-prd-v1_0.md` | 입력 PRD 겸 요구사항 추적표 |
 | **SRS-CARDFIT-001** | `docs/[SRS 문서] CardFit (한글).md` | 요구사항 27건 · 다이어그램 17개 |
+| **GUIDE-CARDFIT-001** | `docs/[SRS 이해 가이드] CardFit (한글).md` | SRS를 읽는 방법 — 경로 3종 · 자가진단 12문항 |
 | **SDD-CARDFIT-001** | `docs/[설계 문서] CardFit (한글).md` | 다이어그램 27개 · 클래스·시퀀스·순서도·상태 |
 | **STD-CARDFIT-001** | `docs/[테스트 명세서] CardFit (한글).md` | 테스트 27건 (P0 6건 · 배포 게이트 2건) |
 | **GTD-CARDFIT-001** | `docs/[배포 게이트 데이터] CardFit (한글).md` | 경계값 260건 · 금지어 사전 |
