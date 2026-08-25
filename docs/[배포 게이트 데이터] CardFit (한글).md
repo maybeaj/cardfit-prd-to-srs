@@ -6,9 +6,13 @@
 
 **개정 버전:** 1.0
 
-**날짜:** 2026-08-24
+**날짜:** 2026-08-25
 
-**입력 문서:** `cardfit-srs-v1_0.md` (SRS-CARDFIT-001) · `cardfit-testcase-v1_0.md` (STD-CARDFIT-001)
+**근거 문서:** STD-CARDFIT-001 v1.0 (`[테스트 명세서] CardFit (한글).md`)
+
+**참조 문서:** SRS-CARDFIT-001 (`[SRS 문서] CardFit (한글).md`)
+
+**해소 대상:** 의존성 D8 (SRS 10.3)
 
 ---
 
@@ -34,21 +38,21 @@ D8이 없으면 C-TEC-007a(배포 게이트 허용)를 확정한 의미가 사�
 
 | 파일 | 역할 | 소비 대상 |
 | --- | --- | :---: |
-| `gate/generate_boundary_cases.py` | 경계 차원 정의 + 케이스 생성기 | 게이트 ① |
-| `gate/boundary-cases.json` | 생성된 케이스 **260건** | 게이트 ① |
-| `gate/prohibited-terms.json` | 금지어 사전 — 6 카테고리 · 패턴 **32개** · 허용목록 6개 | 게이트 ② |
-| `gate/scan_prohibited_terms.py` | 스캐너 구현 (allowlist 우선 판정) | 게이트 ② |
-| `gate/scan-samples.json` | 스캐너 자체 검증 샘플 **31건** | 게이트 ② 회귀 |
+| `tools/generate_boundary_cases.py` | 경계 차원 정의 + 케이스 생성기 | 게이트 ① |
+| `tools/boundary-cases.json` | 생성된 케이스 **260건** | 게이트 ① |
+| `tools/prohibited-terms.json` | 금지어 사전 — 6 카테고리 · 패턴 **32개** · 허용목록 6개 | 게이트 ② |
+| `tools/scan_prohibited_terms.py` | 스캐너 구현 (allowlist 우선 판정) | 게이트 ② |
+| `tools/scan-samples.json` | 스캐너 자체 검증 샘플 **31건** | 게이트 ② 회귀 |
 
 **개수를 주장하지 않고 생성·실행해 확인했다.** 아래 결과는 실제 실행 출력이다.
 
 ```
-$ python3 gate/generate_boundary_cases.py
-생성: 260건 → gate/boundary-cases.json
+$ python3 tools/generate_boundary_cases.py
+생성: 260건 → tools/boundary-cases.json
   단독 53건 / 조합 207건
   게이트 요구 200건: ✅ 충족
 
-$ python3 gate/scan_prohibited_terms.py
+$ python3 tools/scan_prohibited_terms.py
 샘플 31건 / 판정 불일치 0건
 종료코드: 0
 ```
@@ -109,7 +113,7 @@ $ python3 gate/scan_prohibited_terms.py
 
 ```bash
 # D2·D5 확정 후
-python3 gate/generate_boundary_cases.py --abs 30000 --rel 0.10 --delta 0.20
+python3 tools/generate_boundary_cases.py --abs 30000 --rel 0.10 --delta 0.20
 # → params_bound: true
 ```
 

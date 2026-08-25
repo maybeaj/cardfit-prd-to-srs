@@ -6,9 +6,11 @@
 
 **개정 버전:** 1.0
 
-**날짜:** 2026-08-24
+**날짜:** 2026-08-25
 
-**입력 문서:** `cardfit-srs-v1_0.md` (SRS-CARDFIT-001 v1.0)
+**근거 문서:** SRS-CARDFIT-001 v1.0 (`[SRS 문서] CardFit (한글).md`)
+
+**참조 문서:** PRD-CARDFIT-001 (`../cardfit-prd-v1_0.md`)
 
 ---
 
@@ -1241,6 +1243,6 @@ stateDiagram-v2
 
 ---
 
-*입력 문서: `cardfit-srs-v1_0.md` (SRS-CARDFIT-001 v1.0)*
+*입력 문서: `[SRS 문서] CardFit (한글).md` (SRS-CARDFIT-001 v1.0)*
 
 *작성자: 기획 분석가, 검토자: 개발팀 리드, 승인자: 제품 책임자 (PM)*
