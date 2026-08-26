@@ -4,13 +4,13 @@
 
 **문서 ID:** HRN-CARDFIT-001
 
-**개정 버전:** 1.0
+**개정 버전:** 1.1
 
 **날짜:** 2026-08-26
 
 **참조 하네스:** `wild-mental/AI-multivender-harness-sample`
 
-**외부 스킬 출처:** [skills.sh](https://www.skills.sh/) — `prisma/skills` · `supabase/agent-skills` · `vercel-labs/agent-skills` · `mattpocock/skills`
+**외부 스킬 출처:** [skills.sh](https://www.skills.sh/) — `prisma/skills` · `supabase/agent-skills` · `vercel-labs/agent-skills` · `mattpocock/skills` · **`wild-mental/*-skill` 4종**
 
 ---
 
@@ -129,6 +129,21 @@ AGENTS.md                    벤더 중립 규칙
 
 **선정 기준 셋** — ① 우리 스택과 직접 맞을 것 ② 벤더 공식이거나 설치 수로 검증됐을 것 ③ 우리 문서가 이미 정한 것과 충돌하지 않을 것.
 
+### 3.1.1 작업 방식 스킬 4종 (v1.1 추가)
+
+출처는 `wild-mental/{grill-it,goal-setting,review-merge,merge-review}-skill` 이며 **사용자가 지정해 설치**했다. 앞의 8종이 *무엇을 어떻게 만드는가*를 다룬다면, 이 넷은 *어떻게 일할 것인가*를 다룬다.
+
+| 스킬 | 무엇을 하나 | 이 프로젝트에서 |
+| --- | --- | --- |
+| **`grill-it`** | 착수 전 미해소 결정 토픽을 전부 추출·가시화하고, 의존 순서대로 하나씩 해소하며 **설계문서와 하네스에 즉시 반영**한다. 재개 가능한 Grill Ledger를 남긴다 | **이미 같은 일을 손으로 했다** — SRS 10.3 미결 의존성 16건을 CALC·FXT로 해소하고 태스크 리스트·하네스에 반영한 과정이 정확히 이 절차다. 다음 결정 묶음(🟡 5건 재개 시)에 그대로 쓴다 |
+| **`goal-setting`** | `/goal` 프롬프트를 필수 4섹션(목표·범위 / 세부 규칙 / 종료 조건 / 제약)으로 설계. 실현성·시연성·유계성 3원칙 강제 | 태스크 59건을 에이전트에 위임할 때 **종료 조건을 명시**하게 한다. 우리 DoD 8항목이 그대로 종료 조건이 된다 |
+| **`review-merge`** | PR을 한 건씩 검토하고 **매 건이 게이트를 통과한 뒤에만** 머지 (REVIEW → MERGE) | **독립 태스크에 쓴다** — 슬랙이 큰 38건은 서로 무관해 개별 게이트 통과가 자연스럽다 |
+| **`merge-review`** | 응집·의존 결합된 PR 묶음을 bottom-up으로 먼저 머지하고 **수렴된 화면에서 통합 검토** (MERGE → REVIEW) | **의존 사슬에 쓴다** — `BE-06 → BE-08 → BE-09` 처럼 앞 PR이 뒤 PR 없이는 dead code인 묶음, `FE-03`(한 화면 8건)처럼 통합돼야 동작이 존재하는 경우 |
+
+> **둘은 중복이 아니라 상보다.** PR 묶음의 응집도가 갈림길이다 — 독립이면 `review-merge`, 결합이면 `merge-review`. 우리 태스크 그래프는 두 성격이 섞여 있어(임계 9건은 사슬, 슬랙 큰 38건은 독립) 둘 다 필요하다.
+
+**벤더 판이 세 가지(`.claude` / `.agents` / `.cursor`)로 제공되는데 `.claude` 판을 설치했다.** 슬래시 호출 형식과 `CLAUDE.md` 참조가 우리 환경에 맞는다.
+
 ### 3.2 미채택과 이유
 
 | 스킬 | 왜 안 썼나 |
@@ -138,6 +153,7 @@ AGENTS.md                    벤더 중립 규칙
 | `setup-pre-commit` | **C-TEC-007a가 "게이트 1개만" 허용한다.** pre-commit 훅을 더하면 검증 경로가 둘이 되어 제약의 취지가 흐려진다 |
 | `find-skills` · `grill-me` · `handoff` · `triage` 등 | 생산성 메타 스킬. 개발 목표와 직접 관계 없다 |
 | `agent-browser` · `lark-*` | 무관 |
+| `.agents` / `.cursor` 벤더 판 | 같은 스킬의 다른 표기. 세 곳을 함께 두면 갱신이 갈라진다 |
 | `improve-codebase-architecture` | 아키텍처는 SDD·ADR이 정본이다. 자동 개선 제안이 ADR-02 경계를 흔들 수 있다 |
 
 > **`setup-pre-commit` 미채택이 판단이 들어간 지점이다.** 금지어 스캔을 커밋 시점으로 앞당기면 편하지만, "배포 전 게이트 1개"라는 제약(C-TEC-007a)은 **검증 경로를 하나로 유지하려는 결정**이었다. 편의를 위해 그것을 흐리지 않는다.

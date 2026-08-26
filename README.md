@@ -59,7 +59,7 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 ├── .claude/
 │   ├── agents/                               ← 도메인 서브에이전트 6종
 │   ├── commands/                             ← 슬래시 커맨드 5종
-│   └── skills/                               ← 외부 채택 스킬 8종
+│   └── skills/                               ← 외부 채택 스킬 12종
 ├── .github/ISSUE_TEMPLATE/
 │   └── feature-task.md                       ← GitHub 이슈 템플릿
 └── tools/                                    ← 실행 도구
@@ -156,7 +156,7 @@ python3 tools/scan_prohibited_terms.py --dict tools/prohibited-terms.json --samp
 | 태스크 리스트 (TASK) | ✅ **59건** (개발 54 · 디자인 5) · **착수 차단 0건** |
 | 태스크 명세 (`docs/tasks/`) | ✅ **59건** — 1 태스크 = 1 파일 |
 | 개발 실행 총괄 (EXE) | ✅ 8트랙 · 임계 경로 9건 **29 작업일** (AI 가속 + IN-07 분할) |
-| 에이전트 하네스 | ✅ 규칙 4 · 에이전트 6 · 커맨드 5 · 외부 스킬 8 |
+| 에이전트 하네스 | ✅ 규칙 4 · 에이전트 6 · 커맨드 5 · 외부 스킬 12 |
 | GitHub | ✅ 이슈 **#1~#59** · [프로젝트 #1](https://github.com/users/maybeaj/projects/1) 59건 일정 등록 |
 | 계산 명세서 (CALC) | ✅ **D16·D2·D5 해소** — RE-1~8 확정 · 임계값 월 3,000원/10% · 증감 폭 ±20% |
 | 픽스처 데이터 (FXT) | ✅ **D1·D4·D11·D13·D14 해소** — 카드 24종 · 페르소나 5인 · 거래 348건 |

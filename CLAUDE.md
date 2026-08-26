@@ -113,7 +113,16 @@ python3 tools/generate_fixtures.py    # 픽스처 + 참조 계산기 대조
 | `/setup-env` | 로컬 개발환경 기동 |
 
 ### 외부 스킬 (`.claude/skills/`)
-Prisma·Supabase·Vercel·TDD 등 8종을 채택했다. 채택·미채택 근거는 `docs/[하네스 구성] CardFit (한글).md`에 있다.
+
+| 묶음 | 스킬 | 언제 |
+| --- | --- | --- |
+| 스택 | `prisma-client-api` · `prisma-database-setup` · `supabase-postgres-best-practices` · `deploy-to-vercel` · `react-best-practices` | DB·배포·화면 작업 시 |
+| 엔지니어링 | `tdd` · `code-review` · `diagnosing-bugs` | 테스트·리뷰·진단 |
+| 작업 방식 | `grill-it` · `goal-setting` · `review-merge` · `merge-review` | 결정 해소 · 목표 설계 · PR 리뷰·머지 |
+
+**PR 묶음의 성격에 따라 `review-merge`와 `merge-review`를 갈라 쓴다** — 독립 PR은 리뷰 후 머지, 응집 PR 묶음은 머지 후 통합 리뷰다.
+
+채택·미채택 근거는 `docs/[하네스 구성] CardFit (한글).md`에 있다.
 
 ---
 
