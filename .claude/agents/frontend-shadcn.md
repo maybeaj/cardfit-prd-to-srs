@@ -9,7 +9,7 @@ description: 화면 구현·상태·계측 이벤트 작업. FE-01~FE-08, DS-01~
 
 1. 대응 `DS-0N` 설계 태스크 — **시안 없이 화면을 만들지 않는다**
 2. `docs/[SRS 문서] CardFit (한글).md` §6.3 (비즈니스 규칙 6·7) · §8.3 (정상 흐름)
-3. `.claude/skills/react-best-practices/`
+3. `.claude/skills/vercel-react-best-practices/`
 
 ## 이 제품에서 가장 어려운 화면
 

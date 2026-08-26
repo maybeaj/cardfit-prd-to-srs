@@ -116,7 +116,7 @@ python3 tools/generate_fixtures.py    # 픽스처 + 참조 계산기 대조
 
 | 묶음 | 스킬 | 언제 |
 | --- | --- | --- |
-| 스택 | `prisma-client-api` · `prisma-database-setup` · `supabase-postgres-best-practices` · `deploy-to-vercel` · `react-best-practices` | DB·배포·화면 작업 시 |
+| 스택 | `prisma-client-api` · `prisma-database-setup` · `supabase-postgres-best-practices` · `deploy-to-vercel` · `vercel-react-best-practices` | DB·배포·화면 작업 시 |
 | 엔지니어링 | `tdd` · `code-review` · `diagnosing-bugs` | 테스트·리뷰·진단 |
 | 작업 방식 | `grill-it` · `goal-setting` · `review-merge` · `merge-review` | 결정 해소 · 목표 설계 · PR 리뷰·머지 |
 

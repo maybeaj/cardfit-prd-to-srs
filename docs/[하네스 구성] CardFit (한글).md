@@ -122,7 +122,7 @@ AGENTS.md                    벤더 중립 규칙
 | `prisma-database-setup` | `prisma/skills` | `IN-01` 초기화 · `DA-01~04` 마이그레이션 |
 | `supabase-postgres-best-practices` | `supabase/agent-skills` | **`DA-04`의 RLS·append-only 근거.** 오조회 0건(GR5)의 1차 방어선 |
 | `deploy-to-vercel` | `vercel-labs/agent-skills` | `IN-02`·`IN-03` — Git Push 배포와 게이트 |
-| `react-best-practices` | `vercel-labs/agent-skills` | FE 8건. 설치 663K로 검증된 공식 레퍼런스 |
+| `vercel-react-best-practices` | `vercel-labs/agent-skills` | FE 8건. 설치 663K로 검증된 공식 레퍼런스 |
 | `tdd` | `mattpocock/skills` | `TS-01~03`. STD가 GWT 기반이라 red-green 루프와 결이 맞는다 |
 | `code-review` | `mattpocock/skills` | 공통 DoD의 리뷰 단계 |
 | `diagnosing-bugs` | `mattpocock/skills` | `/fix-error` 를 뒷받침하는 깊은 진단 절차 |
@@ -167,7 +167,7 @@ skills.sh의 표준 경로는 `npx skills add <owner/repo>` 다. **여기서는 
 ## 4. 이 구성의 한계
 
 1. **외부 스킬은 우리 문서보다 낮은 우선순위다.** 충돌하면 `docs/` 가 이긴다 — 특히 계산 값·판정 SLO·API 스키마
-2. **`react-best-practices`는 React 일반 레퍼런스다.** App Router 고유 사항은 `frontend-shadcn` 에이전트가 보완한다
+2. **`vercel-react-best-practices`는 React 일반 레퍼런스다.** App Router 고유 사항은 `frontend-shadcn` 에이전트가 보완한다
 3. **외부 스킬은 버전이 고정돼 있다.** 원본이 갱신돼도 자동으로 따라오지 않는다
 4. **불변식 6은 코드로 강제되는 것과 문서로만 있는 것이 섞여 있다.** I1은 린트(`IN-04`)가, I2·I3는 배포 게이트 ①이 막지만, I4·I5·I6은 **테스트와 리뷰가 유일한 방어선**이다
 
