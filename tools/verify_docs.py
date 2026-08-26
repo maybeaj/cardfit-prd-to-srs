@@ -12,6 +12,7 @@ STD  = D / "[테스트 명세서] CardFit (한글).md"
 GTD  = D / "[배포 게이트 데이터] CardFit (한글).md"
 TASK = D / "[태스크 리스트] CardFit.md"
 CALC = D / "[계산 명세서] CardFit (한글).md"
+EXE  = D / "[개발 실행 총괄] CardFit (한글).md"
 FXT  = D / "[픽스처 데이터 명세] CardFit (한글).md"
 
 REQ = re.compile(r"REQ-(?:FUNC|NF|EXC)-\d{3}")
@@ -30,13 +31,13 @@ def check(name, ok, detail=""):
     if not ok: fails.append(name)
 
 # ── 1. 파일 존재 ─────────────────────────────────────────
-for p in (SRS, SDD, STD, GTD, TASK, CALC, FXT):
+for p in (SRS, SDD, STD, GTD, TASK, CALC, FXT, EXE):
     check(f"파일 존재: {p.name}", p.exists())
 if fails:
     for n, ok, d in checks: print(f"{'✅' if ok else '❌'} {n}")
     sys.exit(1)
 
-srs, sdd, std, gtd, task, calc, fxt = map(read, (SRS, SDD, STD, GTD, TASK, CALC, FXT))
+srs, sdd, std, gtd, task, calc, fxt, exe = map(read, (SRS, SDD, STD, GTD, TASK, CALC, FXT, EXE))
 
 # ── 2. 요구사항 ID 일관성 ────────────────────────────────
 srs_req = ids(srs, REQ)
@@ -182,6 +183,20 @@ if len(fx) == 7:
     blocked = [x for x in texts
                if any(h["severity"] == "block" for h in _m.scan(x, cats, allow))]
     check(f"픽스처 문구 금지어 0건 ({len(texts)}건 검사)", not blocked, f"적발 {len(blocked)}건")
+
+# ── 6-6. 실행 총괄 ↔ 태스크 그래프 ──────────────────────
+check("EXE 문서의 태스크 수 표기 일치", f"| 노드 | **{len(tids)}** |" in exe,
+      f"실측 {len(tids)}건")
+gantt = re.findall(r"```mermaid\n(gantt.*?)\n```", exe, re.S)
+check("EXE Gantt 2종 이상 존재", len(gantt) >= 2, f"실측 {len(gantt)}개")
+if gantt:
+    rows = [l for l in gantt[0].split("\n")
+            if re.match(r"^\s*(?:CT|MK|IN|DA|BE|FE|TS|QA|DS)-\d{2}\s", l)]
+    check("EXE Gantt 태스크 행 = 태스크 수", len(rows) == len(tids),
+          f"Gantt {len(rows)}행 / 태스크 {len(tids)}건")
+    ids_in_gantt = {re.match(r"^\s*((?:CT|MK|IN|DA|BE|FE|TS|QA|DS)-\d{2})", l).group(1) for l in rows}
+    check("EXE Gantt ID = 태스크 리스트 ID", ids_in_gantt == tids,
+          f"차이 {sorted(ids_in_gantt ^ tids)[:5]}")
 
 # ── 7. 깨진 파일 참조 ───────────────────────────────────
 stale = [n for n in ("cardfit-srs-v1_0", "cardfit-design-v1_0",
