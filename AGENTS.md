@@ -1,0 +1,75 @@
+# CardFit — Agent Instructions
+
+**벤더 중립 규칙 파일이다.** Claude Code · Cursor · Antigravity 등이 공통으로 읽는다. Claude Code 전용 라우팅은 `CLAUDE.md`에 있다.
+
+---
+
+## 무엇을 만드는가
+
+보유 카드 조합을 재설계해 주는 서비스. 미래 지출 계획으로 순혜택을 계산하고, **바꿀 만하지 않으면 "그대로 두세요"를 결론으로 반환한다.**
+
+- 북극성 — 조합안 선택률 ≥ 40%
+- 차별점 — **"유지"도 정답이다**(ADR-01)
+- 범위 밖 — **실행 대행.** 신청·해지는 카드사에서 직접 한다
+
+근거 문서는 `docs/` 에 있고, 태스크 59건은 `docs/tasks/<ID>.md` 와 GitHub 이슈 `#1~#59` 로 1:1 대응한다.
+
+---
+
+## 기술 스택 (C-TEC-001~007 — 제약이지 선택지가 아니다)
+
+- **Next.js App Router** 단일 풀스택 · TypeScript strict
+- 서버 로직은 **Server Actions / Route Handlers** — 별도 백엔드 서버 없음
+- **Prisma + Supabase(PostgreSQL)** — Prisma 스키마가 정본
+- **Tailwind + shadcn/ui**
+- **Vercel AI SDK** + Google Gemini (환경변수로 교체)
+- **Vercel** 배포 · Git Push 자동화 · **검증 게이트 1개만 허용**
+
+금액은 전 경로에서 **원 단위 정수**(`BigInt`)다.
+
+---
+
+## 절대 어기면 안 되는 것
+
+| # | 불변식 | 어기면 |
+| :---: | --- | --- |
+| I1 | AI는 계산 영역을 호출하지 않는다 — 결과를 인자로만 받는다 | ADR-02 위반 |
+| I2 | 금액은 원 단위 정수다 — 계산 경로에 부동소수 금지 | GR1 |
+| I3 | 계산 경로에 비결정론 금지 — `random`·`now`·해시 순회 | REQ-NF-002 |
+| I4 | 임계 미달이면 변경을 제안하지 않는다 (월 3,000원 **그리고** 10%) | **GR2 = 즉시 중단** |
+| I5 | 근거 6항목 미달이면 응답 거부 — AI 설명은 게이트 뒤 | **GR3** |
+| I6 | 응답 주체 ≠ 로그인 사용자면 즉시 차단 | **GR5 = 컴플라이언스 단독 중단** |
+
+상세는 `.agents/rules/004-invariants.md`.
+
+---
+
+## 작업 방식
+
+1. **`docs/tasks/<ID>.md` 를 읽고 시작한다.** `Depends on` 이 전건 완료됐는지 먼저 확인한다
+2. **AC를 새로 만들지 않는다.** 판정 SLO 27건이 테스트 명세서에 있다
+3. **계산 값은 계산 명세서에서 인용한다.** SRS 4.1.0은 "정해야 했다"는 기록이고 값은 CALC에 있다
+4. **픽스처 모드에서 외부 호출 0회**로 동작해야 한다
+5. 완료 전 `python3 tools/verify_docs.py` 를 통과시킨다
+
+---
+
+## 코드 규칙
+
+- 주석은 **왜**를 적는다. 무엇은 코드로 표현한다
+- 한 커밋이 한 가지를 한다. 기본 브랜치에 직접 커밋하지 않는다
+- 문서와 코드가 어긋나면 **문서를 먼저 본다.** 명세가 틀렸으면 명세를 고치고 `rule_spec_version` 을 올린다
+- `skip`·`only` 로 남은 테스트, TODO 자리표시자는 완료 근거가 아니다
+
+---
+
+## 규칙 파일 구조
+
+```
+CLAUDE.md               Claude Code 전용 — 라우팅 포함
+AGENTS.md               이 파일 — 벤더 중립
+.agents/rules/          항상 적용되는 규칙 4종
+.claude/agents/         도메인별 서브에이전트 6종
+.claude/commands/       절차 5종
+.claude/skills/         외부 채택 스킬 8종 (Prisma·Supabase·Vercel·TDD 등)
+```

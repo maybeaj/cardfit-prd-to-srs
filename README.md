@@ -53,6 +53,13 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 │   ├── [GitHub 프로젝트용 TASK 템플릿] CardFit.md
 │   └── tasks/                                ← 배치별 이슈 명세
 │       └── S1-계약-API.md                     (CT-01 · CT-02)
+├── CLAUDE.md                                 ← 에이전트 컨텍스트 (자동 로드)
+├── AGENTS.md                                 ← 벤더 중립 규칙
+├── .agents/rules/                            ← 항상 적용 규칙 4종
+├── .claude/
+│   ├── agents/                               ← 도메인 서브에이전트 6종
+│   ├── commands/                             ← 슬래시 커맨드 5종
+│   └── skills/                               ← 외부 채택 스킬 8종
 ├── .github/ISSUE_TEMPLATE/
 │   └── feature-task.md                       ← GitHub 이슈 템플릿
 └── tools/                                    ← 실행 도구
@@ -86,6 +93,7 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 | **CALC-CARDFIT-001** | `docs/[계산 명세서] CardFit (한글).md` | 규칙 엔진 계산 명세 · 게이팅 기준값 (D16·D2·D5) |
 | **FXT-CARDFIT-001** | `docs/[픽스처 데이터 명세] CardFit (한글).md` | 외부 연동 없는 시연 데이터 (D1·D4·D11·D13·D14) |
 | **TASK-CARDFIT-001** | `docs/[태스크 리스트] CardFit.md` | 개발 54건 + 디자인 5건 · 착수 차단 0 |
+| **HRN-CARDFIT-001** | `docs/[하네스 구성] CardFit (한글).md` | 에이전트 규칙 세팅 — 채택·수정·삭제 근거 |
 | **EXE-CARDFIT-001** | `docs/[개발 실행 총괄] CardFit (한글).md` | 실행 전략 · 의존성 구조 · DAG 기반 Gantt (채택 29 작업일) |
 
 ### 3.1 문서 파생 관계
@@ -148,6 +156,7 @@ python3 tools/scan_prohibited_terms.py --dict tools/prohibited-terms.json --samp
 | 태스크 리스트 (TASK) | ✅ **59건** (개발 54 · 디자인 5) · **착수 차단 0건** |
 | 태스크 명세 (`docs/tasks/`) | ✅ **59건** — 1 태스크 = 1 파일 |
 | 개발 실행 총괄 (EXE) | ✅ 8트랙 · 임계 경로 9건 **29 작업일** (AI 가속 + IN-07 분할) |
+| 에이전트 하네스 | ✅ 규칙 4 · 에이전트 6 · 커맨드 5 · 외부 스킬 8 |
 | GitHub | ✅ 이슈 **#1~#59** · [프로젝트 #1](https://github.com/users/maybeaj/projects/1) 59건 일정 등록 |
 | 계산 명세서 (CALC) | ✅ **D16·D2·D5 해소** — RE-1~8 확정 · 임계값 월 3,000원/10% · 증감 폭 ±20% |
 | 픽스처 데이터 (FXT) | ✅ **D1·D4·D11·D13·D14 해소** — 카드 24종 · 페르소나 5인 · 거래 348건 |
