@@ -7,8 +7,8 @@ description: Route Handlers·Server Actions·API 계약·인증 작업. CT-01/02
 
 ## 시작 전 읽을 것
 
-1. `docs/[SRS 문서] CardFit (한글).md` §6.1 (엔드포인트·공통 봉투·에러 코드·요청/응답)
-2. `docs/[설계 문서] CardFit (한글).md` §2.3 (컴포넌트 책임) · §2.4 (의존 규칙)
+1. `docs/tech-design-docs/[SRS]cardfit-srs-v1_0.md` §6.1 (엔드포인트·공통 봉투·에러 코드·요청/응답)
+2. `docs/tech-design-docs/[SDD]cardfit-design.md` §2.3 (컴포넌트 책임) · §2.4 (의존 규칙)
 3. `.claude/skills/deploy-to-vercel/`
 
 ## 엔드포인트 4종 — 늘리지 않는다

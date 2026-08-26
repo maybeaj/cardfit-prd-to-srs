@@ -8,7 +8,7 @@
 
 ### 1.1 하는 일
 
-> **기준 템플릿은 `[SRS 문서] AD-Core-Platform (한글).md` 하나입니다.**
+> **기준 템플릿은 `docs/source-docs/[SRS]ad-core-platform-reference.md` 하나입니다.**
 
 `cardfit-prd-v1_0.md`에 담긴 내용을, 예시 SRS 문서가 이미 쓰고 있는 **섹션 구성·표 스키마·ID 체계·서술 톤**으로 옮겨 적습니다. 도메인만 다를 뿐(광고 플랫폼 → 카드 조합 최적화), 문서의 **뼈대는 예시 문서를 그대로 따릅니다.**
 
@@ -38,28 +38,30 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 .
 ├── README.md
 ├── cardfit-prd-v1_0.md                       ← 입력 PRD
-├── [SRS 문서] AD-Core-Platform (한글).md       ← 양식 기준 템플릿
+├── docs/source-docs/[SRS]ad-core-platform-reference.md       ← 양식 기준 템플릿
 ├── 29148-2018-ISOIECIEEE.pdf                 ← 준거 표준 (저장소 미포함)
 ├── docs/                                     ← 산출물
-│   ├── [SRS 문서] CardFit (한글).md
-│   ├── [SRS 이해 가이드] CardFit (한글).md      ← 읽는 방법 안내
-│   ├── [설계 문서] CardFit (한글).md
-│   ├── [테스트 명세서] CardFit (한글).md
-│   ├── [배포 게이트 데이터] CardFit (한글).md
-│   ├── [계산 명세서] CardFit (한글).md          ← D16·D2·D5 결정본
-│   ├── [픽스처 데이터 명세] CardFit (한글).md     ← D1·D4·D11·D13·D14 해소
-│   ├── [개발 실행 총괄] CardFit (한글).md        ← 실행 전략 · DAG 일정 · Gantt
-│   ├── [태스크 리스트] CardFit.md
-│   ├── [GitHub 프로젝트용 TASK 템플릿] CardFit.md
+│   ├── [SRS]cardfit-srs-v1_0.md
+│   ├── [Guide]cardfit-srs-guide.md      ← 읽는 방법 안내
+│   ├── [SDD]cardfit-design.md
+│   ├── [STD]cardfit-test-spec.md
+│   ├── [GTD]cardfit-gate-data.md
+│   ├── [CALC]cardfit-calc-spec.md          ← D16·D2·D5 결정본
+│   ├── [FXT]cardfit-fixture-spec.md     ← D1·D4·D11·D13·D14 해소
+│   ├── [Plan]cardfit-execution-plan.md        ← 실행 전략 · DAG 일정 · Gantt
+│   ├── [TaskList]cardfit-task-list.md
+│   ├── [Ops]cardfit-task-template.md
 │   └── tasks/                                ← 배치별 이슈 명세
 │       └── S1-계약-API.md                     (CT-01 · CT-02)
 ├── CLAUDE.md                                 ← 에이전트 컨텍스트 (자동 로드)
 ├── AGENTS.md                                 ← 벤더 중립 규칙
-├── .agents/rules/                            ← 항상 적용 규칙 4종
+├── skills-lock.json                          ← 외부 스킬 출처·해시
+├── .agents/
+│   ├── rules/                                ← 항상 적용 규칙 4종
+│   └── skills/                               ← 절차·기술 규칙 12종 + 외부 15종 (원본)
 ├── .claude/
 │   ├── agents/                               ← 도메인 서브에이전트 6종
-│   ├── commands/                             ← 슬래시 커맨드 5종
-│   └── skills/                               ← 외부 채택 스킬 12종
+│   └── skills/                               ← 위의 미러 27종
 ├── .github/ISSUE_TEMPLATE/
 │   └── feature-task.md                       ← GitHub 이슈 템플릿
 └── tools/                                    ← 실행 도구
@@ -85,16 +87,16 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 | 문서 ID | 파일 | 내용 |
 | --- | --- | --- |
 | **PRD-CARDFIT-001** | `cardfit-prd-v1_0.md` | 입력 PRD 겸 요구사항 추적표 |
-| **SRS-CARDFIT-001** | `docs/[SRS 문서] CardFit (한글).md` | 요구사항 27건 · 다이어그램 17개 |
-| **GUIDE-CARDFIT-001** | `docs/[SRS 이해 가이드] CardFit (한글).md` | SRS를 읽는 방법 — 경로 3종 · 자가진단 12문항 |
-| **SDD-CARDFIT-001** | `docs/[설계 문서] CardFit (한글).md` | 다이어그램 27개 · 클래스·시퀀스·순서도·상태 |
-| **STD-CARDFIT-001** | `docs/[테스트 명세서] CardFit (한글).md` | 테스트 27건 (P0 6건 · 배포 게이트 2건) |
-| **GTD-CARDFIT-001** | `docs/[배포 게이트 데이터] CardFit (한글).md` | 경계값 260건 · 금지어 사전 |
-| **CALC-CARDFIT-001** | `docs/[계산 명세서] CardFit (한글).md` | 규칙 엔진 계산 명세 · 게이팅 기준값 (D16·D2·D5) |
-| **FXT-CARDFIT-001** | `docs/[픽스처 데이터 명세] CardFit (한글).md` | 외부 연동 없는 시연 데이터 (D1·D4·D11·D13·D14) |
-| **TASK-CARDFIT-001** | `docs/[태스크 리스트] CardFit.md` | 개발 54건 + 디자인 5건 · 착수 차단 0 |
-| **HRN-CARDFIT-001** | `docs/[하네스 구성] CardFit (한글).md` | 에이전트 규칙 세팅 — 채택·수정·삭제 근거 |
-| **EXE-CARDFIT-001** | `docs/[개발 실행 총괄] CardFit (한글).md` | 실행 전략 · 의존성 구조 · DAG 기반 Gantt (채택 29 작업일) |
+| **SRS-CARDFIT-001** | `docs/tech-design-docs/[SRS]cardfit-srs-v1_0.md` | 요구사항 27건 · 다이어그램 17개 |
+| **GUIDE-CARDFIT-001** | `docs/tech-design-docs/[Guide]cardfit-srs-guide.md` | SRS를 읽는 방법 — 경로 3종 · 자가진단 12문항 |
+| **SDD-CARDFIT-001** | `docs/tech-design-docs/[SDD]cardfit-design.md` | 다이어그램 27개 · 클래스·시퀀스·순서도·상태 |
+| **STD-CARDFIT-001** | `docs/tech-design-docs/[STD]cardfit-test-spec.md` | 테스트 27건 (P0 6건 · 배포 게이트 2건) |
+| **GTD-CARDFIT-001** | `docs/tech-design-docs/[GTD]cardfit-gate-data.md` | 경계값 260건 · 금지어 사전 |
+| **CALC-CARDFIT-001** | `docs/tech-design-docs/[CALC]cardfit-calc-spec.md` | 규칙 엔진 계산 명세 · 게이팅 기준값 (D16·D2·D5) |
+| **FXT-CARDFIT-001** | `docs/tech-design-docs/[FXT]cardfit-fixture-spec.md` | 외부 연동 없는 시연 데이터 (D1·D4·D11·D13·D14) |
+| **TASK-CARDFIT-001** | `docs/plan-docs/[TaskList]cardfit-task-list.md` | 개발 54건 + 디자인 5건 · 착수 차단 0 |
+| **HRN-CARDFIT-001** | `docs/ops-docs/[Ops]cardfit-harness-guide.md` | 에이전트 규칙 세팅 — 채택·수정·삭제 근거 |
+| **EXE-CARDFIT-001** | `docs/plan-docs/[Plan]cardfit-execution-plan.md` | 실행 전략 · 의존성 구조 · DAG 기반 Gantt (채택 29 작업일) |
 
 ### 3.1 문서 파생 관계
 
@@ -156,7 +158,7 @@ python3 tools/scan_prohibited_terms.py --dict tools/prohibited-terms.json --samp
 | 태스크 리스트 (TASK) | ✅ **59건** (개발 54 · 디자인 5) · **착수 차단 0건** |
 | 태스크 명세 (`docs/tasks/`) | ✅ **59건** — 1 태스크 = 1 파일 |
 | 개발 실행 총괄 (EXE) | ✅ 8트랙 · 임계 경로 9건 **29 작업일** (AI 가속 + IN-07 분할) |
-| 에이전트 하네스 | ✅ 규칙 4 · 에이전트 6 · 커맨드 5 · 외부 스킬 12 |
+| 에이전트 하네스 | ✅ 규칙 4 · 스킬 27(번호 12 + 외부 15) · 에이전트 6 · `skills-lock.json` |
 | GitHub | ✅ 이슈 **#1~#59** · [프로젝트 #1](https://github.com/users/maybeaj/projects/1) 59건 일정 등록 |
 | 계산 명세서 (CALC) | ✅ **D16·D2·D5 해소** — RE-1~8 확정 · 임계값 월 3,000원/10% · 증감 폭 ±20% |
 | 픽스처 데이터 (FXT) | ✅ **D1·D4·D11·D13·D14 해소** — 카드 24종 · 페르소나 5인 · 거래 348건 |

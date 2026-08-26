@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "skills": {
+    "ai-sdk": {
+      "source": "vercel/ai",
+      "sourceType": "github",
+      "skillPath": "skills/use-ai-sdk/SKILL.md",
+      "computedHash": "864e110a36c00975e5c5ddec68163dd0b5347b126a46d84d7369a2bbdbdb7754"
+    },
+    "code-review": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/code-review/SKILL.md",
+      "computedHash": "47f4e52c21694def9c7c11cbfbf891ca35eac7a93e395797515be3c8a409ae50"
+    },
+    "deploy-to-vercel": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/deploy-to-vercel/SKILL.md",
+      "computedHash": "cfcc3dd479ab2e0ae721ddf39b8af84d977321487672f1487c8d6855f576927b"
+    },
+    "diagnosing-bugs": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "computedHash": "77f3cf31bc99b2f49af943222526531fcc9fc41d047626d3640e875e85af3e84"
+    },
+    "goal-setting": {
+      "source": "wild-mental/goal-setting-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/goal-setting/SKILL.md",
+      "computedHash": "9576c780bbbdb8ac52fcbb21abac1231ed6db8391d7e0b6fdf04d4d4214e9a29"
+    },
+    "grill-it": {
+      "source": "wild-mental/grill-it-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/grill-it/SKILL.md",
+      "computedHash": "52295353b10f2bb325a3a0de0ed61658ff6fe2d86ac9552cfa51973b451a3292"
+    },
+    "merge-review": {
+      "source": "wild-mental/merge-review-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/merge-review/SKILL.md",
+      "computedHash": "64c616384f920411df2ad8a74889def1044189a6e93eea6e58ae28eb1067ae9f"
+    },
+    "prisma-client-api": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-client-api/SKILL.md",
+      "computedHash": "d033821313dc64b2b7dee120c6904b7d4457813e3b9c82d9584f7dee74baabe4"
+    },
+    "prisma-database-setup": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-database-setup/SKILL.md",
+      "computedHash": "0763c2b684fff47a89afa495dd0e3439f7e892f08e38d01a89def934ff5b71fb"
+    },
+    "review-merge": {
+      "source": "wild-mental/review-merge-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/review-merge/SKILL.md",
+      "computedHash": "2f78e64f4fc20e2f66a728e68944c7bb91d5742974e1c075016dd0a76fc0ac0c"
+    },
+    "shadcn": {
+      "source": "shadcn-ui/ui",
+      "sourceType": "github",
+      "skillPath": "skills/shadcn/SKILL.md",
+      "computedHash": "deba6c5152d9835892fa7dffeb1fedbb689ddac7e59e14e57ec5eaf9463309e4"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "ad65e776f45e761bafc609d3f506c77c1032225aa65e0c4c02f241b8071e5855"
+    },
+    "tdd": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/tdd/SKILL.md",
+      "computedHash": "cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355"
+    },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/webapp-testing/SKILL.md",
+      "computedHash": "51b7349e77ec63b7744a6f63647e7566a0b4d2e301121cc10e8c2113af6556a2"
+    }
+  }
+}

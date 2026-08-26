@@ -5,15 +5,17 @@
 """
 import re, sys, pathlib, json
 
-D = pathlib.Path("docs")
-SRS  = D / "[SRS 문서] CardFit (한글).md"
-SDD  = D / "[설계 문서] CardFit (한글).md"
-STD  = D / "[테스트 명세서] CardFit (한글).md"
-GTD  = D / "[배포 게이트 데이터] CardFit (한글).md"
-TASK = D / "[태스크 리스트] CardFit.md"
-CALC = D / "[계산 명세서] CardFit (한글).md"
-EXE  = D / "[개발 실행 총괄] CardFit (한글).md"
-FXT  = D / "[픽스처 데이터 명세] CardFit (한글).md"
+D    = pathlib.Path("docs")
+TECH = D / "tech-design-docs"
+PLAN = D / "plan-docs"
+SRS  = TECH / "[SRS]cardfit-srs-v1_0.md"
+SDD  = TECH / "[SDD]cardfit-design.md"
+STD  = TECH / "[STD]cardfit-test-spec.md"
+GTD  = TECH / "[GTD]cardfit-gate-data.md"
+CALC = TECH / "[CALC]cardfit-calc-spec.md"
+FXT  = TECH / "[FXT]cardfit-fixture-spec.md"
+TASK = PLAN / "[TaskList]cardfit-task-list.md"
+EXE  = PLAN / "[Plan]cardfit-execution-plan.md"
 
 REQ = re.compile(r"REQ-(?:FUNC|NF|EXC)-\d{3}")
 TC  = re.compile(r"TC-(?:FUNC|NF|EXC)-\d{3}")
@@ -198,11 +200,22 @@ if gantt:
     check("EXE Gantt ID = 태스크 리스트 ID", ids_in_gantt == tids,
           f"차이 {sorted(ids_in_gantt ^ tids)[:5]}")
 
-# ── 7. 깨진 파일 참조 ───────────────────────────────────
-stale = [n for n in ("cardfit-srs-v1_0", "cardfit-design-v1_0",
-                     "cardfit-testcase-v1_0", "cardfit-gate-data-v1_0", "gate/")
-         if any(n in t for t in (srs, sdd, std, gtd, task))]
-check("구 파일명 참조 없음", not stale, f"잔여 {stale}")
+# ── 7. 구 파일명 참조 ───────────────────────────────────
+# 2026-08-26 문서 폴더·파일명 재편 이전의 한글 파일명이 남아 있으면 링크가 깨진다.
+LEGACY = ["[SRS \ubb38\uc11c] CardFit", "[SRS \uc774\ud574 \uac00\uc774\ub4dc]", "[\uc124\uacc4 \ubb38\uc11c]",
+          "[\ud14c\uc2a4\ud2b8 \uba85\uc138\uc11c]", "[\ubc30\ud3ec \uac8c\uc774\ud2b8 \ub370\uc774\ud130]",
+          "[\uacc4\uc0b0 \uba85\uc138\uc11c]", "[\ud53d\uc2a4\ucc98 \ub370\uc774\ud130 \uba85\uc138]",
+          "[\ud0dc\uc2a4\ud06c \ub9ac\uc2a4\ud2b8]", "[\uac1c\ubc1c \uc2e4\ud589 \ucd1d\uad04]",
+          "[\ud558\ub124\uc2a4 \uad6c\uc131]", "[GitHub \ud504\ub85c\uc81d\ud2b8\uc6a9 TASK \ud15c\ud50c\ub9bf]"]
+scan = [p for p in pathlib.Path("docs").rglob("*.md")] + \
+       [p for p in pathlib.Path("tools").glob("*.py")] + \
+       [pathlib.Path("README.md"), pathlib.Path("CLAUDE.md"), pathlib.Path("AGENTS.md")] + \
+       [p for p in pathlib.Path(".agents").rglob("*.md")] + \
+       [p for p in pathlib.Path(".claude").rglob("*.md")
+        if not str(p).startswith(".claude/skills/")]
+stale = sorted({f"{p}:{n}" for p in scan if p.exists()
+                for n in LEGACY if n in read(p)})
+check("구 파일명 참조 없음", not stale, f"잔여 {stale[:3]}")
 
 # ── 출력 ────────────────────────────────────────────────
 print(f"{'결과':<4} {'검사 항목':<38} 상세")

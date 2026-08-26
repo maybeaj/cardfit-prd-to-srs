@@ -9,9 +9,9 @@ description: 계산 파이프라인·게이팅·조합·배분·결정론 작업
 
 ## 시작 전 반드시 읽을 것
 
-1. `docs/[계산 명세서] CardFit (한글).md` — **값의 유일한 정본**
-2. `docs/[SRS 문서] CardFit (한글).md` §4.1.0 (RE-1~8이 왜 기획 결정이었나) · §4.1.1 (시퀀스)
-3. `docs/[설계 문서] CardFit (한글).md` §3.1 · §6.2 · §6.3
+1. `docs/tech-design-docs/[CALC]cardfit-calc-spec.md` — **값의 유일한 정본**
+2. `docs/tech-design-docs/[SRS]cardfit-srs-v1_0.md` §4.1.0 (RE-1~8이 왜 기획 결정이었나) · §4.1.1 (시퀀스)
+3. `docs/tech-design-docs/[SDD]cardfit-design.md` §3.1 · §6.2 · §6.3
 4. `tools/generate_fixtures.py` 의 **참조 계산기** — 같은 명세를 옮긴 독립 구현
 
 > **SRS 4.1.0을 값의 출처로 쓰지 않는다.** 그것은 "무엇을 정해야 했는가"의 기록이고, 값은 계산 명세에 있다.

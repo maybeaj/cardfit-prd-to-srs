@@ -6,7 +6,7 @@
 
 **날짜:** 2026-08-25
 
-**근거 문서:** SRS-CARDFIT-001 v1.0 (`[SRS 문서] CardFit (한글).md`)
+**근거 문서:** SRS-CARDFIT-001 v1.0 (`[SRS]cardfit-srs-v1_0.md`)
 
 **참조 문서:** SDD-CARDFIT-001 (설계) · STD-CARDFIT-001 (테스트) · GTD-CARDFIT-001 (게이트 데이터)
 
@@ -322,6 +322,6 @@
 
 ---
 
-*근거 문서: `[SRS 문서] CardFit (한글).md` (SRS-CARDFIT-001 v1.0)*
+*근거 문서: `[SRS]cardfit-srs-v1_0.md` (SRS-CARDFIT-001 v1.0)*
 
 *작성자: 기획 분석가, 검토자: 개발팀 리드, 승인자: 제품 책임자 (PM)*

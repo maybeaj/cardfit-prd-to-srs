@@ -1,6 +1,6 @@
 # CardFit — 프로젝트 컨텍스트
 
-**이 파일은 Claude Code가 작업 시작 시 자동 로드한다.** 항상 적용되는 규칙만 둔다. 도메인 지식은 `.claude/agents/`, 절차는 `.claude/commands/`, 외부 기술 레퍼런스는 `.claude/skills/`에 있다.
+**이 파일은 Claude Code가 작업 시작 시 자동 로드한다.** 항상 적용되는 규칙만 둔다. 도메인 지식은 `.claude/agents/`, 절차·기술 규칙은 `.agents/skills/`(→`.claude/skills/` 미러), 외부 레퍼런스는 `.claude/skills/`에 있다.
 
 ---
 
@@ -19,13 +19,13 @@
 
 | 문서 | 언제 읽나 |
 | --- | --- |
-| `docs/[SRS 문서] CardFit (한글).md` | 요구사항·제약·API·스키마. **모든 태스크의 근거** |
-| `docs/[계산 명세서] CardFit (한글).md` | 계산 순서·전환비용·임계값. **계산 관련 값의 유일한 정본** |
-| `docs/[픽스처 데이터 명세] CardFit (한글).md` | 픽스처 모드 경계·시연 데이터 |
-| `docs/[설계 문서] CardFit (한글).md` | 컴포넌트·클래스·시퀀스 |
-| `docs/[테스트 명세서] CardFit (한글).md` | 판정 SLO. **AC를 새로 만들지 않는다** |
+| `docs/tech-design-docs/[SRS]cardfit-srs-v1_0.md` | 요구사항·제약·API·스키마. **모든 태스크의 근거** |
+| `docs/tech-design-docs/[CALC]cardfit-calc-spec.md` | 계산 순서·전환비용·임계값. **계산 관련 값의 유일한 정본** |
+| `docs/tech-design-docs/[FXT]cardfit-fixture-spec.md` | 픽스처 모드 경계·시연 데이터 |
+| `docs/tech-design-docs/[SDD]cardfit-design.md` | 컴포넌트·클래스·시퀀스 |
+| `docs/tech-design-docs/[STD]cardfit-test-spec.md` | 판정 SLO. **AC를 새로 만들지 않는다** |
 | `docs/tasks/<ID>.md` | 태스크 1건의 실행 계획·AC·DoD |
-| `docs/[개발 실행 총괄] CardFit (한글).md` | 의존성·일정·트랙 |
+| `docs/plan-docs/[Plan]cardfit-execution-plan.md` | 의존성·일정·트랙 |
 
 ---
 
@@ -103,26 +103,30 @@ python3 tools/generate_fixtures.py    # 픽스처 + 참조 계산기 대조
 | `compliance-guardrail` | 금지어 스캔 · 경계 고지 · Guardrail 5건 · 배포 게이트 |
 | `frontend-shadcn` | 화면 구현 · 상태 · 계측 이벤트 |
 
-### 슬래시 커맨드 (`.claude/commands/`)
-| 커맨드 | 목적 |
+### 절차·규칙 스킬 (`.agents/skills/` ↔ `.claude/skills/` 미러)
+
+| 번호대 | 스킬 | 언제 |
+| :---: | --- | --- |
+| **100** | `100-error-fixing-process` · `101-build-and-env-setup` | 에러 진단 · 환경 기동 |
+| **200** | `200-git-commit-push-pr` · `201-code-commenting` · `202-github-issue-handling` | 커밋·PR · 주석 · 이슈/프로젝트 |
+| **300** | `300-tech-constraints-guardrails` · `301-server-boundary-rules` · `302-data-access-rules` · `303-ai-integration-rules` · `304-calc-gating-rules` | **의존성 추가 · 코드 배치 · DB 접근 · AI 통합 · 계산** 전에 |
+| **400** | `400-task-execution-workflow` · `401-verification-workflow` | 태스크 착수 · 전체 검증 |
+
+**300번대가 이 프로젝트의 방어선이다.** 새 패키지를 넣기 전, 서버 코드를 어디 둘지 정하기 전, 금액 컬럼을 만들기 전에 해당 스킬을 먼저 읽는다.
+
+### 외부 스킬 15종
+
+| 묶음 | 스킬 |
 | --- | --- |
-| `/task-start` | 이슈 하나를 착수 조건 점검부터 시작 |
-| `/verify` | 문서·픽스처·게이트 전체 검증 |
-| `/fix-error` | 에러 7단계 구조화 진단 |
-| `/gitflow-commit` | 저장소 관례에 맞춘 커밋·PR |
-| `/setup-env` | 로컬 개발환경 기동 |
+| 스택 | `prisma-client-api` · `prisma-database-setup` · `supabase-postgres-best-practices` · `deploy-to-vercel` · `vercel-react-best-practices` · **`shadcn`** · **`ai-sdk`** |
+| 엔지니어링 | `tdd` · `code-review` · `diagnosing-bugs` · **`webapp-testing`** |
+| 작업 방식 | `grill-it` · `goal-setting` · `review-merge` · `merge-review` |
 
-### 외부 스킬 (`.claude/skills/`)
-
-| 묶음 | 스킬 | 언제 |
-| --- | --- | --- |
-| 스택 | `prisma-client-api` · `prisma-database-setup` · `supabase-postgres-best-practices` · `deploy-to-vercel` · `vercel-react-best-practices` | DB·배포·화면 작업 시 |
-| 엔지니어링 | `tdd` · `code-review` · `diagnosing-bugs` | 테스트·리뷰·진단 |
-| 작업 방식 | `grill-it` · `goal-setting` · `review-merge` · `merge-review` | 결정 해소 · 목표 설계 · PR 리뷰·머지 |
+**출처와 해시는 `skills-lock.json` 에 잠겨 있다.** 어느 저장소의 어느 경로에서 가져왔는지 추적된다.
 
 **PR 묶음의 성격에 따라 `review-merge`와 `merge-review`를 갈라 쓴다** — 독립 PR은 리뷰 후 머지, 응집 PR 묶음은 머지 후 통합 리뷰다.
 
-채택·미채택 근거는 `docs/[하네스 구성] CardFit (한글).md`에 있다.
+채택·미채택 근거는 `docs/ops-docs/[Ops]cardfit-harness-guide.md`에 있다.
 
 ---
 
@@ -132,5 +136,9 @@ python3 tools/generate_fixtures.py    # 픽스처 + 참조 계산기 대조
 | --- | --- |
 | 항상 적용 | 이 파일 또는 `.agents/rules/` |
 | 도메인 지식 | `.claude/agents/` |
-| 절차·프로세스 | `.claude/commands/` |
-| 외부 기술 레퍼런스 | `.claude/skills/` (출처 명시) |
+| 절차·프로세스·기술 규칙 | **`.agents/skills/NNN-*`** → `.claude/skills/` 미러 |
+| 외부 기술 레퍼런스 | `.claude/skills/` + `skills-lock.json` 등록 |
+
+**번호 체계** — 100 프로세스 · 200 협업 · 300 기술 규칙 · 400 워크플로.
+
+**`.agents/` 가 원본이고 `.claude/` 가 미러다.** 한쪽만 고치면 갈라지므로 함께 고친다.

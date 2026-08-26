@@ -7,8 +7,8 @@ description: Prisma 스키마·마이그레이션·Supabase RLS·감사 로그 �
 
 ## 시작 전 읽을 것
 
-1. `docs/[SRS 문서] CardFit (한글).md` §6.4 (ERD·DDL·파생 테이블 근거) · §6.5 (상태 전이) · §6.6
-2. `docs/[설계 문서] CardFit (한글).md` §4.2 — **DB가 지키는 규칙과 애플리케이션이 지키는 규칙의 분담표**
+1. `docs/tech-design-docs/[SRS]cardfit-srs-v1_0.md` §6.4 (ERD·DDL·파생 테이블 근거) · §6.5 (상태 전이) · §6.6
+2. `docs/tech-design-docs/[SDD]cardfit-design.md` §4.2 — **DB가 지키는 규칙과 애플리케이션이 지키는 규칙의 분담표**
 3. `.claude/skills/prisma-database-setup/` · `.claude/skills/supabase-postgres-best-practices/`
 
 ## 정본 관계

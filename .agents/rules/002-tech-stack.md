@@ -58,4 +58,4 @@ src/
 
 ## 외부 레퍼런스
 
-`.claude/skills/` 에 Prisma·Supabase·Vercel 공식 스킬을 두었다. 채택 근거는 `docs/[하네스 구성] CardFit (한글).md`.
+`.claude/skills/` 에 Prisma·Supabase·Vercel 공식 스킬을 두었다. 채택 근거는 `docs/ops-docs/[Ops]cardfit-harness-guide.md`.

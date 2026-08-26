@@ -6,7 +6,7 @@
 """
 import re, sys, argparse, pathlib, collections
 
-TASKS = pathlib.Path("docs/[태스크 리스트] CardFit.md")
+TASKS = pathlib.Path("docs/plan-docs/[TaskList]cardfit-task-list.md")
 ID = r"(?:CT|MK|IN|DA|BE|FE|QA|TS|DS)-\d{2,3}[ab]?"
 ROW = re.compile(rf"^\|\s*(?:🔴 )?\*?\*?({ID})\*?\*?\s*\|(.*)$")
 

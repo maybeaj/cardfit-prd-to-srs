@@ -69,7 +69,11 @@
 CLAUDE.md               Claude Code 전용 — 라우팅 포함
 AGENTS.md               이 파일 — 벤더 중립
 .agents/rules/          항상 적용되는 규칙 4종
+.agents/skills/         절차·기술 규칙 12종 (100/200/300/400) + 외부 15종  ← 원본
+.claude/skills/         위의 미러 (Claude Code 가 읽는 자리)
 .claude/agents/         도메인별 서브에이전트 6종
-.claude/commands/       절차 5종
-.claude/skills/         외부 채택 스킬 8종 (Prisma·Supabase·Vercel·TDD 등)
+skills-lock.json        외부 스킬 15종의 출처·경로·해시
 ```
+
+**번호 체계** — 100 프로세스 · 200 협업 · **300 기술 규칙** · 400 워크플로.
+새 의존성·서버 코드 배치·DB 접근·AI 통합·계산 작업 전에 300번대를 먼저 읽는다.
