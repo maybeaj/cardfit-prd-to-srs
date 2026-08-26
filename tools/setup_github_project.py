@@ -12,11 +12,20 @@ import json, subprocess, sys, pathlib, argparse, datetime, math, os, importlib.u
 OWNER, NUMBER, REPO = "maybeaj", "1", "maybeaj/cardfit-prd-to-srs"
 STATE = pathlib.Path("tools/.project-state.json")
 
-def gh(*args, parse=True):
-    r = subprocess.run(["gh", *args], capture_output=True, text=True)
-    if r.returncode:
-        raise SystemExit(f"❌ gh {' '.join(args[:3])}: {r.stderr.strip()[:200]}")
-    return json.loads(r.stdout) if parse and r.stdout.strip() else r.stdout.strip()
+def gh(*args, parse=True, tries=3, timeout=45):
+    """gh 호출은 응답 없이 멈추는 일이 있다 — 타임아웃과 재시도를 건다."""
+    last = ""
+    for n in range(tries):
+        try:
+            r = subprocess.run(["gh", *args], capture_output=True, text=True, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            last = f"{timeout}s 무응답"; print(f"    ⏱ 재시도 {n+1}/{tries} — {' '.join(args[:3])}", flush=True)
+            continue
+        if r.returncode == 0:
+            return json.loads(r.stdout) if parse and r.stdout.strip() else r.stdout.strip()
+        last = r.stderr.strip()[:200]
+        print(f"    ↻ 재시도 {n+1}/{tries} — {last[:80]}", flush=True)
+    raise SystemExit(f"❌ gh {' '.join(args[:3])}: {last}")
 
 # ── 일정 산정 — 총괄 문서 6.5절의 계수를 그대로 옮긴다 ──────────────
 DS   = {"DS-01","DS-02","DS-03","DS-04","DS-05"}
@@ -77,9 +86,11 @@ def schedule():
                     track=TRACK_OF(t), week=f"W{ES[t]//5+1}", slack=LS[t]-ES[t])
             for t in G}, T
 
+# ⚠️ SINGLE_SELECT 옵션을 나중에 updateProjectV2Field 로 재정의하면 옵션 ID가 새로
+#    발급되어 **이미 설정된 값이 전부 초기화된다.** 옵션 범위는 처음부터 넉넉히 잡는다.
 FIELDS = [("Start date","DATE",None), ("Target date","DATE",None),
           ("Track","SINGLE_SELECT","디자인,계약·Mock,인프라·플랫폼,데이터 계층,계산 도메인,백엔드 도메인,프론트엔드,QA·테스트"),
-          ("Week","SINGLE_SELECT","W1,W2,W3,W4,W5,W6"),
+          ("Week","SINGLE_SELECT","W1,W2,W3,W4,W5,W6,W7,W8"),
           ("Duration","NUMBER",None), ("Slack","NUMBER",None)]
 
 def main():
@@ -87,7 +98,7 @@ def main():
     a = ap.parse_args()
     sched, T = schedule()
     imap = json.loads(pathlib.Path("tools/issue-map.json").read_text(encoding="utf-8"))
-    print(f"일정 산정 — 총 {T} 작업일 · 태스크 {len(sched)}건 · 이슈 {len(imap)}건")
+    print(f"일정 산정 — 총 {T} 작업일 · 태스크 {len(sched)}건 · 이슈 {len(imap)}건", flush=True)
     if a.dry_run:
         for t in sorted(sched, key=lambda x: sched[x]["start"]):
             s = sched[t]
@@ -96,7 +107,7 @@ def main():
         return
 
     proj = gh("project","view",NUMBER,"--owner",OWNER,"--format","json")
-    pid = proj["id"]; print(f"프로젝트: {proj['title']} ({pid})")
+    pid = proj["id"]; print(f"프로젝트: {proj['title']} ({pid})", flush=True)
 
     have = {f["name"]: f for f in gh("project","field-list",NUMBER,"--owner",OWNER,
                                      "--format","json","--limit","50")["fields"]}
@@ -104,7 +115,7 @@ def main():
         if name in have: continue
         cmd = ["project","field-create",NUMBER,"--owner",OWNER,"--name",name,"--data-type",dtype]
         if opts: cmd += ["--single-select-options", opts]
-        gh(*cmd, parse=False); print(f"  필드 생성: {name}")
+        gh(*cmd, parse=False); print(f"  필드 생성: {name}", flush=True)
     F = {f["name"]: f for f in gh("project","field-list",NUMBER,"--owner",OWNER,
                                   "--format","json","--limit","50")["fields"]}
 
@@ -116,13 +127,17 @@ def main():
         gh("project","item-add",NUMBER,"--owner",OWNER,
            "--url",f"https://github.com/{REPO}/issues/{num}", parse=False)
         print(f"  추가: #{num} {t}", flush=True)
-    items = {i["content"]["number"]: i["id"]
-             for i in gh("project","item-list",NUMBER,"--owner",OWNER,
-                         "--format","json","--limit","200")["items"] if i.get("content")}
+    raw = gh("project","item-list",NUMBER,"--owner",OWNER,"--format","json","--limit","200")["items"]
+    items = {i["content"]["number"]: i["id"] for i in raw if i.get("content")}
+    done_already = {i["content"]["number"] for i in raw
+                    if i.get("content") and i.get("start date") and i.get("track")}
+    if done_already:
+        print(f"  재개 — 값이 이미 채워진 {len(done_already)}건은 건너뛴다", flush=True)
 
     def opt_id(field, value):
         return next(o["id"] for o in F[field]["options"] if o["name"] == value)
     for t, num in sorted(imap.items(), key=lambda x: x[1]):
+        if num in done_already: continue
         s = sched[t]; iid = items[num]
         for fname, flag, val in [("Start date","--date",s["start"]), ("Target date","--date",s["end"]),
                                  ("Duration","--number",str(s["dur"])), ("Slack","--number",str(s["slack"])),
