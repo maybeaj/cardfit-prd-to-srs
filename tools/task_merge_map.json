@@ -1,6 +1,6 @@
 {
-  "spec": "RDUC-CARDFIT-001 §3 병합 맵 — 142건 → 53건 · 신규 5건(FE-08 · DA-05·06 · BE-20 · QA-04)",
-  "version": "2.0",
+  "spec": "RDUC-CARDFIT-001 §3 병합 맵 — 142건 → 59건 (IN-07 분할 반영)",
+  "version": "2.1",
   "groups": [
     {
       "id": "CT-01",
@@ -96,9 +96,16 @@
     {
       "id": "IN-07",
       "epic": "Infra/Batch",
-      "name": "Cron 배치 구성 + 서버리스 실행시간 실측",
+      "name": "Cron 배치 구성 (일간 스케줄)",
       "members": [
-        "IN-014",
+        "IN-014"
+      ]
+    },
+    {
+      "id": "IN-09",
+      "epic": "Infra/Perf",
+      "name": "**서버리스 실행시간 실측** (D15)",
+      "members": [
         "IN-015"
       ]
     },

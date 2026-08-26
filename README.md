@@ -85,8 +85,8 @@ PRD에는 예시 SRS의 7개 섹션 어디에도 들어가지 않는 내용이 �
 | **GTD-CARDFIT-001** | `docs/[배포 게이트 데이터] CardFit (한글).md` | 경계값 260건 · 금지어 사전 |
 | **CALC-CARDFIT-001** | `docs/[계산 명세서] CardFit (한글).md` | 규칙 엔진 계산 명세 · 게이팅 기준값 (D16·D2·D5) |
 | **FXT-CARDFIT-001** | `docs/[픽스처 데이터 명세] CardFit (한글).md` | 외부 연동 없는 시연 데이터 (D1·D4·D11·D13·D14) |
-| **TASK-CARDFIT-001** | `docs/[태스크 리스트] CardFit.md` | 개발 53건 + 디자인 5건 · 착수 차단 0 |
-| **EXE-CARDFIT-001** | `docs/[개발 실행 총괄] CardFit (한글).md` | 실행 전략 · 의존성 구조 · DAG 기반 Gantt (임계 경로 71일) |
+| **TASK-CARDFIT-001** | `docs/[태스크 리스트] CardFit.md` | 개발 54건 + 디자인 5건 · 착수 차단 0 |
+| **EXE-CARDFIT-001** | `docs/[개발 실행 총괄] CardFit (한글).md` | 실행 전략 · 의존성 구조 · DAG 기반 Gantt (채택 29 작업일) |
 
 ### 3.1 문서 파생 관계
 
@@ -119,7 +119,7 @@ PRD ──> SRS ──┬──> SDD  (어떻게 만드나)
 ## 5. 도구
 
 ```bash
-# 문서 정합성 검증 — 109개 항목
+# 문서 정합성 검증 — 110개 항목
 python3 tools/verify_docs.py
 
 # 픽스처 생성 + 참조 계산기 검증 (시연 데이터)
@@ -145,9 +145,10 @@ python3 tools/scan_prohibited_terms.py --dict tools/prohibited-terms.json --samp
 | 설계 문서 (SDD) | ✅ UseCase·Component·Class·Sequence·Flowchart·State |
 | 테스트 명세서 (STD) | ✅ 27건 · 추적표 전건 일치 |
 | 배포 게이트 데이터 (GTD) | ✅ D8 해소 — 경계값 260건 · 스캐너 검증 통과 |
-| 태스크 리스트 (TASK) | ✅ **58건** (개발 53 · 디자인 5) · **착수 차단 0건** |
-| 태스크 명세 (`docs/tasks/`) | ✅ **58건** — 1 태스크 = 1 파일 |
-| 개발 실행 총괄 (EXE) | ✅ 8트랙 · 임계 경로 12건 **71 작업일** · 압축안 47일 |
+| 태스크 리스트 (TASK) | ✅ **59건** (개발 54 · 디자인 5) · **착수 차단 0건** |
+| 태스크 명세 (`docs/tasks/`) | ✅ **59건** — 1 태스크 = 1 파일 |
+| 개발 실행 총괄 (EXE) | ✅ 8트랙 · 임계 경로 9건 **29 작업일** (AI 가속 + IN-07 분할) |
+| GitHub | ✅ 이슈 **#1~#59** · [프로젝트 #1](https://github.com/users/maybeaj/projects/1) 59건 일정 등록 |
 | 계산 명세서 (CALC) | ✅ **D16·D2·D5 해소** — RE-1~8 확정 · 임계값 월 3,000원/10% · 증감 폭 ±20% |
 | 픽스처 데이터 (FXT) | ✅ **D1·D4·D11·D13·D14 해소** — 카드 24종 · 페르소나 5인 · 거래 348건 |
 | 태스크 관점 분리 | ✅ UX 설계(DS 5) ↔ 기능 구현(FE 8) 대응 전건 확인 |

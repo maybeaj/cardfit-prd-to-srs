@@ -31,7 +31,7 @@ def gh(*args, parse=True, tries=3, timeout=45):
 DS   = {"DS-01","DS-02","DS-03","DS-04","DS-05"}
 JUDG = {"BE-01","BE-02","BE-03","BE-05","BE-06","BE-07","BE-08","BE-09",
         "BE-15","BE-18","IN-08"}
-VERI = {"IN-02","IN-03","IN-07","BE-10","QA-01","QA-02","QA-03","QA-04"}
+VERI = {"IN-02","IN-03","IN-09","BE-10","QA-01","QA-02","QA-03","QA-04"}
 FACT = lambda t: 0.70 if t in DS else 0.55 if t in JUDG else 0.80 if t in VERI else 0.35
 TRACK_OF = lambda t: ("계약·Mock" if t[:2] in ("CT","MK") else "인프라·플랫폼" if t[:2]=="IN"
     else "데이터 계층" if t[:2]=="DA" else "디자인" if t[:2]=="DS"
