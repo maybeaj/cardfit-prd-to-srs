@@ -105,20 +105,31 @@ g = subprocess.run([sys.executable, "tools/build_task_graph.py"],
 check("태스크 선행 참조 무결성", g.returncode == 0,
       [l for l in g.stdout.split("\n") if "❌" in l][:1])
 
-# ── 6-3. 이슈 명세 템플릿 준수 ───────────────────────────
+# ── 6-3. 태스크 파일 준수 (1 태스크 = 1 파일, TPL 2.1) ────
 SECT = ["## 🎯 Summary", "## 🔗 References (Spec & Context)",
         "## ✅ Task Breakdown (실행 계획)", "## 🧪 Acceptance Criteria (BDD/GWT)",
         "## ⚙️ Technical & Non-Functional Constraints",
         "## 🏁 Definition of Done (DoD)", "## 🚧 Dependencies & Blockers"]
-for tf in sorted(pathlib.Path("docs/tasks").glob("*.md")) if pathlib.Path("docs/tasks").exists() else []:
+H1 = "# GitHub Project용 TASK 템플릿"
+TDIR = pathlib.Path("docs/tasks")
+tfiles = sorted(TDIR.glob("*.md")) if TDIR.exists() else []
+bad_name = [f.name for f in tfiles if f.stem not in tids]
+check("태스크 파일명 = 태스크 ID", not bad_name, f"미정의 {bad_name[:5]}")
+for tf in tfiles:
     body = read(tf)
-    blocks = re.findall(r"```markdown\n(.*?)\n```", body, re.S)
-    bad = [b[:40] for b in blocks if not all(x in b for x in SECT)]
-    gwt_bad = [b[:40] for b in blocks
-               if len(re.findall(r"^Scenario \d+:", b, re.M)) < 2
-               or len(re.findall(r"^- Given:", b, re.M)) != len(re.findall(r"^- Then:", b, re.M))]
-    check(f"이슈 명세 템플릿 준수: {tf.name}", not bad and not gwt_bad and blocks,
-          f"섹션누락 {len(bad)} · GWT불일치 {len(gwt_bad)} · 블록 {len(blocks)}")
+    miss = [s for s in SECT if s not in body]
+    scn = len(re.findall(r"^\*\*Scenario \d+", body, re.M))
+    given, then = (len(re.findall(rf"^- {k}:", body, re.M)) for k in ("Given", "Then"))
+    problems = []
+    if not body.lstrip().startswith(H1): problems.append("H1 불일치")
+    if miss: problems.append(f"섹션누락 {len(miss)}")
+    if scn < 2: problems.append(f"시나리오 {scn}개")
+    if given != then: problems.append(f"Given {given} ≠ Then {then}")
+    if "```yaml" not in body: problems.append("yaml 프론트매터 없음")
+    check(f"태스크 파일: {tf.name}", not problems, " · ".join(problems))
+written = {f.stem for f in tfiles}
+check(f"태스크 파일 진행률 {len(written)}/{len(tids)}", written <= tids,
+      f"목록에 없는 파일 {sorted(written - tids)[:5]}")
 
 # ── 6-4. 계산 명세 ↔ 게이트 파라미터 바인딩 ──────────────
 PARAMS = {"abs_threshold": 3000, "rel_threshold": 0.10, "scenario_delta": 0.20}
